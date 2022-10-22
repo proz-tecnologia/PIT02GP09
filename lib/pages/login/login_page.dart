@@ -10,11 +10,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        // centerTitle: true,
-        title: const Text('HOME PAGE'),
-      ),
-    );
+    return Container();
   }
 }
