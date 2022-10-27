@@ -4,7 +4,7 @@ import 'pages/credit_card/credit_card_page.dart';
 import 'pages/expenses/expenses_page.dart';
 import 'pages/revenue/revenue_page.dart';
 import 'pages/home/home_page.dart';
-import 'pages/login/login_page.dart';
+import 'pages/login_flow/login_page.dart';
 
 void main() {
   runApp(const MyApp());
