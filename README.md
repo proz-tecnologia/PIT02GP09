@@ -2,11 +2,11 @@
 
 <p align="center"><img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge"/></p>
 
-## A new Flutter project.
+### A new Flutter project.
 ### 📁 Acesso ao projeto<br>
-> **Indique como é possível baixar ou acessar o código fonte do projeto, seja projeto inicial ou final**<br>
+> **Código fonte do projeto diponível em https://github.com/proz-tecnologia/PIT02GP09 **<br>
 ### 🛠️ Abrir e rodar o projeto<br>
-> **Apresente as instruções necessárias para abrir e executar o projeto**<br>
+> **Gerar um apk usando Dart e Flutter instalando em um dispositivo Android **<br>
 ## Getting Started
 ### :hammer: Funcionalidades do projeto<br> 
 > `Funcionalidade 1`: descrição da funcionalidade 1-<br> 
@@ -23,7 +23,10 @@ _Versão do SDK Flutter/Dart:_<br>
 	
 _Data da última versão do projeto: outubro._<br>
 	
-### Autores| [<img src="https://avatars.githubusercontent.com/u/37356058?v=4" width=115><br><sub>Camila Fernanda Alves</sub>](https://github.com/camilafernanda) |  [<img src="https://avatars.githubusercontent.com/u/30351153?v=4" width=115><br><sub>Guilherme Lima</sub>](https://github.com/guilhermeonrails) |  [<img src="https://avatars.githubusercontent.com/u/8989346?v=4" width=115><br><sub>Alex Felipe</sub>](https://github.com/alexfelipe) || :---: | :---: | :---: |
+## Desenvolvedores
+
+| [<img src="https://avatars.githubusercontent.com/u/70405742?v=4" width=115><br><sub>Hugo Daudt</sub>](https://github.com/HugoDaudt) |  [<img src="https://avatars.githubusercontent.com/u/112892707?v=4" width=115><br><sub>Amanda Mendanha</sub>](https://github.com/Amanda-Mendanha) |  [<img src="https://avatars.githubusercontent.com/u/113555317?v=4" width=115><br><sub>Tamires de Carvalho</sub>](https://github.com/TamiresDCarvalho) |  [<img src="https://avatars.githubusercontent.com/u/67833327?v=4" width=115><br><sub>Rodrigo Oliveira</sub>](https://github.com/rexoliveira) |
+| :---: | :---: | :---: | :---: 
 
 	
   
