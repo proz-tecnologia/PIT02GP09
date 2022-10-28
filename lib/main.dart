@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:projeto_gestao_financeira_grupo_nove/utils/custom_theme_data.dart';
 
 import 'routes/consts_routes.dart';
@@ -20,8 +21,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: Consts.titleMain,
       theme: CustomThemeData.themeData,
-
-      // home: const Ccontainer(),
     );
   }
 }

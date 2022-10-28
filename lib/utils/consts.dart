@@ -3,6 +3,7 @@ class Consts {
 
   //Constantes para serem usadas no projeto
   static const String titleMain = 'App Eu Me Controlo';
+  static const String titleSplashScreen = 'Eu Me Controlo';
   static const String exemploText1 = "... ${Consts.exemploText2} ....";
   static const String exemploText2 = '';
   static const String exemploText3 = '';

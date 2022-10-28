@@ -5,6 +5,7 @@ const MaterialColor primarySwath = Colors.blueGrey;
 class CustomThemeData {
   static ThemeData themeData = ThemeData(
     primarySwatch: primarySwath,
+    backgroundColor:const  Color(0xFFFFFFFF),
     textTheme:  const TextTheme(
       titleMedium: TextStyle(
             color: Colors.black87,
@@ -22,7 +23,7 @@ class CustomThemeData {
           ),
       titleLarge:  TextStyle(
          color: Colors.black87,
-              fontSize: 16.0,
+              fontSize: 18.0,
               fontWeight: FontWeight.bold),
     ),
   );
