@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/utils/custom_theme_data.dart';
 
-import 'pages/home/home_page.dart';
+import 'routes/consts_routes.dart';
+import 'routes/routes.dart';
+import 'utils/consts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,36 +15,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const HomePage(),        
-        
-      },
+      initialRoute: ConstsRoutes.rootRoute,
+      routes: Routes.routes,
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Lab Aulas',
-      theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
-        textTheme: const TextTheme(
-          titleMedium: TextStyle(
-            color: Colors.black87,
-            fontSize: 16.0,
-            fontWeight: FontWeight.w400,
-            letterSpacing: 0.2,
-            fontStyle: FontStyle.normal,
-          ),
-          titleSmall: TextStyle(
-            color: Colors.black54,
-            fontSize: 14.0,
-            fontWeight: FontWeight.w400,
-            letterSpacing: 0.2,
-            fontStyle: FontStyle.normal,
-          ),
-          titleLarge: TextStyle(
-              color: Colors.black87,
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold),
-        ),
-      ),
+      title: Consts.titleMain,
+      theme: CustomThemeData.themeData,
 
       // home: const Ccontainer(),
     );
