@@ -1,16 +1,11 @@
-# projeto_gestao_financeira_grupo_nove
+<h1 align="center"> Projeto Gestão Financeira - Grupo 9 <h1>
 
-A new Flutter project.
+## A new Flutter project.
 
 ## Getting Started
+Licença: Instituto de Tecnologia de Massachusetts (MIT);
+Versão do SDK Flutter: versão 4.0.1;
+Versão do SDK Dart: versão 4.0.1;
+Data da última versão do projeto: outubro.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
