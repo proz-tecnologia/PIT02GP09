@@ -32,6 +32,7 @@ class _LoginPageState extends State<SignUpPage> with ValidationMixin {
   final passwordFocusNode = FocusNode();
   final confirmPasswordFocusNode = FocusNode();
   final savedFocusNode = FocusNode();
+  
   final controller = SignUpController();
   @override
   void initState() {
@@ -142,7 +143,7 @@ class _LoginPageState extends State<SignUpPage> with ValidationMixin {
                               ),
                               onFieldSubmitted: (_) =>
                                   confirmPasswordFocusNode.requestFocus(),
-                              textInputAction: TextInputAction.go,
+                              textInputAction: TextInputAction.next,
                             ),
                             const SizedBox(height: 10),
                             ConfirmPasswordCustomTextFormField(

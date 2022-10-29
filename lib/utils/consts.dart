@@ -10,7 +10,7 @@ class Consts {
   static const String pathImageSplashScreen =
       'images/images_login_flow/splash_screen.jpg';
 
-  //Textos login_page
+  // //Textos login_page
   static const String pathImageLoginPage =
       'images/images_login_flow/login_page.jpg';
   static const String textSalutation = 'Bem vindo de volta!';
@@ -28,7 +28,8 @@ class Consts {
   static const String pathImageSignUpPage =
       'images/images_login_flow/sign_up.jpg';
   static const String textInteraction1SignUp = 'Vamos começar';
-  static const String textInteraction2SignUp = 'Crie uma conta para obter todos os recursos';
+  static const String textInteraction2SignUp =
+      'Crie uma conta para obter todos os recursos';
   static const String textNameSignUp = 'Nome';
   static const String textHintTextNameSignUp = 'entre com seu nome completo';
   static const String textEmailSignUp = 'E-mail';
@@ -40,22 +41,39 @@ class Consts {
   static const String textSignUp = 'Inscrever-se';
   static const String textInteractionLoginSignUp = 'Já tem uma conta?';
   static const String textInteractionLoginLinkSignUp = 'Entrar';
-  
+
+  //Textos reset_password_page
+  static const String textTitleAppBarResetPasswordPage =
+      'Reset Password';
+  static const String pathImageResetPasswordPage =
+      'images/images_login_flow/reset_password.jpg';
+  static const String textInteraction1ResetPasswordPage =
+      'Criar uma nova senha';
+  static const String textInteraction2ResetPasswordPage =
+      'Sua nova senha deve ser diferente das senhas usadas anteriormente';
+  static const String textPasswordResetPasswordPage = 'Senha';
+  static const String textHintTextPasswordResetPasswordPage =
+      'entre com sua senha';
+  static const String textConfirmPasswordResetPasswordPage =
+      'Confirme Password';
+  static const String textHintTextConfirmPasswordResetPasswordPage =
+      'repita a senha';
+  static const String textResetPasswordPage = 'Criar';
+
   static const BorderRadius borderRadius10 =
       BorderRadius.all(Radius.circular(10));
 
   static final buttonStyleElevatedButton = ElevatedButton.styleFrom(
-    textStyle:  const TextStyle(
+    textStyle: const TextStyle(
       fontSize: 18,
       fontWeight: FontWeight.w600,
     ),
     padding: const EdgeInsets.all(18),
     shape: const RoundedRectangleBorder(
       borderRadius: Consts.borderRadius10,
-    ),    
-    shadowColor:const  Color(0xFF231F1F),
+    ),
+    shadowColor: const Color(0xFF231F1F),
     elevation: 8,
-
   );
   //EXEMPLOS
   static const String titleMain = 'App Eu Me Controlo';
