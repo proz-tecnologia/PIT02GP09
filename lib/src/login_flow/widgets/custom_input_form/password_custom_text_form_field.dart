@@ -1,4 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import 'package:projeto_gestao_financeira_grupo_nove/src/login_flow/widgets/mixins/validations_mixin.dart';
 
 import '../../../../utils/consts.dart';
@@ -9,6 +11,8 @@ class PasswordCustomTextFormField extends StatefulWidget {
     Key? key,
     required this.password,
     required this.textInputAction,
+    required this.label,
+    required this.hintText,
     this.onFieldSubmitted,
     this.focusNode,
     this.suffix,
@@ -19,6 +23,8 @@ class PasswordCustomTextFormField extends StatefulWidget {
   final Function(String?)? onFieldSubmitted;
   final FocusNode? focusNode;
   final Widget? suffix;
+  final String? label;
+  final String? hintText;
 
   @override
   State<PasswordCustomTextFormField> createState() =>
@@ -38,9 +44,9 @@ class _PasswordCustomTextFormFieldState
     return CustomTextFormField(
       prefixIcon: const Icon(Icons.vpn_key),
       obscureText: obscureText,
-      label: Consts.textPassword,
-      name: widget.password,
-      hintText: Consts.textHintTextPassword,
+      label: widget.label!,
+      controller: widget.password,
+      hintText: widget.hintText!,
       validator: (value) => validatePassword(value),
       onFieldSubmitted: widget.onFieldSubmitted,
       focusNode: widget.focusNode,

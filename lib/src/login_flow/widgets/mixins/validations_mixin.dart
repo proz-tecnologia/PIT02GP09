@@ -3,8 +3,8 @@ import 'package:brasil_fields/brasil_fields.dart';
 
 mixin ValidationMixin {
   //Verifica se o input não está vazio
-  String? isNotEmpty(String? value, [String? message]) {
-    if (value != null && value.isNotEmpty) {
+  String? isEmpty(String? value, [String? message]) {
+    if (value == null || value.isEmpty) {
       return message ?? "Este campo é obrigatório";
     }
     return null;
@@ -13,7 +13,7 @@ mixin ValidationMixin {
   //Verifica o requisito minímo de caracteres
   String? hasXChars(String? value, [String? message, int quantidade = 5]) {
     if (value!.length < quantidade) {
-      return message ?? "Você deve usar $quantidade caracteres ou mais!";
+      return message ?? "Deve conter $quantidade caracteres ou mais!";
     }
     return null;
   }

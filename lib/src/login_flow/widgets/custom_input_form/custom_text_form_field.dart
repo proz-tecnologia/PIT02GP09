@@ -8,7 +8,7 @@ class CustomTextFormField extends StatelessWidget {
     Key? key,
     required this.label,
     required this.validator,
-    required this.name,
+    required this.controller,
     required this.hintText,
     required this.textInputAction,
     required this.prefixIcon,
@@ -26,7 +26,7 @@ class CustomTextFormField extends StatelessWidget {
   final int maxLines;
   final String label;
   final String? Function(String?)? validator;
-  final TextEditingController? name;
+  final TextEditingController? controller;
   final bool autofocus;
   final TextInputAction textInputAction;
   final TextCapitalization textCapitalization;
@@ -46,7 +46,7 @@ class CustomTextFormField extends StatelessWidget {
       maxLines: maxLines,
       autofocus: autofocus,
       textInputAction: TextInputAction.next,
-      controller: name,
+      controller: controller,
       textCapitalization: textCapitalization,
       validator: validator,
       inputFormatters: textInputFormatter,

@@ -24,18 +24,23 @@ class Consts {
   static const String textInteractionCreateAccount = 'Não tem uma conta?';
   static const String textInteractionCreateAccountLink = 'Crie Aqui';
 
-  static const String titleMain = 'App Eu Me Controlo';
-  static const String textConfirmPassword = 'Confirme a senha';
-  static const String exemploText1 = "... ${Consts.exemploText2} ....";
-  static const String exemploText2 = '';
-  static const String exemploText3 = '';
-  static const String exemploText4 = '${Consts.exemploText2} ...!';
-  static const String exemploText5 = '...a ${Consts.exemploText2}!';
-  static const String exemploText6 = '';
-  static const String exemploText7 = '';
-  static const double exemploText8 = 0.0;
-  static const int exemploText9 = 0;
-
+  //Textos sign_up_page
+  static const String pathImageSignUpPage =
+      'images/images_login_flow/sign_up.jpg';
+  static const String textInteraction1SignUp = 'Vamos começar';
+  static const String textInteraction2SignUp = 'Crie uma conta para obter todos os recursos';
+  static const String textNameSignUp = 'Nome';
+  static const String textHintTextNameSignUp = 'entre com seu nome completo';
+  static const String textEmailSignUp = 'E-mail';
+  static const String textHintTextEmailSignUp = 'entre com seu e-mail';
+  static const String textPasswordSignUp = 'Senha';
+  static const String textHintTextPasswordSignUp = 'entre com sua senha';
+  static const String textConfirmPasswordSignUp = 'Confirme Senha';
+  static const String textHintTextConfirmPasswordSignUp = 'repita a senha';
+  static const String textSignUp = 'Inscrever-se';
+  static const String textInteractionLoginSignUp = 'Já tem uma conta?';
+  static const String textInteractionLoginLinkSignUp = 'Entrar';
+  
   static const BorderRadius borderRadius10 =
       BorderRadius.all(Radius.circular(10));
 
@@ -52,4 +57,16 @@ class Consts {
     elevation: 8,
 
   );
+  //EXEMPLOS
+  static const String titleMain = 'App Eu Me Controlo';
+  static const String textConfirmPassword = 'Confirme a senha';
+  static const String exemploText1 = "... ${Consts.exemploText2} ....";
+  static const String exemploText2 = '';
+  static const String exemploText3 = '';
+  static const String exemploText4 = '${Consts.exemploText2} ...!';
+  static const String exemploText5 = '...a ${Consts.exemploText2}!';
+  static const String exemploText6 = '';
+  static const String exemploText7 = '';
+  static const double exemploText8 = 0.0;
+  static const int exemploText9 = 0;
 }
