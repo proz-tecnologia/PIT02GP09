@@ -17,8 +17,8 @@ class SplashScreenController {
   Future<SplashScreenState> isAuthenticated() async {
     final sharedPrefers = await SharedPreferences.getInstance();
 
-    //APAGAR A LINHA DE BAIXO
-    await sharedPrefers.setString(SharedPreferencesKeys.userData, 'User');
+    //APAGAR A LINHA ABAIXO
+    await sharedPrefers.setString(SharedPreferencesKeys.userData, '');
 
     final String? userData =
         sharedPrefers.getString(SharedPreferencesKeys.userData);

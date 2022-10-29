@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:projeto_gestao_financeira_grupo_nove/utils/custom_theme_data.dart';
-
 import 'routes/consts_routes.dart';
 import 'routes/routes.dart';
 import 'utils/consts.dart';
+import 'utils/custom_theme_data.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,9 +15,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       initialRoute: ConstsRoutes.rootRoute,
       routes: Routes.routes,
-      debugShowCheckedModeBanner: false,
       title: Consts.titleMain,
       theme: CustomThemeData.themeData,
     );

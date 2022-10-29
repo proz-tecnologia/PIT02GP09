@@ -23,8 +23,6 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
 
   _navigateToHome() async {
     Future.delayed(const Duration(seconds: 3)).then((value) async {
-      
-
       await controller.isAuthenticated().then((value) {
         if (value.runtimeType == SplashScreenStateAuthenticated) {
           final state = value as SplashScreenStateAuthenticated;
@@ -54,13 +52,11 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
               height: 191,
               width: 205,
               child: Image(
-                image: AssetImage(
-                  'images/images_login_flow/splash_screen.jpg',
-                ),
+                image: AssetImage(Consts.pathImageSplashScreen),
               ),
             ),
             Text(
-              Consts.titleSplashScreen,
+              Consts.textTitleSplashScreen,
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ],
