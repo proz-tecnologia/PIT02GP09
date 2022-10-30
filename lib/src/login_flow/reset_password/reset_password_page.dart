@@ -6,7 +6,6 @@ import '../widgets/custom_input_form/confirm_password_custom_text_form_field.dar
 import '../widgets/custom_input_form/custom_elevated_button.dart';
 import '../widgets/custom_input_form/input_clear.dart';
 import '../widgets/custom_input_form/password_custom_text_form_field.dart';
-import '../widgets/custom_input_form/text_rich_info.dart';
 import 'reset_password_controller.dart';
 
 class ResetPasswordPage extends StatefulWidget {
@@ -23,6 +22,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   final mailController = TextEditingController(text: 'teste@teste.com');
   final passwordController = TextEditingController(text: 'Rinex1#');
   final confirmPasswordController = TextEditingController(text: 'Rinex1#');
+  final formValidVN = ValueNotifier<bool>(false);
 
 //Faz o controle de foco
   final passwordFocusNode = FocusNode();
@@ -54,7 +54,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     return Scaffold(
         appBar: AppBar(
           foregroundColor: Colors.black87,
-          backgroundColor:const Color(0x00FFFFFF),
+          backgroundColor: const Color(0x00FFFFFF),
           elevation: 0,
           centerTitle: true,
           title: Text(
@@ -72,7 +72,10 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     Form(
                       key: formkey,
                       onChanged: () {
-                        setState(() {});
+                        setState(() {
+                          formValidVN.value =
+                              formkey.currentState?.validate() ?? false;
+                        });
                       },
                       child: SizedBox(
                         child: Padding(
@@ -148,35 +151,42 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    CustomElevatedButton(
-                      label: Consts.textResetPasswordPage,
-                      savedFocusNode: savedFocusNode,
-                      onPressed: () async {
-                        if (formkey.currentState != null &&
-                            formkey.currentState!.validate()) {
-                          showDialog(
-                            context: context,
-                            builder: (context) => const Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          );
+                    ValueListenableBuilder(
+                      valueListenable: formValidVN,
+                      builder: (_, formValid, child) {
+                        return CustomElevatedButton(
+                          label: Consts.textResetPasswordPage,
+                          savedFocusNode: savedFocusNode,
+                          onPressed: !formValid
+                              ? null
+                              : () async {
+                                  if (formkey.currentState != null &&
+                                      formkey.currentState!.validate()) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => const Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                    );
 
-                          controller
-                              .login(
-                            mail: mailController.text,
-                            password: passwordController.text,
-                          )
-                              .then((value) {
-                            //Tira o loading
-                            Navigator.pop(context);
-                            Navigator.pushNamed(
-                                context, ConstsRoutes.loginPage);
-                            formkey.currentState!.reset();
-                            inputClear;
-                          });
-                        }
+                                    controller
+                                        .login(
+                                      mail: mailController.text,
+                                      password: passwordController.text,
+                                    )
+                                        .then((value) {
+                                      //Tira o loading
+                                      Navigator.pop(context);
+                                      Navigator.pushNamed(
+                                          context, ConstsRoutes.loginPage);
+                                      formkey.currentState!.reset();
+                                      inputClear;
+                                    });
+                                  }
+                                },
+                        );
                       },
-                    ),
+                    )
                   ],
                 ),
               ],

@@ -4,12 +4,12 @@ import 'package:projeto_gestao_financeira_grupo_nove/src/login_flow/widgets/mixi
 
 import '../../../routes/consts_routes.dart';
 import '../../../utils/consts.dart';
+import '../../models/user_model.dart';
 import '../widgets/custom_input_form/confirm_password_custom_text_form_field.dart';
 import '../widgets/custom_input_form/custom_elevated_button.dart';
 import '../widgets/custom_input_form/custom_text_form_field.dart';
 import '../widgets/custom_input_form/password_custom_text_form_field.dart';
 import '../widgets/custom_input_form/text_rich_info.dart';
-import 'sign_up_controller.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -26,14 +26,14 @@ class _LoginPageState extends State<SignUpPage> with ValidationMixin {
   final mailController = TextEditingController(text: 'teste@teste.com');
   final passwordController = TextEditingController(text: 'Rinex1#');
   final confirmPasswordController = TextEditingController(text: 'Rinex1#');
+  final formValidVN = ValueNotifier<bool>(false);
 
 //Faz o controle de foco
   final mailFocusNode = FocusNode();
   final passwordFocusNode = FocusNode();
   final confirmPasswordFocusNode = FocusNode();
   final savedFocusNode = FocusNode();
-  
-  final controller = SignUpController();
+
   @override
   void initState() {
     super.initState();
@@ -68,7 +68,10 @@ class _LoginPageState extends State<SignUpPage> with ValidationMixin {
                 Form(
                   key: formkey,
                   onChanged: () {
-                    setState(() {});
+                    setState(() {
+                      formValidVN.value =
+                          formkey.currentState?.validate() ?? false;
+                    });
                   },
                   child: SizedBox(
                     child: Padding(
@@ -167,27 +170,35 @@ class _LoginPageState extends State<SignUpPage> with ValidationMixin {
                   ),
                 ),
                 const SizedBox(height: 10),
-                CustomElevatedButton(
-                  label: Consts.textSignUp,
-                  savedFocusNode: savedFocusNode,
-                  onPressed: () async {
-                    if (formkey.currentState != null &&
-                        formkey.currentState!.validate()) {
-                      showDialog(
-                        context: context,
-                        builder: (context) => const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
+                ValueListenableBuilder(
+                  valueListenable: formValidVN,
+                  builder: (_, formValid, child) {
+                    return CustomElevatedButton(
+                      label: Consts.textSignUp,
+                      savedFocusNode: savedFocusNode,
+                      onPressed: !formValid
+                          ? null
+                          : () async {
+                              if (formkey.currentState != null &&
+                                  formkey.currentState!.validate()) {
+                                // showDialog(
+                                //   context: context,
+                                //   builder: (context) => const Center(
+                                //     child: CircularProgressIndicator(),
+                                //   ),
+                                // );
+                                final newUser = UserModel(
+                                    name: nameController.text,
+                                    email: mailController.text,
+                                    password: passwordController.text);
 
-                      controller.register(
-                        name: nameController.text,
-                        mail: mailController.text,
-                        password: passwordController.text,
-                      );
-                      formkey.currentState!.reset();
-                      inputClear;
-                    }
+                                Navigator.pop(context, newUser);
+
+                                formkey.currentState!.reset();
+                                inputClear;
+                              }
+                            },
+                    );
                   },
                 ),
                 const SizedBox(height: 20),
@@ -197,7 +208,8 @@ class _LoginPageState extends State<SignUpPage> with ValidationMixin {
                     textLink: Text(Consts.textInteractionLoginLinkSignUp,
                         style: theme.textTheme.labelMedium),
                     link: () {
-                      Navigator.pushNamed(context, ConstsRoutes.loginPage);
+                      Navigator.popAndPushNamed(
+                          context, ConstsRoutes.loginPage);
                       formkey.currentState!.reset();
                       inputClear;
                     })
