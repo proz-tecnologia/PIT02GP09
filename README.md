@@ -4,10 +4,13 @@
 
 ### :new: Um novo projeto Dart/Flutter.
 ### 📁 Acesso ao projeto<br>
-> **Código fonte do projeto diponível em https://github.com/proz-tecnologia/PIT02GP09**<br>
-<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2F9KqM20u8dvdgHR7wi8nI4O%2FProjeto-Proz%3Fnode-id%3D20%253A408" allowfullscreen></iframe><br>
+> **Código fonte do projeto diponível no [GitHub](https://github.com/proz-tecnologia/PIT02GP09)**<br>
+> **Prototipação do designe no [Figma](https://www.figma.com/file/9KqM20u8dvdgHR7wi8nI4O/Projeto-Proz?node-id=20%3A408**<br>)**  
+
 ### 🛠️ Abrir e rodar o projeto<br>
-> **Gerar um apk usando Dart e Flutter instalando em um dispositivo Android**<br>
+> - **Baixar o projeto do [GitHub](https://github.com/proz-tecnologia/PIT02GP09);**<br>
+> - **Gerar um APK de instalação fazendo o seguinte processo: no diretório(raiz) do projeto abra o terminal e execute o seguinte comando "flutter build apk --nome-apk". Obs.: os SDKs de Dart e Flutter tem que estarem previamente instalados e configurados na máquina que realizar a build";**<br>  
+> - **Mova o APK para um dispositivo Android e execute-o.**<br>
 ## :star: Começando
 ### :trophy: Objetivo do projeto
 > _Este projeto visa criar uma aplicação de gestão financeira pessoal, fazendo controle de receita e despesas assim como das movimentações dos cartões de crédito, geram relatórios sobre ambos os recursos e de forma geral. Está sendo usado as tecnologias Dart/Flutter para dispositivos Android sem versão miníma definida._<br>
