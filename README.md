@@ -2,13 +2,13 @@
 
 <p align="center"><img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge"/></p>
 
-### :new:Um novo projeto Dart/Flutter.
+### :new: Um novo projeto Dart/Flutter.
 ### 📁 Acesso ao projeto<br>
 > **Código fonte do projeto diponível em https://github.com/proz-tecnologia/PIT02GP09**<br>
 ### 🛠️ Abrir e rodar o projeto<br>
 > **Gerar um apk usando Dart e Flutter instalando em um dispositivo Android**<br>
-## :star:Começando
-### :trophy:Objetivo do projeto
+## :star: Começando
+### :trophy: Objetivo do projeto
 > _Este projeto visa criar uma aplicação de gestão financeira pessoal, fazendo controle de receita e despesas assim como das movimentações dos cartões de crédito, geram relatórios sobre ambos os recursos e de forma geral. Está sendo usado as tecnologias Dart/Flutter para dispositivos Android sem versão miníma definida._<br>
 ### :hammer: Funcionalidades do projeto<br> 
 > `Flow Login`: é composto pelas páginas splash screen, login, sign up e reset password<br> 
@@ -17,6 +17,7 @@
 > `Expenses Page`: página com todas as depesas e suas funções<br>
 > `Credit Card Page`: página com todas as depesas e suas funções<br>
 	
+### :ticket: Licença, versões e status de softwares<br>	
 _Licença: Instituto de Tecnologia de Massachusetts (MIT);_<br>
 _Versão do SDK Flutter/Dart:_<br>
 > _Flutter 3.3.4 • channel stable • https://github.com/flutter/flutter.git_<br>
