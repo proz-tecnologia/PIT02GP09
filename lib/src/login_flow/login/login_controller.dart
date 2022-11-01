@@ -1,21 +1,44 @@
+import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../utils/shared_preferences_keys.dart';
+import '../../models/user_model.dart';
 import 'login_state.dart';
 
 class LoginController {
-  LoginState state = LoginStateEmpty();
-
   Future<LoginState> login({
     required String mail,
     required String password,
   }) async {
-    final sharedPrefers = await SharedPreferences.getInstance();
+    List<UserModel> usersLogin = <UserModel>[];
 
+    late final SharedPreferences sharedPrefers;
+    sharedPrefers = await SharedPreferences.getInstance();
+
+    final users = sharedPrefers.getString(SharedPreferencesKeys.users);
     await Future.delayed(const Duration(seconds: 3));
 
-    await sharedPrefers.setBool(SharedPreferencesKeys.userData, true);
-    return LoginStateSuccess();
+    if (users != null && users.isNotEmpty) {
+      final usersDecode = jsonDecode(users);
+
+      final decodedUsers =
+          (usersDecode as List).map((e) => UserModel.fromJson(e)).toList();
+      usersLogin.addAll(decodedUsers);
+      print(usersLogin);
+      for (var i = 0; i < usersLogin.length; i++) {
+        if (mail.trim() == usersLogin[i].email.trim()) {
+          if (usersLogin[i].password.trim() == password.trim()) {
+            await sharedPrefers.setString(
+                SharedPreferencesKeys.userSession, usersLogin[i].name);
+            return LoginStateSuccess();
+          } else {
+            return LoginStateEmpty();
+          }
+        } 
+      }
+    }
+
+    return LoginStateEmpty();
   }
 }

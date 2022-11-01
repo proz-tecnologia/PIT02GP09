@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/login_flow/login/login_state.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/login_flow/widgets/custom_input_form/input_clear.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/login_flow/widgets/mixins/validations_mixin.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/utils/mixins/validations_mixin.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../routes/consts_routes.dart';
 import '../../../utils/consts.dart';
+import '../../../utils/shared_preferences_keys.dart';
+import '../../home/home_page.dart';
+import '../reset_password/reset_password_controller.dart';
+import '../sign_up/sign_up_controller.dart';
+import '../widgets/custom_dialog/custom_dialog.dart';
 import '../widgets/custom_input_form/custom_elevated_button.dart';
 import '../widgets/custom_input_form/custom_text_form_field.dart';
 import '../widgets/custom_input_form/password_custom_text_form_field.dart';
-import '../widgets/custom_input_form/text_rich_info.dart';
+import '../widgets/text_richinfo_create_account.dart';
+import '../widgets/text_richinfo_forgot_password.dart';
 import 'login_controller.dart';
 
 class LoginPage extends StatefulWidget {
@@ -18,21 +26,33 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> with ValidationMixin {
+  late final LoginController loginController = LoginController();
+  late final SignUpController signUpController;
+  late final ResetPasswordController resetPasswordController;
+  final formValidVN = ValueNotifier<bool>(false);
+
+  @override
+  void initState() {
+    signUpController = SignUpController(onUpdate: () {
+      setState(() {});
+    });
+    
+    resetPasswordController = ResetPasswordController(onUpdate: () {
+      setState(() {});
+    });
+    super.initState();
+  }
+
   final formkey = GlobalKey<FormState>();
 
   //Controle com entrada de parametro "text" com valores para teste
   final mailController = TextEditingController(text: 'teste@teste.com');
   final passwordController = TextEditingController(text: 'Rinex1#');
 
-//Faz o controle de foco
+  //Faz o controle de foco
   final mailFocusNode = FocusNode();
   final passwordFocusNode = FocusNode();
   final savedFocusNode = FocusNode();
-  final controller = LoginController();
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   void dispose() {
@@ -59,8 +79,12 @@ class _LoginPageState extends State<LoginPage> with ValidationMixin {
               children: [
                 Form(
                   key: formkey,
+                  //Habilta de desabilita o botão
                   onChanged: () {
-                    setState(() {});
+                    setState(() {
+                      formValidVN.value =
+                          formkey.currentState?.validate() ?? false;
+                    });
                   },
                   child: SizedBox(
                     child: Padding(
@@ -128,17 +152,12 @@ class _LoginPageState extends State<LoginPage> with ValidationMixin {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                TextRichInfo(
-                                  textLink: Text(
-                                    Consts.textForgotPassword,
-                                    style: theme.textTheme.labelMedium,
-                                  ),
-                                  link: () {
-                                    Navigator.pushNamed(context,
-                                        ConstsRoutes.resetPasswordPage);
-                                    formkey.currentState!.reset();
-                                    inputClear;
-                                  },
+                                TextRichInfoForgotPassword(
+                                  theme: theme,
+                                  resetPasswordController:
+                                      resetPasswordController,
+                                  formkey: formkey,
+                                  inputClear: inputClear,
                                 ),
                               ],
                             ),
@@ -148,45 +167,86 @@ class _LoginPageState extends State<LoginPage> with ValidationMixin {
                     ),
                   ),
                 ),
-                CustomElevatedButton(
-                  label: Consts.textLogin,
-                  savedFocusNode: savedFocusNode,
-                  onPressed: () async {
-                    if (formkey.currentState != null &&
-                        formkey.currentState!.validate()) {
-                      showDialog(
-                        context: context,
-                        builder: (context) => const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
+                ValueListenableBuilder(
+                  //Habilta de desabilita o botão
+                  valueListenable: formValidVN,
+                  builder: (_, formValid, child) {
+                    return CustomElevatedButton(
+                      label: Consts.textLogin,
+                      savedFocusNode: savedFocusNode,
+                      onPressed: !formValid
+                          ? null
+                          : () async {
+                              late final SharedPreferences sharedPrefers;
+                              sharedPrefers =
+                                  await SharedPreferences.getInstance();
 
-                      controller
-                          .login(
-                        mail: mailController.text,
-                        password: passwordController.text,
-                      )
-                          .then((value) {
-                        //Tira o loading
-                        Navigator.pop(context);
-                        Navigator.pushNamed(context, ConstsRoutes.homePage);
-                        formkey.currentState!.reset();
-                        inputClear;
-                      });
-                    }
+                              if (formkey.currentState != null &&
+                                  formkey.currentState!.validate()) {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => const Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                );
+
+                                loginController
+                                    .login(
+                                  mail: mailController.text,
+                                  password: passwordController.text,
+                                )
+                                    .then((value) {
+                                  if (value.runtimeType == LoginStateSuccess) {
+                                    final userSession = sharedPrefers.getString(
+                                        SharedPreferencesKeys.userSession);
+                                    //Tira o loading
+                                    Navigator.pop(context);
+                                    Navigator.popAndPushNamed(
+                                        context, ConstsRoutes.homePage,
+                                        arguments:
+                                            HomeArguments(name: userSession!));
+                                    formkey.currentState!.reset();
+                                    inputClear;
+                                  } else {
+                                    Navigator.pop(context);
+                                    return showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          CustomDialog(
+                                        wid1: TextRichInfoForgotPassword(
+                                          theme: theme,
+                                          resetPasswordController:
+                                              resetPasswordController,
+                                          formkey: formkey,
+                                          inputClear: inputClear,
+                                        ),
+                                        wid2: TextRichInfoCreateAccount(
+                                          theme: theme,
+                                          signUpController: signUpController,
+                                          formkey: formkey,
+                                          inputClear: inputClear,
+                                        ),
+                                        title: Consts.textCustomDialogTitle,
+                                        description:
+                                            Consts.textCustomDialogDescription,
+                                        buttonText:
+                                            Consts.textCustomDialogButtonText,
+                                      ),
+                                    );
+                                  }
+                                });
+                              }
+                            },
+                    );
                   },
                 ),
                 const SizedBox(height: 100),
-                TextRichInfo(
-                    text: Text(Consts.textInteractionCreateAccount,
-                        style: theme.textTheme.labelSmall),
-                    textLink: Text(Consts.textInteractionCreateAccountLink,
-                        style: theme.textTheme.labelMedium),
-                    link: () {
-                      Navigator.pushNamed(context, ConstsRoutes.signUpPage);
-                      formkey.currentState!.reset();
-                      inputClear;
-                    })
+                TextRichInfoCreateAccount(
+                  theme: theme,
+                  signUpController: signUpController,
+                  formkey: formkey,
+                  inputClear: inputClear,
+                ),
               ],
             ),
           ],
