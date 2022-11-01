@@ -43,8 +43,7 @@ class Consts {
   static const String textInteractionLoginLinkSignUp = 'Entrar';
 
   //Textos reset_password_page
-  static const String textTitleAppBarResetPasswordPage =
-      'Reset Password';
+  static const String textTitleAppBarResetPasswordPage = 'Reset Password';
   static const String pathImageResetPasswordPage =
       'images/images_login_flow/reset_password.jpg';
   static const String textInteraction1ResetPasswordPage =
@@ -59,6 +58,12 @@ class Consts {
   static const String textHintTextConfirmPasswordResetPasswordPage =
       'repita a senha';
   static const String textResetPasswordPage = 'Criar';
+
+  //Textos do custom_dialog
+  static const String textCustomDialogTitle = 'Info Login';
+  static const String textCustomDialogDescription =
+      'Senha ou e-mail incorreto!';
+  static const String textCustomDialogButtonText = 'OK';
 
   static const BorderRadius borderRadius10 =
       BorderRadius.all(Radius.circular(10));
@@ -75,6 +80,9 @@ class Consts {
     shadowColor: const Color(0xFF231F1F),
     elevation: 8,
   );
+  static const double padding = 16.0;
+  static const double avatarRadius = 66.0;
+
   //EXEMPLOS
   static const String titleMain = 'App Eu Me Controlo';
   static const String textConfirmPassword = 'Confirme a senha';
