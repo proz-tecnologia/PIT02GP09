@@ -25,7 +25,6 @@ class LoginController {
       final decodedUsers =
           (usersDecode as List).map((e) => UserModel.fromJson(e)).toList();
       usersLogin.addAll(decodedUsers);
-      
       for (var i = 0; i < usersLogin.length; i++) {
         if (mail.trim() == usersLogin[i].email.trim()) {
           if (usersLogin[i].password.trim() == password.trim()) {
