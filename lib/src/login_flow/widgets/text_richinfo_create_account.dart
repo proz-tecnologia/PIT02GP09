@@ -28,10 +28,18 @@ class TextRichInfoCreateAccount extends StatelessWidget {
         textLink: Text(Consts.textInteractionCreateAccountLink,
             style: theme.textTheme.labelMedium),
         link: () async {
+          showDialog(
+            context: context,
+            builder: (context) => const Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+          Navigator.pop(context);
           final newUser = await Navigator.pushNamed(
             context,
             ConstsRoutes.signUpPage,
           );
+
           if (newUser != null) {
             signUpController.addUser(user: newUser as UserModel);
           }

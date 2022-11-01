@@ -28,8 +28,10 @@ _Versão do SDK Flutter/Dart:_<br>
 > _Framework • revision eb6d86ee27 (3 weeks ago) • 2022-10-04 22:31:45 -0700_<br>
 > _Engine • revision c08d7d5efc_<br>
 > _Tools • Dart 2.18.2 • DevTools 2.15.0_<br>
+> _Dependencies_<br>
+> > _flutter:_<br>_sdk: flutter_<br>_brasil_fields: ^1.6.0_<br>_shared_preferences: ^2.0.15_<br>
 	
-_Data da última versão do projeto: outubro._<br>
+> _Data da última versão do projeto: outubro._<br>
 	
 ## :octocat:Desenvolvedores
 

@@ -181,16 +181,12 @@ class _LoginPageState extends State<SignUpPage> with ValidationMixin {
                           : () async {
                               if (formkey.currentState != null &&
                                   formkey.currentState!.validate()) {
-                                // showDialog(
-                                //   context: context,
-                                //   builder: (context) => const Center(
-                                //     child: CircularProgressIndicator(),
-                                //   ),
-                                // );
+                                
                                 final newUser = UserModel(
                                     name: nameController.text,
                                     email: mailController.text,
                                     password: passwordController.text);
+                                
                                 Navigator.pop(context, newUser);
                                 formkey.currentState!.reset();
                                 inputClear;

@@ -53,7 +53,8 @@ class SignUpController {
 
   Future<void> addUser({required UserModel user}) async {
     updateState(SignUpStateLoading());
-
+    await Future.delayed(const Duration(seconds: 3));
+    print("teste");
     newUsers.add(user);
 
     final newUsersJson = newUsers.map((e) => e.toJson()).toList();
