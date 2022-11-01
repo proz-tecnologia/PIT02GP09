@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/login_flow/widgets/custom_input_form/input_clear.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/login_flow/widgets/mixins/validations_mixin.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/utils/mixins/validations_mixin.dart';
 
 import '../../../routes/consts_routes.dart';
 import '../../../utils/consts.dart';
@@ -191,9 +191,7 @@ class _LoginPageState extends State<SignUpPage> with ValidationMixin {
                                     name: nameController.text,
                                     email: mailController.text,
                                     password: passwordController.text);
-
                                 Navigator.pop(context, newUser);
-
                                 formkey.currentState!.reset();
                                 inputClear;
                               }

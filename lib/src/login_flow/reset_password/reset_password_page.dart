@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 
-import '../../../routes/consts_routes.dart';
 import '../../../utils/consts.dart';
+import '../../models/user_model.dart';
 import '../widgets/custom_input_form/confirm_password_custom_text_form_field.dart';
 import '../widgets/custom_input_form/custom_elevated_button.dart';
 import '../widgets/custom_input_form/input_clear.dart';
 import '../widgets/custom_input_form/password_custom_text_form_field.dart';
-import 'reset_password_controller.dart';
+
+class ResetPasswordArguments {
+  final String name;
+  final String email;
+
+  ResetPasswordArguments({
+    required this.name,
+    required this.email,
+  });
+}
 
 class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({super.key});
@@ -18,8 +27,6 @@ class ResetPasswordPage extends StatefulWidget {
 class _ResetPasswordPageState extends State<ResetPasswordPage> {
   final formkey = GlobalKey<FormState>();
 
-  //Controle com entrada de parametro "text" com valores para teste
-  final mailController = TextEditingController(text: 'teste@teste.com');
   final passwordController = TextEditingController(text: 'Rinex1#');
   final confirmPasswordController = TextEditingController(text: 'Rinex1#');
   final formValidVN = ValueNotifier<bool>(false);
@@ -29,7 +36,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   final savedFocusNode = FocusNode();
   final confirmPasswordFocusNode = FocusNode();
 
-  final controller = ResetPasswordController();
+  late UserModel userResetPassword;
+
   @override
   void initState() {
     super.initState();
@@ -43,13 +51,14 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   }
 
   get inputClear {
-    mailController.clear;
     passwordController.clear;
     confirmPasswordController.clear();
   }
 
   @override
   Widget build(BuildContext context) {
+    final args =
+        ModalRoute.of(context)!.settings.arguments as ResetPasswordArguments;
     ThemeData theme = Theme.of(context);
     return Scaffold(
         appBar: AppBar(
@@ -168,20 +177,15 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                         child: CircularProgressIndicator(),
                                       ),
                                     );
-
-                                    controller
-                                        .login(
-                                      mail: mailController.text,
-                                      password: passwordController.text,
-                                    )
-                                        .then((value) {
-                                      //Tira o loading
-                                      Navigator.pop(context);
-                                      Navigator.pushNamed(
-                                          context, ConstsRoutes.loginPage);
-                                      formkey.currentState!.reset();
-                                      inputClear;
-                                    });
+                                    userResetPassword = UserModel(
+                                        name: args.name,
+                                        email: args.email,
+                                        password: passwordController.text);
+                                    //Tira o loading
+                                    Navigator.pop(context);
+                                    Navigator.pop(context, userResetPassword);
+                                    formkey.currentState!.reset();
+                                    inputClear;
                                   }
                                 },
                         );

@@ -25,18 +25,20 @@ class LoginController {
       final decodedUsers =
           (usersDecode as List).map((e) => UserModel.fromJson(e)).toList();
       usersLogin.addAll(decodedUsers);
+      print(usersLogin);
       for (var i = 0; i < usersLogin.length; i++) {
-        while (mail.trim().contains(usersLogin[i].email.trim())) {
-          if (usersLogin[i].password.contains(password.trim())) {
+        if (mail.trim() == usersLogin[i].email.trim()) {
+          if (usersLogin[i].password.trim() == password.trim()) {
             await sharedPrefers.setString(
                 SharedPreferencesKeys.userSession, usersLogin[i].name);
             return LoginStateSuccess();
           } else {
             return LoginStateEmpty();
           }
-        }
+        } 
       }
     }
+
     return LoginStateEmpty();
   }
 }

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/login_flow/login/login_state.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/login_flow/widgets/custom_input_form/input_clear.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/login_flow/widgets/mixins/validations_mixin.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/utils/mixins/validations_mixin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../routes/consts_routes.dart';
 import '../../../utils/consts.dart';
 import '../../../utils/shared_preferences_keys.dart';
 import '../../home/home_page.dart';
+import '../reset_password/reset_password_controller.dart';
 import '../sign_up/sign_up_controller.dart';
 import '../widgets/custom_dialog/custom_dialog.dart';
 import '../widgets/custom_input_form/custom_elevated_button.dart';
@@ -27,11 +28,16 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> with ValidationMixin {
   late final LoginController loginController = LoginController();
   late final SignUpController signUpController;
+  late final ResetPasswordController resetPasswordController;
   final formValidVN = ValueNotifier<bool>(false);
 
   @override
   void initState() {
     signUpController = SignUpController(onUpdate: () {
+      setState(() {});
+    });
+    
+    resetPasswordController = ResetPasswordController(onUpdate: () {
       setState(() {});
     });
     super.initState();
@@ -148,6 +154,8 @@ class _LoginPageState extends State<LoginPage> with ValidationMixin {
                               children: [
                                 TextRichInfoForgotPassword(
                                   theme: theme,
+                                  resetPasswordController:
+                                      resetPasswordController,
                                   formkey: formkey,
                                   inputClear: inputClear,
                                 ),
@@ -207,6 +215,8 @@ class _LoginPageState extends State<LoginPage> with ValidationMixin {
                                           CustomDialog(
                                         wid1: TextRichInfoForgotPassword(
                                           theme: theme,
+                                          resetPasswordController:
+                                              resetPasswordController,
                                           formkey: formkey,
                                           inputClear: inputClear,
                                         ),

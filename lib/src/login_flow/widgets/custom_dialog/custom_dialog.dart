@@ -16,9 +16,8 @@ class CustomDialog extends StatelessWidget {
     @required this.title,
     @required this.description,
     @required this.buttonText,
-    @required this.wid1,
-    @required this.wid2,
-    
+    this.wid1,
+    this.wid2,
     this.image,
   });
 
@@ -77,9 +76,9 @@ class CustomDialog extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              wid1!,
+              if(wid1 != null) wid1!,
               const SizedBox(height: 10),
-              wid2!,
+              if(wid2 != null) wid2!,
               const SizedBox(height: 24.0),
               Align(
                 alignment: Alignment.bottomRight,

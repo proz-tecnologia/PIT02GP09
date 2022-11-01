@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Page, Olá ${args.name}!'),
+        title: Text('Home Page  Olá ${args.name}!'),
         actions: [
           IconButton(
               onPressed: () {

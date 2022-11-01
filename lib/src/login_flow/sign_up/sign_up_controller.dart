@@ -24,7 +24,7 @@ class SignUpController {
   Future<bool> logout() async {
     late final SharedPreferences sharedPrefers;
     sharedPrefers = await SharedPreferences.getInstance();
-    return await sharedPrefers.setString(SharedPreferencesKeys.userSession,'');
+    return await sharedPrefers.remove(SharedPreferencesKeys.userSession);
   }
 
   void updateState(SignUpState newState) {

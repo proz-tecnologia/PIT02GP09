@@ -1,5 +1,10 @@
 //Validar formulário
+import 'dart:convert';
+
 import 'package:brasil_fields/brasil_fields.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../src/models/user_model.dart';
 
 mixin ValidationMixin {
   //Verifica se o input não está vazio
@@ -103,6 +108,7 @@ String? validateConfPassword(String? value, String? password) {
   }
   return null;
 }
+
 ///Exemplo de uso - é aplicado atraves de "with" na classe state
 ///class nomeClaseState extends clsseState<> with nomeDoMixin{...}
 ///Exemplo de uso no widget
@@ -114,3 +120,34 @@ String? validateConfPassword(String? value, String? password) {
   ()=> hasXChars(value,message,quantidade)
 ]) */
 //Fonte:https://youtu.be/HgFstMmYLok
+
+Future<UserModel?> validEmailSharedPref({
+  required String mail,
+  required String sharedPreferencesKeys,
+}) async {
+  List<UserModel> usersAll = <UserModel>[];
+  UserModel user;
+
+  late final SharedPreferences sharedPrefers;
+  sharedPrefers = await SharedPreferences.getInstance();
+
+  final users = sharedPrefers.getString(sharedPreferencesKeys);
+
+  if (users != null && users.isNotEmpty) {
+    final usersDecode = jsonDecode(users);
+
+    final decodedUsers =
+        (usersDecode as List).map((e) => UserModel.fromJson(e)).toList();
+    usersAll.addAll(decodedUsers);
+    for (var i = 0; i < usersAll.length; i++) {
+      if (mail.trim().contains(usersAll[i].email.trim())) {
+        user = UserModel(
+            name: usersAll[i].name,
+            email: usersAll[i].email,
+            password: usersAll[i].password);
+        return user;
+      }
+    }
+  }
+  return null;
+}
