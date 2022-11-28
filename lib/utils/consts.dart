@@ -9,6 +9,11 @@ class Consts {
   static const String textTitleSplashScreen = 'Eu Me Controlo';
   static const String pathImageSplashScreen =
       'images/images_login_flow/splash_screen.jpg';
+  /*================================================================= */
+  
+  //Textos MAIN
+  static const String titleMain = 'App Eu Me Controlo';
+  /*================================================================= */
 
   // //Textos login_page
   static const String pathImageLoginPage =
@@ -23,6 +28,7 @@ class Consts {
   static const String textLogin = 'Entrar';
   static const String textInteractionCreateAccount = 'Não tem uma conta?';
   static const String textInteractionCreateAccountLink = 'Crie Aqui';
+  /*================================================================= */
 
   //Textos sign_up_page
   static const String pathImageSignUpPage =
@@ -41,6 +47,7 @@ class Consts {
   static const String textSignUp = 'Inscrever-se';
   static const String textInteractionLoginSignUp = 'Já tem uma conta?';
   static const String textInteractionLoginLinkSignUp = 'Entrar';
+  /*================================================================= */
 
   //Textos reset_password_page
   static const String textTitleAppBarResetPasswordPage = 'Reset Password';
@@ -58,13 +65,27 @@ class Consts {
   static const String textHintTextConfirmPasswordResetPasswordPage =
       'repita a senha';
   static const String textResetPasswordPage = 'Criar';
+  /*================================================================= */
 
   //Textos do custom_dialog
   static const String textCustomDialogTitle = 'Info Login';
   static const String textCustomDialogDescription =
       'Senha ou e-mail incorreto!';
   static const String textCustomDialogButtonText = 'OK';
+  /*================================================================= */
 
+  //Textos do custom_theme_data
+  static const String textTitleCustomShowAlertDialog = 'Entre com seu e-mail';
+  static const String textCancelarCustomShowAlertDialog = 'Cancelar';
+  static const String textEnviarCustomShowAlertDialog = 'Enviar';
+  /*================================================================= */
+
+  // Textos text_richinfo_forgot_password
+  static const String textTitleTextRichinfoForgotPassword = 'Info Reset Password';
+  static const String textDescriptionTextRichinfoForgotPassword = 'Usuário não cadastrado ou e-mail incorreto!';
+  /*================================================================= */
+
+  //Constantes de de configurações gerais
   static const BorderRadius borderRadius10 =
       BorderRadius.all(Radius.circular(10));
 
@@ -82,17 +103,20 @@ class Consts {
   );
   static const double padding = 16.0;
   static const double avatarRadius = 66.0;
+  /*================================================================= */
+  
 
+  /*================================================================= */
+  /*================================================================= */
   //EXEMPLOS
-  static const String titleMain = 'App Eu Me Controlo';
-  static const String textConfirmPassword = 'Confirme a senha';
-  static const String exemploText1 = "... ${Consts.exemploText2} ....";
-  static const String exemploText2 = '';
-  static const String exemploText3 = '';
-  static const String exemploText4 = '${Consts.exemploText2} ...!';
-  static const String exemploText5 = '...a ${Consts.exemploText2}!';
-  static const String exemploText6 = '';
-  static const String exemploText7 = '';
-  static const double exemploText8 = 0.0;
-  static const int exemploText9 = 0;
+  // static const String textConfirmPassword = 'Confirme a senha';
+  // static const String exemploText1 = "... ${Consts.exemploText2} ....";
+  // static const String exemploText2 = '';
+  // static const String exemploText3 = '';
+  // static const String exemploText4 = '${Consts.exemploText2} ...!';
+  // static const String exemploText5 = '...a ${Consts.exemploText2}!';
+  // static const String exemploText6 = '';
+  // static const String exemploText7 = '';
+  // static const double exemploText8 = 0.0;
+  // static const int exemploText9 = 0;
 }

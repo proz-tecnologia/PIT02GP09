@@ -27,11 +27,12 @@ class ResetPasswordPage extends StatefulWidget {
 class _ResetPasswordPageState extends State<ResetPasswordPage> {
   final formkey = GlobalKey<FormState>();
 
+  //Parametro "text" do TexteEditingController está com informação para TESTES
   final passwordController = TextEditingController(text: 'Rinex1#');
   final confirmPasswordController = TextEditingController(text: 'Rinex1#');
   final formValidVN = ValueNotifier<bool>(false);
 
-//Faz o controle de foco
+  //Faz o controle de foco
   final passwordFocusNode = FocusNode();
   final savedFocusNode = FocusNode();
   final confirmPasswordFocusNode = FocusNode();
@@ -89,7 +90,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       child: SizedBox(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 0),
+                            horizontal: 20,
+                            vertical: 0,
+                          ),
                           child: Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -103,7 +106,8 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                       width: 180,
                                       child: Image(
                                         image: AssetImage(
-                                            Consts.pathImageResetPasswordPage),
+                                          Consts.pathImageResetPasswordPage,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -178,9 +182,10 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                       ),
                                     );
                                     userResetPassword = UserModel(
-                                        name: args.name,
-                                        email: args.email,
-                                        password: passwordController.text);
+                                      name: args.name,
+                                      email: args.email,
+                                      password: passwordController.text,
+                                    );
                                     //Tira o loading
                                     Navigator.pop(context);
                                     Navigator.pop(context, userResetPassword);

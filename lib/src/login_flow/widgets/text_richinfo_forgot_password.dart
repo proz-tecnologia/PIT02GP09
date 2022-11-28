@@ -83,8 +83,8 @@ class _TextRichInfoForgotPasswordState
               return showDialog(
                 context: context,
                 builder: (BuildContext context) => CustomDialog(
-                  title: 'Info Reset Password',
-                  description: 'Usuário não cadastrado ou e-mail incorreto!',
+                  title: Consts.textTitleTextRichinfoForgotPassword,
+                  description: Consts.textDescriptionTextRichinfoForgotPassword,
                   wid1: TextRichInfoCreateAccount(
                     theme: widget.theme,
                     signUpController: signUpController,

@@ -7,6 +7,8 @@ import '../../models/user_model.dart';
 import 'login_state.dart';
 
 class LoginController {
+
+  //Responsavel fazer o entrada de usuário cadastrado
   Future<LoginState> login({
     required String mail,
     required String password,
@@ -19,6 +21,7 @@ class LoginController {
     final users = sharedPrefers.getString(SharedPreferencesKeys.users);
     await Future.delayed(const Duration(seconds: 3));
 
+    //Percorre a lista de usuários verificando o e-mail e por fim a senha
     if (users != null && users.isNotEmpty) {
       final usersDecode = jsonDecode(users);
 
