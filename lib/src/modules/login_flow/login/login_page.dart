@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/login_flow/login/login_state.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/login_flow/widgets/custom_input_form/input_clear.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/utils/mixins/validations_mixin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../routes/consts_routes.dart';
-import '../../../utils/consts.dart';
-import '../../../utils/shared_preferences_keys.dart';
+import '../../routes/consts_routes.dart';
 import '../../home/home_page.dart';
+import '../../../utils/consts.dart';
+import '../../../utils/mixins/validations_mixin.dart';
+import '../../../utils/shared_preferences_keys.dart';
 import '../reset_password/reset_password_controller.dart';
 import '../sign_up/sign_up_controller.dart';
 import '../widgets/custom_dialog/custom_dialog.dart';
 import '../widgets/custom_input_form/custom_elevated_button.dart';
 import '../widgets/custom_input_form/custom_text_form_field.dart';
+import '../widgets/custom_input_form/input_clear.dart';
 import '../widgets/custom_input_form/password_custom_text_form_field.dart';
 import '../widgets/text_richinfo_create_account.dart';
 import '../widgets/text_richinfo_forgot_password.dart';
 import 'login_controller.dart';
+import 'login_state.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

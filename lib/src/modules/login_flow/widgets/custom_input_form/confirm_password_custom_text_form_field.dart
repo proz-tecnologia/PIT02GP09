@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
-import 'package:projeto_gestao_financeira_grupo_nove/utils/mixins/validations_mixin.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/utils/mixins/validations_mixin.dart';
 
 import 'custom_text_form_field.dart';
 

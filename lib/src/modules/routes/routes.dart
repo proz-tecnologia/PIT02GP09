@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../src/credit_card/credit_card_page.dart';
-import '../src/expenses/expenses_page.dart';
-import '../src/home/home_page.dart';
-import '../src/login_flow/login/login_page.dart';
-import '../src/login_flow/reset_password/reset_password_page.dart';
-import '../src/login_flow/sign_up/sign_up_page.dart';
-import '../src/login_flow/splash_screen/splash_screen_page.dart';
-import '../src/revenue/revenue_page.dart';
+import '../credit_card/credit_card_page.dart';
+import '../expenses/expenses_page.dart';
+import '../home/home_page.dart';
+import '../login_flow/login/login_page.dart';
+import '../login_flow/reset_password/reset_password_page.dart';
+import '../login_flow/sign_up/sign_up_page.dart';
+import '../login_flow/splash_screen/splash_screen_page.dart';
+import '../revenue/revenue_page.dart';
 import 'consts_routes.dart';
 
 class Routes {

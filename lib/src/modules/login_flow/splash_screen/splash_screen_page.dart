@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../routes/consts_routes.dart';
+import '../../routes/consts_routes.dart';
+import '../../home/home_page.dart';
 import '../../../utils/consts.dart';
 import '../../../utils/shared_preferences_keys.dart';
-import '../../home/home_page.dart';
 import 'splash_screen_controller.dart';
 import 'splash_screen_state.dart';
 

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/login_flow/widgets/custom_input_form/input_clear.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/utils/mixins/validations_mixin.dart';
 
-import '../../../routes/consts_routes.dart';
-import '../../../utils/consts.dart';
+import '../../routes/consts_routes.dart';
 import '../../models/user_model.dart';
+import '../../../utils/consts.dart';
+import '../../../utils/mixins/validations_mixin.dart';
 import '../widgets/custom_input_form/confirm_password_custom_text_form_field.dart';
 import '../widgets/custom_input_form/custom_elevated_button.dart';
 import '../widgets/custom_input_form/custom_text_form_field.dart';
+import '../widgets/custom_input_form/input_clear.dart';
 import '../widgets/custom_input_form/password_custom_text_form_field.dart';
 import '../widgets/custom_input_form/text_rich_info.dart';
 

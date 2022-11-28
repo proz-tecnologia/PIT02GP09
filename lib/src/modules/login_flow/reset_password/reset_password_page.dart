@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../utils/consts.dart';
 import '../../models/user_model.dart';
+import '../../../utils/consts.dart';
 import '../widgets/custom_input_form/confirm_password_custom_text_form_field.dart';
 import '../widgets/custom_input_form/custom_elevated_button.dart';
 import '../widgets/custom_input_form/input_clear.dart';

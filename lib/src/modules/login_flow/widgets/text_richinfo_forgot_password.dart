@@ -1,13 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/login_flow/reset_password/reset_password_page.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/utils/mixins/validations_mixin.dart';
 
-import '../../../routes/consts_routes.dart';
-import '../../../utils/consts.dart';
-import '../../../utils/shared_preferences_keys.dart';
+import '../../routes/consts_routes.dart';
 import '../../models/user_model.dart';
+import '../../../utils/consts.dart';
+import '../../../utils/mixins/validations_mixin.dart';
+import '../../../utils/shared_preferences_keys.dart';
 import '../reset_password/reset_password_controller.dart';
+import '../reset_password/reset_password_page.dart';
 import '../sign_up/sign_up_controller.dart';
 import 'custom_dialog/custom_dialog.dart';
 import 'custom_input_form/text_rich_info.dart';

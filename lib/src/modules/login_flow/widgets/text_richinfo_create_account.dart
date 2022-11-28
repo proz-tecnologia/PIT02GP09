@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../routes/consts_routes.dart';
-import '../../../utils/consts.dart';
+import '../../routes/consts_routes.dart';
 import '../../models/user_model.dart';
+import '../../../utils/consts.dart';
 import '../sign_up/sign_up_controller.dart';
 import 'custom_input_form/text_rich_info.dart';
 

@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../utils/shared_preferences_keys.dart';
 import '../../models/user_model.dart';
+import '../../../utils/shared_preferences_keys.dart';
 import 'sign_up_state.dart';
 
 class SignUpController {
@@ -54,7 +54,6 @@ class SignUpController {
   Future<void> addUser({required UserModel user}) async {
     updateState(SignUpStateLoading());
     await Future.delayed(const Duration(seconds: 3));
-    print("teste");
     newUsers.add(user);
 
     final newUsersJson = newUsers.map((e) => e.toJson()).toList();

@@ -4,8 +4,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../utils/shared_preferences_keys.dart';
 import '../../models/user_model.dart';
+import '../../../utils/shared_preferences_keys.dart';
 import 'reset_password_state.dart';
 
 class ResetPasswordController {
