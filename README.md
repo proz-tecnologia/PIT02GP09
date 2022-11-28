@@ -24,14 +24,15 @@
 ### :ticket: Licença, versões e status de softwares<br>	
 _Licença: Instituto de Tecnologia de Massachusetts (MIT);_<br>
 _Versão do SDK Flutter/Dart:_<br>
-> _Flutter 3.3.4 • channel stable • https://github.com/flutter/flutter.git_<br>
-> _Framework • revision eb6d86ee27 (3 weeks ago) • 2022-10-04 22:31:45 -0700_<br>
-> _Engine • revision c08d7d5efc_<br>
+> _Flutter 3.3.7 • channel stable • https://github.com/flutter/flutter.git_ <br>
+> _Framework • revision e99c9c7cd9 (4 weeks ago) • 2022-11-01 16:59:00 -0700_<br>
+> _Engine • revision 857bd6b74c_<br>
 > _Tools • Dart 2.18.2 • DevTools 2.15.0_<br>
 > _Dependencies_<br>
 > > _flutter:_<br>_sdk: flutter_<br>_brasil_fields: ^1.6.0_<br>_shared_preferences: ^2.0.15_<br>
-	
-> _Data da última versão do projeto: outubro._<br>
+> > flutter_modular: ^5.0.3 <br>
+	Tools • Dart 2.18.4 • DevTools 2.15.0
+> _Data da última versão do projeto: novembro._<br>
 	
 ## :octocat:Desenvolvedores
 
