@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../../routes/consts_routes.dart';
-import '../../models/user_model.dart';
 import '../../../utils/consts.dart';
 import '../../../utils/mixins/validations_mixin.dart';
+import '../../models/user_model.dart';
 import '../widgets/custom_input_form/confirm_password_custom_text_form_field.dart';
 import '../widgets/custom_input_form/custom_elevated_button.dart';
 import '../widgets/custom_input_form/custom_text_form_field.dart';
@@ -187,7 +186,7 @@ class _LoginPageState extends State<SignUpPage> with ValidationMixin {
                                     email: mailController.text,
                                     password: passwordController.text);
 
-                                Modular.to.pop(newUser);                             
+                                Modular.to.pop(newUser);
                                 // Navigator.pop(context, newUser);
                                 formkey.currentState!.reset();
                                 inputClear;

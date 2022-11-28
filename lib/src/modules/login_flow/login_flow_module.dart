@@ -5,6 +5,8 @@ import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/rese
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/sign_up/sign_up_page.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/routes/consts_routes.dart';
 
+import '../not_found_page/not_found_page.dart';
+
 class LoginFlowModule extends Module {
   @override
   List<Bind<Object>> get binds => [];
@@ -22,5 +24,7 @@ class LoginFlowModule extends Module {
             
         ChildRoute(ConstsRoutes.resetPasswordPage,
             child: (context, args) => const ResetPasswordPage()),
+        WildcardRoute(child: (context, args) =>const NotFoundPage()),
+
       ];
 }

@@ -85,6 +85,16 @@ class Consts {
   static const String textDescriptionTextRichinfoForgotPassword = 'Usuário não cadastrado ou e-mail incorreto!';
   /*================================================================= */
 
+  //Textos not_found_page
+  static const String pathImageNotFoundPage =
+      'images/404_error.png';
+  static const String textTextButtonNotFoundPage =
+      'Página de Login';
+
+  /*================================================================= */
+
+
+
   //Constantes de de configurações gerais
   static const BorderRadius borderRadius10 =
       BorderRadius.all(Radius.circular(10));

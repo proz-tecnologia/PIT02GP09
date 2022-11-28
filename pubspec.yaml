@@ -51,6 +51,7 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
+    - images/
     - images/images_login_flow/
 
   # The following line ensures that the Material Icons font is
