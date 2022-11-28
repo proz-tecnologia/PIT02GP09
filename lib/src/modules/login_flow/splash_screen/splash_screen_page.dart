@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../routes/consts_routes.dart';
+import '../../../routes/consts_routes.dart';
 import '../../home/home_page.dart';
 import '../../../utils/consts.dart';
 import '../../../utils/shared_preferences_keys.dart';
@@ -17,7 +18,7 @@ class SplashScreenPage extends StatefulWidget {
 
 class _SplashScreenPageState extends State<SplashScreenPage> {
   SplashScreenController controller = SplashScreenController();
-  
+
   @override
   void initState() {
     super.initState();
@@ -33,16 +34,21 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
           final userSession =
               sharedPrefers.getString(SharedPreferencesKeys.userSession);
 
-          Navigator.popAndPushNamed(
-            context,
+          Modular.to.navigate(
             ConstsRoutes.homePage,
             arguments: HomeArguments(name: userSession!),
           );
+          // Navigator.popAndPushNamed(
+          //   context,
+          //   ConstsRoutes.homePage,
+          //   arguments: HomeArguments(name: userSession!),
+          // );
         } else if (value.runtimeType == SplashScreenStateUnauthenticated) {
-          Navigator.popAndPushNamed(
-            context,
-            ConstsRoutes.loginPage,
-          );
+          Modular.to.navigate(ConstsRoutes.loginFlowModule);
+          // Navigator.popAndPushNamed(
+          //   context,
+          //   ConstsRoutes.loginPage,
+          // );
         }
       });
     });

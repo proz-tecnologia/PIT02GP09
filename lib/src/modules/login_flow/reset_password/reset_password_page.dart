@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../models/user_model.dart';
 import '../../../utils/consts.dart';
@@ -187,8 +188,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                       password: passwordController.text,
                                     );
                                     //Tira o loading
-                                    Navigator.pop(context);
-                                    Navigator.pop(context, userResetPassword);
+                                    Modular.to.pop();
+                                    Modular.to.pop(userResetPassword);
+                                    // Navigator.pop(context, userResetPassword);
                                     formkey.currentState!.reset();
                                     inputClear;
                                   }

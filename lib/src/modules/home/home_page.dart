@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/modules/routes/consts_routes.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/routes/consts_routes.dart';
 
 import '../login_flow/sign_up/sign_up_controller.dart';
 
@@ -39,7 +40,8 @@ class _HomePageState extends State<HomePage> {
           IconButton(
               onPressed: () {
                 controller.logout();
-                Navigator.popAndPushNamed(context, ConstsRoutes.loginPage);
+                Modular.to.navigate(ConstsRoutes.loginPage);
+                // Navigator.popAndPushNamed(context, ConstsRoutes.loginPage);
               },
               icon: const Icon(Icons.logout))
         ],

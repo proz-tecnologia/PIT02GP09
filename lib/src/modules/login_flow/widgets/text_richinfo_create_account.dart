@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../routes/consts_routes.dart';
-import '../../models/user_model.dart';
+import '../../../routes/consts_routes.dart';
 import '../../../utils/consts.dart';
+import '../../models/user_model.dart';
 import '../sign_up/sign_up_controller.dart';
 import 'custom_input_form/text_rich_info.dart';
 
@@ -28,20 +29,16 @@ class TextRichInfoCreateAccount extends StatelessWidget {
         textLink: Text(Consts.textInteractionCreateAccountLink,
             style: theme.textTheme.labelMedium),
         link: () async {
-          showDialog(
-            context: context,
-            builder: (context) => const Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-          Navigator.pop(context);
-          final newUser = await Navigator.pushNamed(
-            context,
+          final newUser = await Modular.to.pushNamed(
             ConstsRoutes.signUpPage,
           );
+          // // final newUser = await Navigator.pushNamed(
+          // //   context,
+          // //   ConstsRoutes.signUpPage,
+          // // );          
 
           if (newUser != null) {
-            signUpController.addUser(user: newUser as UserModel);
+            signUpController.addUser(user: newUser as UserModel);            
           }
           formkey.currentState!.reset();
           inputClear;

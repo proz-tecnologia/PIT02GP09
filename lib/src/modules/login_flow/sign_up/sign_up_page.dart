@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../routes/consts_routes.dart';
+import '../../../routes/consts_routes.dart';
 import '../../models/user_model.dart';
 import '../../../utils/consts.dart';
 import '../../../utils/mixins/validations_mixin.dart';
@@ -181,13 +182,13 @@ class _LoginPageState extends State<SignUpPage> with ValidationMixin {
                           : () async {
                               if (formkey.currentState != null &&
                                   formkey.currentState!.validate()) {
-                                
                                 final newUser = UserModel(
                                     name: nameController.text,
                                     email: mailController.text,
                                     password: passwordController.text);
-                                
-                                Navigator.pop(context, newUser);
+
+                                Modular.to.pop(newUser);                             
+                                // Navigator.pop(context, newUser);
                                 formkey.currentState!.reset();
                                 inputClear;
                               }
@@ -202,8 +203,9 @@ class _LoginPageState extends State<SignUpPage> with ValidationMixin {
                     textLink: Text(Consts.textInteractionLoginLinkSignUp,
                         style: theme.textTheme.labelMedium),
                     link: () {
-                      Navigator.popAndPushNamed(
-                          context, ConstsRoutes.loginPage);
+                      Modular.to.pop();
+                      // Navigator.popAndPushNamed(
+                      //     context, ConstsRoutes.loginPage);
                       formkey.currentState!.reset();
                       inputClear;
                     })

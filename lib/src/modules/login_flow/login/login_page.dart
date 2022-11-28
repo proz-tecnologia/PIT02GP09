@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../routes/consts_routes.dart';
+import '../../../routes/consts_routes.dart';
 import '../../home/home_page.dart';
 import '../../../utils/consts.dart';
 import '../../../utils/mixins/validations_mixin.dart';
@@ -36,7 +37,7 @@ class _LoginPageState extends State<LoginPage> with ValidationMixin {
     signUpController = SignUpController(onUpdate: () {
       setState(() {});
     });
-    
+
     resetPasswordController = ResetPasswordController(onUpdate: () {
       setState(() {});
     });
@@ -200,11 +201,18 @@ class _LoginPageState extends State<LoginPage> with ValidationMixin {
                                     final userSession = sharedPrefers.getString(
                                         SharedPreferencesKeys.userSession);
                                     //Tira o loading
-                                    Navigator.pop(context);
-                                    Navigator.popAndPushNamed(
-                                        context, ConstsRoutes.homePage,
-                                        arguments:
-                                            HomeArguments(name: userSession!));
+                                    Modular.to.pop();
+
+                                    Modular.to.navigate(
+                                      ConstsRoutes.homePage,
+                                      arguments:
+                                          HomeArguments(name: userSession!),
+                                    );
+
+                                    // Navigator.popAndPushNamed(
+                                    //     context, ConstsRoutes.homePage,
+                                    //     arguments:
+                                    //         HomeArguments(name: userSession!));
                                     formkey.currentState!.reset();
                                     inputClear;
                                   } else {

@@ -1,7 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../routes/consts_routes.dart';
+import '../../../routes/consts_routes.dart';
 import '../../models/user_model.dart';
 import '../../../utils/consts.dart';
 import '../../../utils/mixins/validations_mixin.dart';
@@ -64,14 +65,21 @@ class _TextRichInfoForgotPasswordState
             );
 
             if (user != null) {
-              final userResetPassword = await Navigator.pushNamed(
-                (context),
+              final userResetPassword = await Modular.to.pushNamed(
                 ConstsRoutes.resetPasswordPage,
                 arguments: ResetPasswordArguments(
                   name: user.name,
                   email: user.email,
                 ),
               );
+              // final userResetPassword = await Navigator.pushNamed(
+              //   (context),
+              //   ConstsRoutes.resetPasswordPage,
+              //   arguments: ResetPasswordArguments(
+              //     name: user.name,
+              //     email: user.email,
+              //   ),
+              // );
 
               if (userResetPassword != null) {
                 widget.resetPasswordController
