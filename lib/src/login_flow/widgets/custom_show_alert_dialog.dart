@@ -22,7 +22,7 @@ class _CustomShowAlertDialogState extends State<CustomShowAlertDialog> {
   Widget build(BuildContext context) {
     // configura o  AlertDialog
     return AlertDialog(
-      title: const Text("Entre com seu e-mail"),
+      title: const Text(Consts.textTitleCustomShowAlertDialog),
       content: Form(
         key: formkey,
         //Habilta de desabilita o botão
@@ -51,12 +51,12 @@ class _CustomShowAlertDialogState extends State<CustomShowAlertDialog> {
               children: [
                 TextButton(
                     onPressed: () => Navigator.pop(context),
-                    child: const Text('Cancelar')),
+                    child: const Text(Consts.textCancelarCustomShowAlertDialog)),
                 TextButton(
                     onPressed: !formValid
                         ? null
                         : () => Navigator.pop(context, emailController.text),
-                    child: const Text('Enviar'))
+                    child: const Text(Consts.textEnviarCustomShowAlertDialog))
               ],
             );
           },
