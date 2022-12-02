@@ -2,27 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../routes/consts_routes.dart';
+import '../../../shared/models/user_model.dart';
 import '../../../utils/consts.dart';
-import '../../models/user_model.dart';
-import '../sign_up/sign_up_controller.dart';
+import '../sign_up/sign_up_bloc.dart';
+import '../sign_up/sign_up_event.dart';
 import 'custom_input_form/text_rich_info.dart';
 
 class TextRichInfoCreateAccount extends StatelessWidget {
   const TextRichInfoCreateAccount({
     Key? key,
     required this.theme,
-    required this.signUpController,
     required this.formkey,
     required this.inputClear,
   }) : super(key: key);
 
   final ThemeData theme;
-  final SignUpController signUpController;
   final GlobalKey<FormState> formkey;
   final Function()? inputClear;
 
   @override
   Widget build(BuildContext context) {
+    final bloc = Modular.get<SignUpBloc>();
     return TextRichInfo(
         text: Text(Consts.textInteractionCreateAccount,
             style: theme.textTheme.labelSmall),
@@ -35,13 +35,15 @@ class TextRichInfoCreateAccount extends StatelessWidget {
           // // final newUser = await Navigator.pushNamed(
           // //   context,
           // //   ConstsRoutes.signUpPage,
-          // // );          
-
+          // // );
           if (newUser != null) {
-            signUpController.addUser(user: newUser as UserModel);            
+            Modular.get<SignUpBloc>().add(OnSignUpEmpty(newUser as UserModel));
+            bloc.add(OnCreateNewUserPressed(newUser));
+            // signUpController.addUser(user: newUser as UserModel);
           }
-          formkey.currentState!.reset();
-          inputClear;
+
+          // formkey.currentState!.reset();
+          // inputClear;
         });
   }
 }

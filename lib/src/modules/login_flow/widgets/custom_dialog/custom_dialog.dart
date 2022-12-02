@@ -1,7 +1,14 @@
 //FONTE: https://medium.com/@excogitatr/custom-dialog-in-flutter-d00e0441f1d5
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login/login_bloc.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login/login_event.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/sign_up/sign_up_event.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/routes/consts_routes.dart';
 
+import '../../../../shared/models/user_model.dart';
 import '../../../../utils/consts.dart';
+import '../../sign_up/sign_up_bloc.dart';
 
 class CustomDialog extends StatelessWidget {
   final String? title;
@@ -34,6 +41,8 @@ class CustomDialog extends StatelessWidget {
   }
 
   dialogContent(BuildContext context) {
+    UserModel? user;
+    final bloc = Modular.get<LoginBloc>();
     return Stack(
       children: <Widget>[
         //...parte inferior do cartão,
@@ -76,9 +85,9 @@ class CustomDialog extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10),
-              if(wid1 != null) wid1!,
+              if (wid1 != null) wid1!,
               const SizedBox(height: 10),
-              if(wid2 != null) wid2!,
+              if (wid2 != null) wid2!,
               const SizedBox(height: 24.0),
               Align(
                 alignment: Alignment.bottomRight,
@@ -86,7 +95,10 @@ class CustomDialog extends StatelessWidget {
                   height: 45,
                   child: FloatingActionButton(
                     onPressed: () {
-                      Navigator.of(context).pop(); // To close the dialog
+                      bloc.add(OnLoginStateEmpty(user));
+                      Modular.to.popUntil(
+                          ModalRoute.withName(ConstsRoutes.loginPage));
+                      Modular.get<SignUpBloc>().add(OnSignUpEmpty(user));
                     },
                     child: Text(
                       buttonText!,

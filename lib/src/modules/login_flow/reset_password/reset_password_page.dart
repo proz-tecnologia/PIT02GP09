@@ -1,25 +1,16 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../models/user_model.dart';
+import '../../../shared/models/user_model.dart';
 import '../../../utils/consts.dart';
 import '../widgets/custom_input_form/confirm_password_custom_text_form_field.dart';
 import '../widgets/custom_input_form/custom_elevated_button.dart';
 import '../widgets/custom_input_form/input_clear.dart';
 import '../widgets/custom_input_form/password_custom_text_form_field.dart';
 
-class ResetPasswordArguments {
-  final String name;
-  final String email;
-
-  ResetPasswordArguments({
-    required this.name,
-    required this.email,
-  });
-}
-
 class ResetPasswordPage extends StatefulWidget {
-  const ResetPasswordPage({super.key});
+  const ResetPasswordPage([Key? key]) : super(key: key);
 
   @override
   State<ResetPasswordPage> createState() => _ResetPasswordPageState();
@@ -59,8 +50,6 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
-    final args =
-        ModalRoute.of(context)!.settings.arguments as ResetPasswordArguments;
     ThemeData theme = Theme.of(context);
     return Scaffold(
         appBar: AppBar(
@@ -182,9 +171,13 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                         child: CircularProgressIndicator(),
                                       ),
                                     );
+                                    final arg = ModalRoute.of(context)!
+                                        .settings
+                                        .arguments as UserModel;
+
                                     userResetPassword = UserModel(
-                                      name: args.name,
-                                      email: args.email,
+                                      name: arg.name,
+                                      email: arg.email,
                                       password: passwordController.text,
                                     );
                                     //Tira o loading

@@ -1,15 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/reset_password/reset_password_bloc.dart';
 
 import '../../../routes/consts_routes.dart';
-import '../../models/user_model.dart';
+import '../../../shared/models/user_model.dart';
 import '../../../utils/consts.dart';
 import '../../../utils/mixins/validations_mixin.dart';
 import '../../../utils/shared_preferences_keys.dart';
-import '../reset_password/reset_password_controller.dart';
-import '../reset_password/reset_password_page.dart';
-import '../sign_up/sign_up_controller.dart';
+import '../reset_password/reset_password_event.dart';
 import 'custom_dialog/custom_dialog.dart';
 import 'custom_input_form/text_rich_info.dart';
 import 'custom_show_alert_dialog.dart';
@@ -19,13 +18,11 @@ class TextRichInfoForgotPassword extends StatefulWidget with ValidationMixin {
   const TextRichInfoForgotPassword({
     Key? key,
     required this.theme,
-    required this.resetPasswordController,
     required this.formkey,
     required this.inputClear,
   }) : super(key: key);
 
   final ThemeData theme;
-  final ResetPasswordController resetPasswordController;
   final GlobalKey<FormState> formkey;
   final Function()? inputClear;
 
@@ -36,16 +33,6 @@ class TextRichInfoForgotPassword extends StatefulWidget with ValidationMixin {
 
 class _TextRichInfoForgotPasswordState
     extends State<TextRichInfoForgotPassword> {
-  late final SignUpController signUpController;
-
-  @override
-  void initState() {
-    signUpController = SignUpController(onUpdate: () {
-      setState(() {});
-    });
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return TextRichInfo(
@@ -65,25 +52,14 @@ class _TextRichInfoForgotPasswordState
             );
 
             if (user != null) {
-              final userResetPassword = await Modular.to.pushNamed(
-                ConstsRoutes.resetPasswordPage,
-                arguments: ResetPasswordArguments(
-                  name: user.name,
-                  email: user.email,
-                ),
-              );
-              // final userResetPassword = await Navigator.pushNamed(
-              //   (context),
-              //   ConstsRoutes.resetPasswordPage,
-              //   arguments: ResetPasswordArguments(
-              //     name: user.name,
-              //     email: user.email,
-              //   ),
-              // );
+              final userResetPassword = await Modular.to
+                  .pushNamed(ConstsRoutes.resetPasswordPage, arguments: user);
+           
 
               if (userResetPassword != null) {
-                widget.resetPasswordController
-                    .resetPassword(user: userResetPassword as UserModel);
+                Modular.get<ResetPasswordBloc>().add(OnResetPasswordPressed(
+                    user: userResetPassword as UserModel));
+                
               }
               widget.formkey.currentState!.reset();
               widget.inputClear;
@@ -95,7 +71,6 @@ class _TextRichInfoForgotPasswordState
                   description: Consts.textDescriptionTextRichinfoForgotPassword,
                   wid1: TextRichInfoCreateAccount(
                     theme: widget.theme,
-                    signUpController: signUpController,
                     formkey: widget.formkey,
                     inputClear: widget.inputClear,
                   ),

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../routes/consts_routes.dart';
-import '../../home/home_page.dart';
 import '../../../utils/consts.dart';
-import '../../../utils/shared_preferences_keys.dart';
-import 'splash_screen_controller.dart';
+import 'splash_screen_bloc.dart';
+import 'splash_screen_event.dart';
 import 'splash_screen_state.dart';
 
 class SplashScreenPage extends StatefulWidget {
@@ -17,40 +15,21 @@ class SplashScreenPage extends StatefulWidget {
 }
 
 class _SplashScreenPageState extends State<SplashScreenPage> {
-  SplashScreenController controller = SplashScreenController();
-
   @override
   void initState() {
     super.initState();
+    Modular.get<SplashScreenBloc>().add(OnIsAuthenticated());
     _navigateToHome();
   }
-
   _navigateToHome() async {
     Future.delayed(const Duration(seconds: 3)).then((value) async {
-      late final SharedPreferences sharedPrefers;
-      sharedPrefers = await SharedPreferences.getInstance();
-      await controller.isAuthenticated().then((value) async {
-        if (value.runtimeType == SplashScreenStateAuthenticated) {
-          final userSession =
-              sharedPrefers.getString(SharedPreferencesKeys.userSession);
-
-          Modular.to.navigate(
-            ConstsRoutes.homePage,
-            arguments: HomeArguments(name: userSession!),
-          );
-          // Navigator.popAndPushNamed(
-          //   context,
-          //   ConstsRoutes.homePage,
-          //   arguments: HomeArguments(name: userSession!),
-          // );
-        } else if (value.runtimeType == SplashScreenStateUnauthenticated) {
-          Modular.to.navigate(ConstsRoutes.loginFlowModule);
-          // Navigator.popAndPushNamed(
-          //   context,
-          //   ConstsRoutes.loginPage,
-          // );
-        }
-      });
+      final bloc = Modular.get<SplashScreenBloc>();
+      if (bloc.state is SplashScreenStateAuthenticated) {
+        Modular.to.navigate(ConstsRoutes.homePage);
+      } else if (bloc.state is SplashScreenStateUnauthenticated) {
+        Modular.to.navigate(ConstsRoutes.loginFlowModule);
+        
+      }
     });
   }
 

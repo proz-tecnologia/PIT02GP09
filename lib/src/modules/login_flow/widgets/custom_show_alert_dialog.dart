@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/routes/consts_routes.dart';
 
 import '../../../utils/consts.dart';
 import '../../../utils/mixins/validations_mixin.dart';
@@ -50,12 +52,14 @@ class _CustomShowAlertDialogState extends State<CustomShowAlertDialog> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const Text(Consts.textCancelarCustomShowAlertDialog)),
+                    onPressed: () =>
+                        Modular.to.popAndPushNamed(ConstsRoutes.loginPage),
+                    child:
+                        const Text(Consts.textCancelarCustomShowAlertDialog)),
                 TextButton(
                     onPressed: !formValid
                         ? null
-                        : () => Navigator.pop(context, emailController.text),
+                        : () => Modular.to.pop(emailController.text),
                     child: const Text(Consts.textEnviarCustomShowAlertDialog))
               ],
             );
