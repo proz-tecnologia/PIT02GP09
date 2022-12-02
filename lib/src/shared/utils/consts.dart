@@ -28,6 +28,9 @@ class Consts {
   static const String textLogin = 'Entrar';
   static const String textInteractionCreateAccount = 'Não tem uma conta?';
   static const String textInteractionCreateAccountLink = 'Crie Aqui';
+  static const String textLoginStateErrorGetUser = 'Lista de usuários vazia!';
+  static const String textLoginStateErrorPassEmail = 'Senha ou email incorreto!';
+
   /*================================================================= */
 
   //Textos sign_up_page

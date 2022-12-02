@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/user_model.dart';
 
-import '../../utils/shared_preferences_keys.dart';
+import '../utils/shared_preferences_keys.dart';
 
 class Repository {
   List<UserModel> usersLogin = <UserModel>[];

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/routes/consts_routes.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/utils/consts.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/utils/consts.dart';
 
 class NotFoundPage extends StatelessWidget {
   const NotFoundPage({super.key});

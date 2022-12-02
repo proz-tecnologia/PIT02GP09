@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../shared/repositories/repository.dart';
-import '../../../utils/shared_preferences_keys.dart';
+import '../../../shared/utils/consts.dart';
+import '../../../shared/utils/shared_preferences_keys.dart';
 import 'login_event.dart';
 import 'login_state.dart';
 
@@ -30,7 +31,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
       final user = await repository.getUser();
       if (user.isEmpty) {
-        emitter(LoginStateError(erro: 'List users is empty!'));
+        emitter(LoginStateError(erro: Consts.textLoginStateErrorGetUser ));
       }
 
       for (var element in user) {
@@ -44,7 +45,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             emitter(LoginStateSuccess(user: userSession));
             return true;
           } else {
-            emitter(LoginStateError(erro: 'Senha incorreto!'));
+            emitter(LoginStateError(erro: Consts.textLoginStateErrorPassEmail));
             return false;
           }
         }

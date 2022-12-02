@@ -3,7 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../routes/consts_routes.dart';
 import '../../../shared/models/user_model.dart';
-import '../../../utils/consts.dart';
+import '../../../shared/utils/consts.dart';
 import '../sign_up/sign_up_bloc.dart';
 import '../sign_up/sign_up_event.dart';
 import 'custom_input_form/text_rich_info.dart';

@@ -6,7 +6,7 @@ class TextRichInfo extends StatelessWidget {
     this.text,
     this.text2,
     this.textLink,
-    this.link,
+    this.link, 
   }) : super(key: key);
 
   final Widget? text;

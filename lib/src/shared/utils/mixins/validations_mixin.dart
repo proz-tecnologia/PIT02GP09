@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../shared/models/user_model.dart';
+import '../../models/user_model.dart';
 
 mixin ValidationMixin {
   //Verifica se o input não está vazio

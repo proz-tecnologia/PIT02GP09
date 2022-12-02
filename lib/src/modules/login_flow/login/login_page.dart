@@ -5,8 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../shared/models/user_model.dart';
-import '../../../utils/consts.dart';
-import '../../../utils/mixins/validations_mixin.dart';
+import '../../../shared/utils/consts.dart';
+import '../../../shared/utils/mixins/validations_mixin.dart';
+import '../../../shared/widgets/show_loader/show_loader.dart';
 import '../../home/home_page.dart';
 import '../widgets/custom_dialog/custom_dialog_stateless.dart';
 import '../widgets/custom_input_form/custom_elevated_button.dart';
@@ -204,7 +205,7 @@ class _LoginPageState extends State<LoginPage> with ValidationMixin {
               },
               onLoading: (_) {
                 log(state.toString());
-                return const CircularProgressIndicator();
+                return const ShowLoader();
               },
               onSuccess: (userSession) {
                 inputClear;
@@ -226,4 +227,6 @@ class _LoginPageState extends State<LoginPage> with ValidationMixin {
           }),
     );
   }
+
+
 }

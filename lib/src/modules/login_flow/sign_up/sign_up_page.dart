@@ -10,8 +10,9 @@ import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/sign
 
 import '../../../routes/consts_routes.dart';
 import '../../../shared/models/user_model.dart';
-import '../../../utils/consts.dart';
-import '../../../utils/mixins/validations_mixin.dart';
+import '../../../shared/utils/consts.dart';
+import '../../../shared/utils/mixins/validations_mixin.dart';
+import '../../../shared/widgets/show_loader/show_loader.dart';
 import '../login/login_page.dart';
 import '../widgets/custom_input_form/confirm_password_custom_text_form_field.dart';
 import '../widgets/custom_input_form/custom_elevated_button.dart';
@@ -255,7 +256,7 @@ class _LoginPageState extends State<SignUpPage> with ValidationMixin {
                 },
                 onLoading: (_) {
                   log(state.toString());
-                  return const CircularProgressIndicator();
+                  return const ShowLoader();
                 },
                 onSuccess: (userSession) {
                   log(state.toString());

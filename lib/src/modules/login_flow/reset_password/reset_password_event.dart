@@ -2,7 +2,7 @@
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/user_model.dart';
 
 abstract class ResetPasswordEvent {
-  UserModel? user;
+  UserModel user;
   ResetPasswordEvent({
     required this.user,
   });

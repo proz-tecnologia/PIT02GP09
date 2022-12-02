@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../shared/repositories/repository.dart';
-import '../../../utils/shared_preferences_keys.dart';
+import '../../../shared/utils/shared_preferences_keys.dart';
 import 'splash_screen_event.dart';
 import 'splash_screen_state.dart';
 

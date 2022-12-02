@@ -41,9 +41,7 @@ class _HomePageState extends State<HomePage> {
         title: Text('Home Page  Olá $name'),
         actions: [
           IconButton(
-              onPressed: () {
-                user = UserModel(
-                    name: 'name', email: 'email', password: 'password');
+              onPressed: () {                
                 Modular.get<LoginBloc>().add(OnLogoutPressed(user));
                 Modular.get<LoginBloc>().add(OnLoginStateEmpty(user));
                 Modular.to.navigate(ConstsRoutes.loginPage);

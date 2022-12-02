@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 import '../../../shared/models/user_model.dart';
@@ -39,4 +40,7 @@ class SignUpStateError extends SignUpState {
   final Object erro;
 
   SignUpStateError({required this.erro});
+
+  @override
+  String toString() => 'SignUpStateError(erro: $erro)';
 }

@@ -7,7 +7,7 @@ import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/sign
 import 'package:projeto_gestao_financeira_grupo_nove/src/routes/consts_routes.dart';
 
 import '../../../../shared/models/user_model.dart';
-import '../../../../utils/consts.dart';
+import '../../../../shared/utils/consts.dart';
 import '../../sign_up/sign_up_bloc.dart';
 
 class CustomDialog extends StatelessWidget {

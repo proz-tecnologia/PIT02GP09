@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../utils/consts.dart';
+import '../../../../shared/utils/consts.dart';
 import '../text_richinfo_create_account.dart';
 import '../text_richinfo_forgot_password.dart';
 import 'custom_dialog.dart';

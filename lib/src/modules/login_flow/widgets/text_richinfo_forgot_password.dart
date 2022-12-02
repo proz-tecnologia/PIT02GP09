@@ -5,9 +5,10 @@ import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/rese
 
 import '../../../routes/consts_routes.dart';
 import '../../../shared/models/user_model.dart';
-import '../../../utils/consts.dart';
-import '../../../utils/mixins/validations_mixin.dart';
-import '../../../utils/shared_preferences_keys.dart';
+import '../../../shared/utils/consts.dart';
+import '../../../shared/utils/mixins/validations_mixin.dart';
+import '../../../shared/utils/shared_preferences_keys.dart';
+
 import '../reset_password/reset_password_event.dart';
 import 'custom_dialog/custom_dialog.dart';
 import 'custom_input_form/text_rich_info.dart';
@@ -54,12 +55,10 @@ class _TextRichInfoForgotPasswordState
             if (user != null) {
               final userResetPassword = await Modular.to
                   .pushNamed(ConstsRoutes.resetPasswordPage, arguments: user);
-           
 
               if (userResetPassword != null) {
                 Modular.get<ResetPasswordBloc>().add(OnResetPasswordPressed(
                     user: userResetPassword as UserModel));
-                
               }
               widget.formkey.currentState!.reset();
               widget.inputClear;

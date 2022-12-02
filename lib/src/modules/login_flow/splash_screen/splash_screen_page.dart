@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../routes/consts_routes.dart';
-import '../../../utils/consts.dart';
+import '../../../shared/utils/consts.dart';
 import 'splash_screen_bloc.dart';
 import 'splash_screen_event.dart';
 import 'splash_screen_state.dart';

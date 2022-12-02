@@ -4,17 +4,17 @@ import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/user_mode
 abstract class SignUpEvent {
   final UserModel? _user;
   SignUpEvent(
-     this._user,
+    this._user,
   );
 
   UserModel? get getUser => _user;
   set setUser(UserModel user) => _user;
 }
-class OnCreateNewUserPressed extends SignUpEvent{
+
+class OnCreateNewUserPressed extends SignUpEvent {
   OnCreateNewUserPressed(super.user);
-  
 }
-class OnSignUpEmpty extends SignUpEvent{
+
+class OnSignUpEmpty extends SignUpEvent {
   OnSignUpEmpty(super.user);
-  
 }

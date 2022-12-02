@@ -1,3 +1,4 @@
 abstract class SplashScreenEvent {}
 
-class OnIsAuthenticated extends SplashScreenEvent{}
+class OnIsAuthenticated extends SplashScreenEvent {}
+

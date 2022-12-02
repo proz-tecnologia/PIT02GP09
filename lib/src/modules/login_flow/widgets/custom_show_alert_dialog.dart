@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/routes/consts_routes.dart';
 
-import '../../../utils/consts.dart';
-import '../../../utils/mixins/validations_mixin.dart';
+import '../../../shared/utils/consts.dart';
+import '../../../shared/utils/mixins/validations_mixin.dart';
 import 'custom_input_form/custom_text_form_field.dart';
 import 'custom_input_form/input_clear.dart';
 
