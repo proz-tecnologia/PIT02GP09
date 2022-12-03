@@ -1,25 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/app_module.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'routes/consts_routes.dart';
-import 'routes/routes.dart';
-import 'utils/consts.dart';
-import 'utils/custom_theme_data.dart';
+import 'src/app_widget.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: ConstsRoutes.rootRoute,
-      routes: Routes.routes,
-      title: Consts.titleMain,
-      theme: CustomThemeData.themeData,
-    );
-  }
+void main() async {
+  final sharedPreferences = await SharedPreferences.getInstance();
+  runApp(
+    ModularApp(
+      module: AppModule(sharedPref:sharedPreferences),
+      child: const AppWidget(),
+    ),
+  );
 }
