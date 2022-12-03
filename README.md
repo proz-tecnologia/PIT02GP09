@@ -22,7 +22,7 @@
 > `Expenses Page`: página com todas as depesas e suas funções<br>
 > `Credit Card Page`: página com movintação dos cartões de crédit e suas funções<br>
 ### :hammer: Tecnologias e processos utiliazados<br> 
-> `Padrão Arquitetural`: **Modular** - Rotas modularizadas - Injeção de Dependência Modularizada - Estrutura dividida por escopo - <br>
+> `Padrão Arquitetural`: **Modular** - Rotas modularizadas - Injeção de Dependência Modularizada - Estrutura dividida por escopo <br>
 > > **Resumindo**: Modular é uma solução para modularizar o sistema de injeção de rotas e dependências, fazendo com que cada escopo tenha suas próprias rotas e injeções independente de qualquer outro fator da estrutura. Criamos objetos para agrupar as Rotas e Injeções e os chamamos de Módulos <br>
 > 
 > `Model-View(Page)-Constroller`: é usando **MVC** em escopo, onde cada recurso tem seu próprio MVC e essa abordagem ajuda a reduzir muitos problemas de escalabilidade e manutenção <br>
@@ -30,7 +30,7 @@
 > `Bloc`: O objetivo deste pacote é facilitar a implementação do BLoCDesign Pattern (**Componente de Lógica de Negócios**)<br>
 > >**Padrão de Projeto**: ajuda a separar a apresentação da lógica de negócios . Seguir o padrão BLoC facilita a testabilidade e a reutilização. Este pacote abstrai os aspectos reativos do padrão, permitindo que os desenvolvedores se concentrem em escrever a lógica de negócios.<br> O **Bloc** é uma classe mais avançada que depende **events** de acionar statealterações em vez de funções, receba **events** e converta o recebido eventsem enviado **states**<br>
 > 
-> `flutter_bloc`: Widgets que facilitam a integração de blocos e côvados no Flutter . Construído para funcionar com package:bloc <br>
+> `flutter_bloc`: Widgets que facilitam a integração de blocos no Flutter . Construído para funcionar com package:bloc <br>
 > > `BlocBuilder`: É um widget Flutter que requer uma bloce uma builderfunção. **BlocBuilder** lida com a construção do widget em resposta a novos estados. BlocBuilder é muito semelhante, StreamBuildermas tem uma API mais simples para reduzir a quantidade de código clichê necessário. A builderfunção será potencialmente chamada várias vezes e deve ser uma função pura que retorna um widget em resposta ao estado.
 	
 ### :ticket: Licença, versões e status de softwares<br>	
