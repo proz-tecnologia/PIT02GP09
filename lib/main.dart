@@ -6,11 +6,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'src/app_widget.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   final sharedPreferences = await SharedPreferences.getInstance();
   runApp(
-    ModularApp(
-      module: AppModule(sharedPref:sharedPreferences),
-      child: const AppWidget(),
+    ModularApp( // replaces MyApp()
+      module: AppModule(sharedPref:sharedPreferences), // module with binds and routes
+      child: const AppWidget(), // has app settings
     ),
   );
 }
