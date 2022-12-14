@@ -23,8 +23,8 @@ mixin ValidationMixin {
     return null;
   }
 
-  //Conbina uma lista de funções de validações
-  //Conbina diferentes regras de validações
+  //Combina uma lista de funções de validações
+  //Combina diferentes regras de validações
   String? combine(List<String? Function()> validators) {
     for (final func in validators) {
       final validation = func();

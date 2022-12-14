@@ -54,7 +54,6 @@ class Repository {
     return usersLogin;
   }
 
-  
   Future<String> getUserSession() async {
     return sharedPreferences
         .getString(SharedPreferencesKeys.userSession)

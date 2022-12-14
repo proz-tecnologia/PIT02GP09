@@ -18,6 +18,7 @@ class AppModule extends Module {
   AppModule({
     required this.sharedPref,
   });
+  
   @override
   List<Bind<Object>> get binds => [
         Bind.factory((i) => Repository(sharedPreferences: sharedPref)),

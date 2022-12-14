@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "335634638705",
+    "project_id": "my-finance-app-3e9e9",
+    "storage_bucket": "my-finance-app-3e9e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:335634638705:android:218ca6619eba86285438d0",
+        "android_client_info": {
+          "package_name": "com.example.finance_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "335634638705-85epd4fmnff182rbg8k8ujuijpbnbekd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATfXoNUm_N08duK5a4qgO6kM6voHxpo5U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "335634638705-85epd4fmnff182rbg8k8ujuijpbnbekd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:335634638705:android:e29e0bdd79891adb5438d0",
+        "android_client_info": {
+          "package_name": "com.example.projeto_gestao_financeira_grupo_nove"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "335634638705-85epd4fmnff182rbg8k8ujuijpbnbekd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATfXoNUm_N08duK5a4qgO6kM6voHxpo5U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "335634638705-85epd4fmnff182rbg8k8ujuijpbnbekd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
