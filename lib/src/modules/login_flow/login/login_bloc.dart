@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,17 +19,21 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }) : super(
           LoginStateEmpty(),
         ) {
-    on<OnLoginPressed>(newLogin);
+    on<OnLoginPressed>(newLoginFirebase); // using Firebase login option
     on<OnLogoutPressed>(logout);
     on<OnLoginStateEmpty>(empty);
   }
 
-  Future<bool> newLogin(LoginEvent event, Emitter<LoginState> emitter) async {
+  FirebaseAuth get _auth => FirebaseAuth.instance;
+
+  // login options:
+  // 1 - login checking on repository
+  Future<bool> newLoginRepository(LoginEvent event, Emitter<LoginState> emitter) async {
     try {
       emitter(LoginStateLoading());
 
       await Future.delayed(const Duration(seconds: 3));
-
+      
       final user = await repository.getUser();
       if (user.isEmpty) {
         emitter(LoginStateError(erro: Consts.textLoginStateErrorGetUser ));
@@ -50,12 +55,22 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           }
         }
       }
+
     } on Exception catch (e) {
       emitter(LoginStateError(erro: e));
       return false;
     }
     return false;
   }
+
+  // 2 - login checking on Firebase
+  Future<UserCredential> newLoginFirebase(LoginEvent event, Emitter<LoginState> emitter) async {
+    return await _auth.signInWithEmailAndPassword(
+      email: event.user!.email, 
+      password: event.user!.password,
+      );
+  }
+
 
   Future<bool> logout(LoginEvent event, Emitter<LoginState> emitter) async {
     return await sharedPreferences.remove(SharedPreferencesKeys.userSession);
