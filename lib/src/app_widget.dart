@@ -1,10 +1,8 @@
 import 'dart:developer';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
 import 'shared/utils/consts.dart';
 import 'shared/utils/custom_theme_data.dart';
 
@@ -36,8 +34,8 @@ class _AppWidgetState extends State<AppWidget> {
         projectId: "my-finance-app-3e9e9",
       ),
     );
-    FirebaseCrashlytics.instance.crash();
-    log('[LOG] ${instance.name}');
+    //FirebaseCrashlytics.instance.crash();
+    //log('[LOG] ${instance.name}');
   }
 
   @override
