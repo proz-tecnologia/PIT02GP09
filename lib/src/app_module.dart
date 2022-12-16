@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login_flow_module.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/shared/repositories/repository.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/repositories/app_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'modules/home/home_bloc.dart';
 import 'modules/login_flow/login/login_bloc.dart';
@@ -19,7 +19,7 @@ class AppModule extends Module {
   
   @override
   List<Bind<Object>> get binds => [
-        Bind.factory((i) => Repository(sharedPreferences: sharedPref)),
+        Bind.factory((i) => AppRepository(sharedPreferences: sharedPref)),
         Bind.singleton(
             (i) => LoginBloc(repository: i(), sharedPreferences: sharedPref)),
         Bind.singleton(

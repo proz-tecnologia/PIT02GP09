@@ -2,15 +2,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../../shared/repositories/repository.dart';
 import '../../../shared/utils/consts.dart';
 import '../../../shared/utils/shared_preferences_keys.dart';
 import 'login_event.dart';
 import 'login_state.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login_flow_repository';
+
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final Repository repository;
+  final LoginFlowRepository repository;
   final SharedPreferences sharedPreferences;
 
   LoginBloc({

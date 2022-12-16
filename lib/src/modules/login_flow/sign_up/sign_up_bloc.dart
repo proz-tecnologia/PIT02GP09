@@ -1,12 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../shared/repositories/repository.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login_flow_repository';
 import 'sign_up_event.dart';
 import 'sign_up_state.dart';
 
 class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
-  final Repository repository;
+  final LoginFlowRepository repository;
   late final SharedPreferences sharedPreferences;  
 
   SignUpBloc({required this.repository, required this.sharedPreferences})
@@ -33,7 +34,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       // add new user to repository
       repository.addUser(user: event.getUser!);
       final user = await repository.getUser();
-      emitter(SignUpStateSuccess(user: user));
+      emitter(SignUpStateSuccess(user: user as List<UserModel>));
     } on Exception catch (e) {
       emitter(SignUpStateError(erro: e));
     }
