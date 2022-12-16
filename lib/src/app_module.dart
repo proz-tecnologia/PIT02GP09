@@ -1,10 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login_flow_module.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/splash_screen/splash_screen_bloc.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/repositories/repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'modules/home/home_bloc.dart';
 import 'modules/login_flow/login/login_bloc.dart';
 import 'modules/login_flow/reset_password/reset_password_bloc.dart';
@@ -27,7 +25,6 @@ class AppModule extends Module {
         Bind.singleton(
             (i) => SignUpBloc(repository: i(), sharedPreferences: sharedPref)),
         Bind.singleton((i) => HomeBloc(repo: i())),
-        Bind.singleton((i) => SplashScreenBloc(repository: i(), sharedPreferences: sharedPref)),
         Bind.singleton((i) => ResetPasswordBloc(repo: i(), sharedPreferences:sharedPref )),
       ];
 
@@ -38,7 +35,9 @@ class AppModule extends Module {
           ConstsRoutes.rootRoute,
           child: (context, args) => const SplashScreenPage(),
         ),
-        ModuleRoute(ConstsRoutes.loginFlowModule, module: LoginFlowModule()),
+        ModuleRoute(ConstsRoutes.loginFlowModule, module: LoginFlowModule( // equivalent to AutenthicationModule
+                                                            sharedPref: sharedPref,
+                                                          )),
         WildcardRoute(child: (context, args) => const NotFoundPage()),
       ];
 }
