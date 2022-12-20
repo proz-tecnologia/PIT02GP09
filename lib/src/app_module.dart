@@ -2,7 +2,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login_flow_module.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/splash_screen/splash_screen_bloc.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/shared/repositories/app_repository.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/repositories/app_repository_impl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'modules/login_flow/splash_screen/splash_screen_page.dart';
 import 'modules/not_found_page/not_found_page.dart';
@@ -16,7 +16,7 @@ class AppModule extends Module {
   
   @override
   List<Bind<Object>> get binds => [
-        Bind.factory((i) => AppRepository(sharedPreferences: sharedPref)),
+        Bind.factory((i) => AppRepositoryImpl(sharedPreferences: sharedPref)),
         Bind.singleton(
             (i) => SplashScreenBloc(repository: i(), sharedPreferences: sharedPref)),        
       ];
