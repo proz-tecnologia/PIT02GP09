@@ -2,7 +2,7 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home/homepage_repository.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home/home_repository.dart';
 import 'home_event.dart';
 import 'home_state.dart';
 

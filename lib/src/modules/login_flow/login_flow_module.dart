@@ -2,6 +2,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home/home_module.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login/login_bloc.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login_flow_repository.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/reset_password/reset_password_page.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/sign_up/sign_up_bloc.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/sign_up/sign_up_page.dart';
@@ -22,12 +23,13 @@ class LoginFlowModule extends Module { // equivalent to AutenthicationModule
   
   @override
   List<Bind<Object>> get binds => [
-    Bind.factory((i) => LoginFlowRepositoryImpl(sharedPreferences: sharedPref)),
-    Bind.singleton(
-            (i) => LoginBloc(repository: i(), sharedPreferences: sharedPref)),
-    Bind.singleton(
-            (i) => SignUpBloc(repository: i(), sharedPreferences: sharedPref)),
-    Bind.singleton((i) => ResetPasswordBloc(repo: i(), sharedPreferences:sharedPref )),
+    Bind.factory<LoginFlowRepository>((i) => LoginFlowRepositoryImpl(sharedPreferences: sharedPref)),
+    Bind.lazySingleton(
+            (i) => LoginBloc(repository: i.get<LoginFlowRepository>(), sharedPreferences: sharedPref)),
+    Bind.lazySingleton(
+            (i) => SignUpBloc(repository: i.get<LoginFlowRepository>(), sharedPreferences: sharedPref)),
+    Bind.lazySingleton(
+            (i) => ResetPasswordBloc(repo: i.get<LoginFlowRepository>(), sharedPreferences:sharedPref )),
   ];
 
   @override
