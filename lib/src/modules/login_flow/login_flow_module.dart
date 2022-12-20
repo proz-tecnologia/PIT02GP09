@@ -38,7 +38,7 @@ class LoginFlowModule extends Module { // equivalent to AutenthicationModule
             child: (context, args) => const LoginPage()),
         ChildRoute(ConstsRoutes.signUpPage,
             child: (context, args) => const SignUpPage()),
-        ChildRoute(ConstsRoutes.homePage,
+        ChildRoute(ConstsRoutes.homePageModule,
             child: (context, args) => const HomePage()),
         ChildRoute(ConstsRoutes.resetPasswordPage,
             child: (context, args) => const ResetPasswordPage()),

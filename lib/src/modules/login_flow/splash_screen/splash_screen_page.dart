@@ -25,7 +25,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
     Future.delayed(const Duration(seconds: 3)).then((value) async {
       final bloc = Modular.get<SplashScreenBloc>();
       if (bloc.state is SplashScreenStateAuthenticated) {
-        Modular.to.pushReplacementNamed(ConstsRoutes.homePage);
+        Modular.to.pushReplacementNamed(ConstsRoutes.homePageModule);
       } else if (bloc.state is SplashScreenStateUnauthenticated) {
         Modular.to.pushReplacementNamed(ConstsRoutes.loginFlowModule);
         
