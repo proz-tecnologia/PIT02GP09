@@ -15,17 +15,19 @@ class SplashScreenPage extends StatefulWidget {
 }
 
 class _SplashScreenPageState extends State<SplashScreenPage> {
+
   @override
   void initState() {
     super.initState();
     Modular.get<SplashScreenBloc>().add(OnIsAuthenticated());
     _navigateToHome();
   }
+  
   _navigateToHome() async {
     Future.delayed(const Duration(seconds: 3)).then((value) async {
       final bloc = Modular.get<SplashScreenBloc>();
       if (bloc.state is SplashScreenStateAuthenticated) {
-        Modular.to.pushReplacementNamed(ConstsRoutes.homePage);
+        Modular.to.pushReplacementNamed(ConstsRoutes.homeModule);
       } else if (bloc.state is SplashScreenStateUnauthenticated) {
         Modular.to.pushReplacementNamed(ConstsRoutes.loginFlowModule);
         

@@ -2,9 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../shared/repositories/repository.dart';
-import '../../../shared/utils/shared_preferences_keys.dart';
 import 'splash_screen_event.dart';
 import 'splash_screen_state.dart';
 
@@ -38,13 +36,8 @@ class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
     Emitter<SplashScreenState> emitter,
   ) async {
     await initializeFirebase();
-    // check on Firebase
     User? userFirebase = FirebaseAuth.instance.currentUser;
-    // check on repository
-    final String? userSession =
-        sharedPreferences.getString(SharedPreferencesKeys.userSession);
-    if ((userSession != null && userSession.isNotEmpty) &&
-        userFirebase != null) {
+    if (userFirebase != null) {
       emitter(SplashScreenStateAuthenticated());
     } else {
       emitter(SplashScreenStateUnauthenticated());

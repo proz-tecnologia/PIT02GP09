@@ -12,7 +12,7 @@ class LoginFlowRepositoryImpl implements LoginFlowRepository {
   @override
   List<UserModel> usersLogin = <UserModel>[];
   @override
-  late final SharedPreferences sharedPreferences;
+  final SharedPreferences sharedPreferences;
 
   LoginFlowRepositoryImpl({required this.sharedPreferences}) {
     init();

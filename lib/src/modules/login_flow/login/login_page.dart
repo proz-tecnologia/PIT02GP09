@@ -3,12 +3,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
+import 'package:projeto_gestao_financeira_grupo_nove/src/routes/consts_routes.dart';
 import '../../../shared/models/user_model.dart';
 import '../../../shared/utils/consts.dart';
 import '../../../shared/utils/mixins/validations_mixin.dart';
 import '../../../shared/widgets/show_loader/show_loader.dart';
-import '../../home/home_page.dart';
 import '../widgets/custom_dialog/custom_dialog_stateless.dart';
 import '../widgets/custom_input_form/custom_elevated_button.dart';
 import '../widgets/custom_input_form/custom_text_form_field.dart';
@@ -63,8 +62,7 @@ class _LoginPageState extends State<LoginPage> with ValidationMixin {
       body: BlocBuilder<LoginBloc, LoginState>(
           bloc: bloc,
           builder: (context, state) {
-            return bloc.state.when(
-              onEmpty: (_) {
+            if (state is LoginStateEmpty) {
                 log(state.toString());
                 return SafeArea(
                   child: ListView(
@@ -202,29 +200,25 @@ class _LoginPageState extends State<LoginPage> with ValidationMixin {
                     ],
                   ),
                 );
-              },
-              onLoading: (_) {
+            } else if (state is LoginStateLoading) {
                 log(state.toString());
                 return const ShowLoader();
-              },
-              onSuccess: (_) {
+            } else if (state is LoginStateSuccess) {
                 inputClear;
                 log(state.toString());
-                Modular.to.canPop();
-                return const HomePage();
-              },
-              onError: (erro) {
+                Modular.to.pushReplacementNamed(ConstsRoutes.homeModule);
+            } else if (state is LoginStateError) {
                 log(state.toString());
-                log(erro.toString());
-
+                log(state.erro.toString());
                 return CustomDialogStateless(
                   theme: theme,
                   formkey: formkey,
                   inputClear: inputClear,
                 );
-              },
-            );
-          }),
+            }
+            return Container();
+          },
+      ),
     );
   }
 

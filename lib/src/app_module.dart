@@ -28,9 +28,8 @@ class AppModule extends Module {
           ConstsRoutes.rootRoute,
           child: (context, args) => const SplashScreenPage(),
         ),
-        ModuleRoute(ConstsRoutes.loginFlowModule, module: LoginFlowModule( // equivalent to AutenthicationModule
-                                                            sharedPref: sharedPref,
-                                                          )),
+        ModuleRoute(ConstsRoutes.loginFlowModule, // equivalent to AutenthicationModule
+                    module: LoginFlowModule(sharedPref: sharedPref,)),
         WildcardRoute(child: (context, args) => const NotFoundPage()),
       ];
 }

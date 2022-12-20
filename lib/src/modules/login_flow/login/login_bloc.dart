@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login_flow_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../shared/utils/shared_preferences_keys.dart';
+//import '../../../shared/utils/shared_preferences_keys.dart';
 import 'login_event.dart';
 import 'login_state.dart';
 
@@ -43,12 +43,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
   }
 
-
-  Future<bool> logout(LoginEvent event, Emitter<LoginState> emitter) async {
-    return await sharedPreferences.remove(SharedPreferencesKeys.userSession);
+  Future<void> logout(LoginEvent event, Emitter<LoginState> emitter) async {
+    await FirebaseAuth.instance.signOut();
   }
 
-  empty(LoginEvent event, Emitter<LoginState> emitter) {
+  void empty(LoginEvent event, Emitter<LoginState> emitter) {
     emitter(LoginStateEmpty());
   }
 }
