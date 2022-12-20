@@ -3,8 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login/login_bloc.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login/login_event.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home/home_event.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/routes/consts_routes.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/user_model.dart';
 import 'home_bloc.dart';
@@ -42,10 +41,8 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
               onPressed: () {                
-                Modular.get<LoginBloc>().add(OnLogoutPressed(null));
-                Modular.get<LoginBloc>().add(OnLoginStateEmpty(null));
-                Modular.to.navigate(ConstsRoutes.loginPage);
-                // Navigator.popAndPushNamed(context, ConstsRoutes.loginPage);
+                Modular.get<HomeBloc>().add(OnHomePageLogout());
+                Modular.to.pushReplacementNamed(ConstsRoutes.loginFlowModule);
               },
               icon: const Icon(Icons.logout))
         ],
