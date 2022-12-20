@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -32,9 +33,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    bloc.repo.getUserSession().then((value) => setState(() {
-          name = value;
-        }));
+    setState(() {
+          name = FirebaseAuth.instance.currentUser!.displayName;
+        });
 
     return Scaffold(
       appBar: AppBar(

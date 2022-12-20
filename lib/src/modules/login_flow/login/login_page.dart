@@ -207,7 +207,7 @@ class _LoginPageState extends State<LoginPage> with ValidationMixin {
                 log(state.toString());
                 return const ShowLoader();
               },
-              onSuccess: (userSession) {
+              onSuccess: (_) {
                 inputClear;
                 log(state.toString());
                 Modular.to.canPop();

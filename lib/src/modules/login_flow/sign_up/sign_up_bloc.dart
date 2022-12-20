@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login_flow_repository.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/user_model.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/utils/shared_preferences_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login_flow_repository';
 import 'sign_up_event.dart';
 import 'sign_up_state.dart';
 
@@ -27,7 +28,9 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       await _auth.createUserWithEmailAndPassword(
         email: event.getUser!.email, 
         password: event.getUser!.password,
-        );
+        );      
+      await _auth.currentUser!.updateDisplayName(event.getUser!.name);
+      sharedPreferences.setString(SharedPreferencesKeys.userSession, event.getUser!.name);
       await _auth.currentUser!.sendEmailVerification();
         // add function to add user on Firebase Firestore, something like:
         // FirebaseFirestore.instance.collection('Users').add(event.getUser.toMap());

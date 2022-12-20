@@ -14,7 +14,7 @@ class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
 
   SplashScreenBloc({required this.repository, required this.sharedPreferences})
       : super(SplashScreenStateEmpty()) {
-    on<OnIsAuthenticated>(isAuthenticated);
+    on<OnIsAuthenticated>(isAuthenticated); // class OnIsAuthenticated extends SplashScreenEvent {}
   }
 
   Future<void> setup() async {
@@ -37,6 +37,7 @@ class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
     SplashScreenEvent event,
     Emitter<SplashScreenState> emitter,
   ) async {
+    await initializeFirebase();
     // check on Firebase
     User? userFirebase = FirebaseAuth.instance.currentUser;
     // check on repository

@@ -1,12 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login_flow_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../shared/utils/consts.dart';
 import '../../../shared/utils/shared_preferences_keys.dart';
 import 'login_event.dart';
 import 'login_state.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login_flow_repository';
 
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
@@ -24,51 +23,24 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<OnLoginStateEmpty>(empty);
   }
 
-  FirebaseAuth get _auth => FirebaseAuth.instance;
+  FirebaseAuth get _auth => FirebaseAuth.instance;  
 
-  // login options:
-  // 1 - login checking on repository
-  Future<bool> newLoginRepository(LoginEvent event, Emitter<LoginState> emitter) async {
+  Future<void> newLoginFirebase(LoginEvent event, Emitter<LoginState> emitter) async {
     try {
       emitter(LoginStateLoading());
 
-      await Future.delayed(const Duration(seconds: 3));
-      
-      final user = await repository.getUser();
-      if (user.isEmpty) {
-        emitter(LoginStateError(erro: Consts.textLoginStateErrorGetUser ));
+      final result = await _auth.signInWithEmailAndPassword(
+                                email: event.user!.email, 
+                                password: event.user!.password,
+                                );
+      if (result.user != null) {
+        emitter(LoginStateSuccess());
+      } else {
+        throw Exception();
       }
-
-      for (var element in user) {
-        if (element.email.trim() == event.user!.email.trim()) {
-         
-          if (element.password.trim() == event.user!.password.trim()) {
-            sharedPreferences.setString(
-                SharedPreferencesKeys.userSession, element.name.trim());
-            final userSession = await repository.getUserSession();
-
-            emitter(LoginStateSuccess(user: userSession));
-            return true;
-          } else {
-            emitter(LoginStateError(erro: Consts.textLoginStateErrorPassEmail));
-            return false;
-          }
-        }
-      }
-
     } on Exception catch (e) {
       emitter(LoginStateError(erro: e));
-      return false;
     }
-    return false;
-  }
-
-  // 2 - login checking on Firebase
-  Future<UserCredential> newLoginFirebase(LoginEvent event, Emitter<LoginState> emitter) async {
-    return await _auth.signInWithEmailAndPassword(
-      email: event.user!.email, 
-      password: event.user!.password,
-      );
   }
 
 

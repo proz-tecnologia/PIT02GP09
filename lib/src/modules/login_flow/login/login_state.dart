@@ -28,10 +28,6 @@ class LoginStateEmpty extends LoginState {}
 class LoginStateLoading extends LoginState {}
 
 class LoginStateSuccess extends LoginState {
-  String user;
-  LoginStateSuccess({
-    required this.user,
-  });
 }
 
 class LoginStateError extends LoginState {

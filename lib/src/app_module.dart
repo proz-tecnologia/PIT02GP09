@@ -1,12 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login_flow_module.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/splash_screen/splash_screen_bloc.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/repositories/app_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'modules/home/home_bloc.dart';
-import 'modules/login_flow/login/login_bloc.dart';
-import 'modules/login_flow/reset_password/reset_password_bloc.dart';
-import 'modules/login_flow/sign_up/sign_up_bloc.dart';
 import 'modules/login_flow/splash_screen/splash_screen_page.dart';
 import 'modules/not_found_page/not_found_page.dart';
 import 'routes/consts_routes.dart';
@@ -21,11 +18,7 @@ class AppModule extends Module {
   List<Bind<Object>> get binds => [
         Bind.factory((i) => AppRepository(sharedPreferences: sharedPref)),
         Bind.singleton(
-            (i) => LoginBloc(repository: i(), sharedPreferences: sharedPref)),
-        Bind.singleton(
-            (i) => SignUpBloc(repository: i(), sharedPreferences: sharedPref)),
-        Bind.singleton((i) => HomeBloc(repo: i())),
-        Bind.singleton((i) => ResetPasswordBloc(repo: i(), sharedPreferences:sharedPref )),
+            (i) => SplashScreenBloc(repository: i(), sharedPreferences: sharedPref)),        
       ];
 
   @override

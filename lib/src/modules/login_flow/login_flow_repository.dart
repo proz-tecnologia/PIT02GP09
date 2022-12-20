@@ -1,4 +1,10 @@
 
+import 'dart:convert';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/user_model.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/repositories/repository.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/utils/shared_preferences_keys.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 class LoginFlowRepository extends Repository {
   List<UserModel> usersLogin = <UserModel>[];
 
