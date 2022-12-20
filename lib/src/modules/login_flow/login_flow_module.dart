@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home/home_bloc.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home/home_page.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home/home_module.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login/login_bloc.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/reset_password/reset_password_page.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/sign_up/sign_up_bloc.dart';
@@ -38,10 +38,11 @@ class LoginFlowModule extends Module { // equivalent to AutenthicationModule
             child: (context, args) => const LoginPage()),
         ChildRoute(ConstsRoutes.signUpPage,
             child: (context, args) => const SignUpPage()),
-        ChildRoute(ConstsRoutes.homePageModule,
-            child: (context, args) => const HomePage()),
         ChildRoute(ConstsRoutes.resetPasswordPage,
             child: (context, args) => const ResetPasswordPage()),
+        ModuleRoute(ConstsRoutes.homePageModule, module: HomePageModule( // equivalent to AutenthicationModule
+                                                            sharedPref: sharedPref,
+                                                          )),
         WildcardRoute(child: (context, args) => const NotFoundPage()),
       ];
 }

@@ -7,7 +7,6 @@ import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/logi
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login/login_event.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/routes/consts_routes.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/user_model.dart';
-
 import 'home_bloc.dart';
 import 'home_state.dart';
 
@@ -43,8 +42,8 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
               onPressed: () {                
-                Modular.get<LoginBloc>().add(OnLogoutPressed(user));
-                Modular.get<LoginBloc>().add(OnLoginStateEmpty(user));
+                Modular.get<LoginBloc>().add(OnLogoutPressed(null));
+                Modular.get<LoginBloc>().add(OnLoginStateEmpty(null));
                 Modular.to.navigate(ConstsRoutes.loginPage);
                 // Navigator.popAndPushNamed(context, ConstsRoutes.loginPage);
               },

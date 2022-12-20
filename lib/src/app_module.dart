@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home/home_module.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login_flow_module.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/splash_screen/splash_screen_bloc.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/repositories/app_repository_impl.dart';
@@ -29,6 +30,9 @@ class AppModule extends Module {
           child: (context, args) => const SplashScreenPage(),
         ),
         ModuleRoute(ConstsRoutes.loginFlowModule, module: LoginFlowModule( // equivalent to AutenthicationModule
+                                                            sharedPref: sharedPref,
+                                                          )),
+        ModuleRoute(ConstsRoutes.homePageModule, module: HomePageModule( // equivalent to AutenthicationModule
                                                             sharedPref: sharedPref,
                                                           )),
         WildcardRoute(child: (context, args) => const NotFoundPage()),

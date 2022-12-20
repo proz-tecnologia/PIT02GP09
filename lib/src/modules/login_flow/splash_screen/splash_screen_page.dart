@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
 import '../../../routes/consts_routes.dart';
 import '../../../shared/utils/consts.dart';
 import 'splash_screen_bloc.dart';
@@ -16,11 +15,13 @@ class SplashScreenPage extends StatefulWidget {
 
 class _SplashScreenPageState extends State<SplashScreenPage> {
   @override
+
   void initState() {
     super.initState();
     Modular.get<SplashScreenBloc>().add(OnIsAuthenticated());
     _navigateToHome();
   }
+  
   _navigateToHome() async {
     Future.delayed(const Duration(seconds: 3)).then((value) async {
       final bloc = Modular.get<SplashScreenBloc>();
