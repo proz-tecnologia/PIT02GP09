@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home/home_event.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/routes/consts_routes.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/user_model.dart';
 import 'home_bloc.dart';
 import 'home_state.dart';
 
@@ -21,7 +20,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final bloc = Modular.get<HomeBloc>();
   String? name;
-  late UserModel user;
 
   @override
   void dispose() {

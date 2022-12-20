@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home/home_bloc.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home/home_module.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login/login_bloc.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/reset_password/reset_password_page.dart';
@@ -28,7 +27,6 @@ class LoginFlowModule extends Module { // equivalent to AutenthicationModule
             (i) => LoginBloc(repository: i(), sharedPreferences: sharedPref)),
     Bind.singleton(
             (i) => SignUpBloc(repository: i(), sharedPreferences: sharedPref)),
-    Bind.singleton((i) => HomeBloc(repository: i())),
     Bind.singleton((i) => ResetPasswordBloc(repo: i(), sharedPreferences:sharedPref )),
   ];
 
