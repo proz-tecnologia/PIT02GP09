@@ -18,7 +18,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
 
   void initState() {
     super.initState();
-    Modular.get<SplashScreenBloc>().add(OnIsAuthenticated());
+    Modular.get<SplashScreenBloc>().add(OnIsAuthenticated()); // Firebase initialiazed in the state emitted
     _navigateToHome();
   }
   
