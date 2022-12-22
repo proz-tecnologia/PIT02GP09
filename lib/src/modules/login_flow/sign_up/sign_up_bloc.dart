@@ -37,7 +37,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       emitter(SignUpStateSuccess());
     } catch (e, s) {
       FirebaseCrashlytics.instance.recordError(e, s);
-      emitter(SignUpStateError(erro: e));
+      emitter(SignUpStateError(erro: e.toString()));
     }
   }
 

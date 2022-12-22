@@ -258,9 +258,11 @@ class _LoginPageState extends State<SignUpPage> with ValidationMixin {
                   log(state.toString());
                   log(state.erro.toString());
                   log(state.runtimeType.toString());
+                  log(state.erro.toString());
                   inputClear;
                   return CustomDialogStateless(
                   stateType: state,
+                  error: state.erro,
                   theme: theme,
                   formkey: formkey,
                   inputClear: inputClear,

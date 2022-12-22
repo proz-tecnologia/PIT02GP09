@@ -10,7 +10,7 @@ class SignUpStateLoading extends SignUpState {}
 class SignUpStateSuccess extends SignUpState {}
 
 class SignUpStateError extends SignUpState {
-  final Object erro;
+  final String erro;
 
   SignUpStateError({required this.erro});
 

@@ -14,17 +14,25 @@ class CustomDialogStateless extends StatelessWidget {
     required this.theme,
     required this.formkey,
     required this.inputClear,
+    this.error,
   }) : super(key: key) {
-    if (stateType is LoginStateError) {
-      message = Consts.textCustomDialogDescriptionLogin;
-    } else if (stateType is SignUpStateError) {
-      message = Consts.textCustomDialogDescriptionSignUp;
+    if (error != null) {
+      if (error == Consts.emailAlreadyInUseError) {
+        message = Consts.textCustomDialogEmailAlreadyInUse;
+      }
     } else {
-      message = Consts.textCustomDialogDescriptionDefault;
+      if (stateType is LoginStateError) {
+        message = Consts.textCustomDialogDescriptionLogin;
+      } else if (stateType is SignUpStateError) {
+        message = Consts.textCustomDialogDescriptionSignUp;
+      } else {
+        message = Consts.textCustomDialogDescriptionDefault;
+      }
     }
   }
 
   final PageState stateType;
+  late final String? error;
   final ThemeData theme;
   final GlobalKey<FormState> formkey;
   final Function()? inputClear;
