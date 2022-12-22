@@ -229,8 +229,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 onSuccess: (userSession) {
                   inputClear;
                   log(state.toString());
-                  Modular.to.canPop();
-                  return const HomePage();
+                  Modular.to.pushReplacementNamed(ConstsRoutes.homePageModule);
                 },
                 onError: (erro) {
                   log(state.toString());

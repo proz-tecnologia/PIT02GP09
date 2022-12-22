@@ -29,7 +29,7 @@ class TextRichInfoCreateAccount extends StatelessWidget {
         textLink: Text(Consts.textInteractionCreateAccountLink,
             style: theme.textTheme.labelMedium),
         link: () async {
-          final newUser = await Modular.to.pushNamed(
+          final newUser = await Modular.to.pushReplacementNamed(
             ConstsRoutes.signUpPage,
           );
           // // final newUser = await Navigator.pushNamed(
