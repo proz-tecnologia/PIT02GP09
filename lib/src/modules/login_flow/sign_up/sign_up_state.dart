@@ -1,40 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:flutter/material.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/utils/page_state.dart';
 
-import '../../../shared/models/user_model.dart';
-
-abstract class SignUpState {
-  Widget when({
-    required Widget Function(SignUpStateEmpty) onEmpty,
-    required Widget Function(SignUpStateLoading) onLoading,
-    required Function(SignUpStateSuccess) onSuccess,
-    required Widget Function(SignUpStateError) onError,
-  }) {
-    switch (runtimeType) {
-      case SignUpStateEmpty:
-        return onEmpty(this as SignUpStateEmpty);
-      case SignUpStateLoading:
-        return onLoading(this as SignUpStateLoading);
-      case SignUpStateSuccess:
-        return onSuccess(this as SignUpStateSuccess);
-      case SignUpStateError:
-        return onError(this as SignUpStateError);
-      default:
-        return onEmpty(this as SignUpStateEmpty);
-    }
-  }
-}
+abstract class SignUpState extends PageState {}
 
 class SignUpStateEmpty extends SignUpState {}
 
 class SignUpStateLoading extends SignUpState {}
 
-class SignUpStateSuccess extends SignUpState {
-  List<UserModel> user;
-  SignUpStateSuccess({
-    required this.user,
-  });
-}
+class SignUpStateSuccess extends SignUpState {}
 
 class SignUpStateError extends SignUpState {
   final Object erro;

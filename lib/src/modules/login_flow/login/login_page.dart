@@ -209,8 +209,9 @@ class _LoginPageState extends State<LoginPage> with ValidationMixin {
             } else if (state is LoginStateError) {
                 log(state.toString());
                 log(state.erro.toString());
-
+                log(state.runtimeType.toString());
                 return CustomDialogStateless(
+                  stateType: state,
                   theme: theme,
                   formkey: formkey,
                   inputClear: inputClear,

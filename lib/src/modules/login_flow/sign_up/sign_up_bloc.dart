@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login_flow_repository.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/utils/shared_preferences_keys.dart';
@@ -33,11 +34,9 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       await _auth.currentUser!.sendEmailVerification();
         // add function to add user on Firebase Firestore, something like:
         // FirebaseFirestore.instance.collection('Users').add(event.getUser.toMap());
-      // add new user to repository
-      repository.addUser(user: event.getUser!);
-      final user = await repository.getUser();
-      emitter(SignUpStateSuccess(user: user));
-    } on Exception catch (e) {
+      emitter(SignUpStateSuccess());
+    } catch (e, s) {
+      FirebaseCrashlytics.instance.recordError(e, s);
       emitter(SignUpStateError(erro: e));
     }
   }

@@ -71,9 +71,11 @@ class Consts {
   /*================================================================= */
 
   //Textos do custom_dialog
-  static const String textCustomDialogTitle = 'Info Login';
-  static const String textCustomDialogDescription =
+  static const String textCustomDialogTitle = 'Info Login';  
+  static const String textCustomDialogDescriptionDefault = 'Algo deu errado!';
+  static const String textCustomDialogDescriptionLogin =
       'Senha ou e-mail incorreto!';
+  static const String textCustomDialogDescriptionSignUp = 'Cadastro inválido!';
   static const String textCustomDialogButtonText = 'OK';
   /*================================================================= */
 
