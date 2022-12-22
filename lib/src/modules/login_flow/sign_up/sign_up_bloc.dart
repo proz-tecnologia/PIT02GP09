@@ -17,7 +17,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     on<OnSignUpEmpty>(signUpEmpty);
   }
 
-  FirebaseAuth get _auth => FirebaseAuth.instance;
+  FirebaseAuth get _auth => FirebaseAuth.instance; // todo: create absctraction class
+  FirebaseCrashlytics get _crashlytics => FirebaseCrashlytics.instance; // todo: create absctraction class
 
   Future<void> createNewUser(
       SignUpEvent event, Emitter<SignUpState> emitter) async {
@@ -36,7 +37,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         // FirebaseFirestore.instance.collection('Users').add(event.getUser.toMap());
       emitter(SignUpStateSuccess());
     } catch (e, s) {
-      FirebaseCrashlytics.instance.recordError(e, s);
+      _crashlytics.recordError(e, s);
       emitter(SignUpStateError(erro: e.toString()));
     }
   }
