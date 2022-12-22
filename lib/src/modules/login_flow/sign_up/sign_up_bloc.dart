@@ -33,8 +33,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       await _auth.currentUser!.updateDisplayName(event.getUser!.name);
       sharedPreferences.setString(SharedPreferencesKeys.userSession, event.getUser!.name);
       await _auth.currentUser!.sendEmailVerification();
-        // add function to add user on Firebase Firestore, something like:
-        // FirebaseFirestore.instance.collection('Users').add(event.getUser.toMap());
+        // todo: add function to add user on Firebase Firestore, something like:
+        // todo: FirebaseFirestore.instance.collection('Users').add(event.getUser.toMap());
       emitter(SignUpStateSuccess());
     } catch (e, s) {
       _crashlytics.recordError(e, s);

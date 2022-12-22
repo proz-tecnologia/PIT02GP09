@@ -29,7 +29,7 @@ class LoginFlowModule extends Module { // equivalent to AutenthicationModule
     Bind.lazySingleton(
             (i) => SignUpBloc(repository: i.get<LoginFlowRepository>(), sharedPreferences: sharedPref)),
     Bind.lazySingleton(
-            (i) => ResetPasswordBloc(repo: i.get<LoginFlowRepository>(), sharedPreferences:sharedPref )),
+            (i) => ResetPasswordBloc(repository: i.get<LoginFlowRepository>(), sharedPreferences:sharedPref )),
   ];
 
   @override

@@ -12,10 +12,10 @@ import 'reset_password_state.dart';
 
 class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
   final SharedPreferences sharedPreferences;
-  Repository repo;
+  Repository repository;
   ResetPasswordBloc({
     required this.sharedPreferences,
-    required this.repo,
+    required this.repository,
   }) : super(ResetPasswordStateEmpty()) {
     initResetPasswordPressed();
     on<OnResetPasswordPressed>(resetPasswordPressed);
