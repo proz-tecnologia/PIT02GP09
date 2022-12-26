@@ -2,7 +2,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AppController {
-  User? user;
+  User? _user;
 
-  void setUser(User newUser) => user = newUser;
+  User? get user => _user;
+  void setUser(User? newUser) => _user = newUser;
+  void logout() => _user = null;
+  
 }
