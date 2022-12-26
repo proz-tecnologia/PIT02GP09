@@ -1,9 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/app_controller.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login_flow_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../shared/utils/shared_preferences_keys.dart';
@@ -32,11 +33,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       emitter(LoginStateLoading());
 
-      final result = await _auth.signInWithEmailAndPassword(
+      final userCredential = await _auth.signInWithEmailAndPassword(
                                 email: event.user!.email, 
                                 password: event.user!.password,
                                 );
-      if (result.user != null) {
+      Modular.get<AppController>().setUser(userCredential.user!);
+      if (userCredential.user != null) {
         emitter(LoginStateSuccess());
       } else {
         throw Exception();

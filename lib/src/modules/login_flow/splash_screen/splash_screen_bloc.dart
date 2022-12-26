@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/app_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../shared/repositories/repository.dart';
 import 'splash_screen_event.dart';
@@ -38,6 +40,7 @@ class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
     await initializeFirebase();
     User? userFirebase = FirebaseAuth.instance.currentUser;
     if (userFirebase != null) {
+      Modular.get<AppController>().setUser(userFirebase);
       emitter(SplashScreenStateAuthenticated());
     } else {
       emitter(SplashScreenStateUnauthenticated());

@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -28,32 +28,59 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void initState() {
+    Modular.get<HomeBloc>().add(OnHomePageEmpty());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    setState(() {
-          name = FirebaseAuth.instance.currentUser!.displayName;
-        });
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Home Page  Olá $name'),
-        actions: [
-          IconButton(
-              onPressed: () {                
-                Modular.get<HomeBloc>().add(OnHomePageLogout());
-                Modular.to.pushReplacementNamed(ConstsRoutes.loginFlowModule);
-              },
-              icon: const Icon(Icons.logout))
-        ],
+    return SafeArea(
+      child: BlocBuilder<HomeBloc, HomeState>(
+        bloc: bloc,
+        builder: (context, state) {
+          if (state is HomeStateEmpty) {
+            log(state.toString());
+            return Scaffold(
+              appBar: AppBar(
+                title: const Text('Homepage Empty'),
+                actions: [
+                  IconButton(
+                    onPressed: () {                
+                      Modular.get<HomeBloc>().add(OnHomePageLogout());
+                      Modular.to.pushReplacementNamed(ConstsRoutes.loginFlowModule);
+                    },
+                    icon: const Icon(Icons.logout))
+                ],
+              ),
+            );
+          } else if (state is HomeStateSuccess){
+            log(state.toString());
+            return Scaffold(
+              appBar: AppBar(
+                title: Text('Home Page  Olá ${state.user.userModelName}'),
+                actions: [
+                  IconButton(
+                    onPressed: () {                
+                      Modular.get<HomeBloc>().add(OnHomePageLogout());
+                      Modular.to.pushReplacementNamed(ConstsRoutes.loginFlowModule);
+                    },
+                    icon: const Icon(Icons.logout))
+                ],
+              ),
+              body: Center(
+                child: Text('Seu saldo é de R\$ ${state.user.balance.toStringAsFixed(2)} reais'),
+              ),
+            );
+          } else if (state is HomeStateError) {
+            log(state.toString());
+            log(state.erro.toString());
+            log(state.runtimeType.toString());
+            return Text(state.erro.toString());
+          }
+          return const SizedBox.shrink();
+        },
       ),
-      body: BlocBuilder<HomeBloc, HomeState>(
-          bloc: bloc,
-          builder: (context, state) {
-            if (state is HomeStateEmpty) {
-              return const Center(child: SizedBox());
-            }
-
-            return const SizedBox.shrink();
-          }),
     );
   }
 }

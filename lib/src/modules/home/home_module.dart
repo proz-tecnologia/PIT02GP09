@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/app_controller.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home/home_bloc.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home/home_page.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home/home_repository.dart';
@@ -18,8 +19,9 @@ class HomePageModule extends Module { // equivalent to AutenthicationModule
   @override
   List<Bind<Object>> get binds => [
     Bind.factory<HomePageRepository>((i) => HomePageRepositoryImpl(sharedPreferences: sharedPref)),
-    Bind.singleton(
-            (i) => HomeBloc(repository: i.get<HomePageRepository>())),
+    Bind.singleton<HomeBloc>(
+            (i) => HomeBloc(repository: i.get<HomePageRepository>(),
+                            id: i.get<AppController>().user!.uid))
   ];
 
   @override
