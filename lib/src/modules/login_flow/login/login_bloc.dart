@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,6 +53,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   empty(LoginEvent event, Emitter<LoginState> emitter) {
+    log(state.toString());
     emitter(LoginStateEmpty());
   }
 }

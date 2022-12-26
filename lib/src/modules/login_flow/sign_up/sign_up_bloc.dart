@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login_flow_repository.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/user_model.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/utils/shared_preferences_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'sign_up_event.dart';
@@ -17,8 +18,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     on<OnSignUpEmpty>(signUpEmpty);
   }
 
-  FirebaseAuth get _auth => FirebaseAuth.instance; // todo: create absctraction class
-  FirebaseCrashlytics get _crashlytics => FirebaseCrashlytics.instance; // todo: create absctraction class
+  FirebaseAuth get _auth => FirebaseAuth.instance; // todo: create abstraction class
+  FirebaseCrashlytics get _crashlytics => FirebaseCrashlytics.instance; // todo: create abstraction class
 
   Future<void> createNewUser(
       SignUpEvent event, Emitter<SignUpState> emitter) async {
@@ -33,8 +34,13 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       await _auth.currentUser!.updateDisplayName(event.getUser!.name);
       sharedPreferences.setString(SharedPreferencesKeys.userSession, event.getUser!.name);
       await _auth.currentUser!.sendEmailVerification();
-        // todo: add function to add user on Firebase Firestore, something like:
-        // todo: FirebaseFirestore.instance.collection('Users').add(event.getUser.toMap());
+
+      await repository.createUserData(
+        user: UserModel(
+          userModelID: _auth.currentUser!.uid, 
+          userModelName: event.getUser!.name,
+        ),
+      );      
       emitter(SignUpStateSuccess());
     } catch (e, s) {
       _crashlytics.recordError(e, s);

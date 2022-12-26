@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login_flow_repository.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/login_model.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/user_model.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/utils/shared_preferences_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -40,6 +42,12 @@ class LoginFlowRepositoryImpl implements LoginFlowRepository {
 
     sharedPrefers.setString(
         SharedPreferencesKeys.users, jsonEncode(newUsersJson));
+  }
+
+  @override
+  Future<void> createUserData({required UserModel user}) async {
+    await FirebaseFirestore.instance.collection('users').add(user.toMap());
+    
   }
 
  
