@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home/home_repository.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePageRepositoryImpl implements HomePageRepository {
@@ -7,5 +9,16 @@ class HomePageRepositoryImpl implements HomePageRepository {
   final SharedPreferences sharedPreferences;
 
   HomePageRepositoryImpl({required this.sharedPreferences});
+
+  @override
+  Future<UserModel> getUserData({required String userID}) async {
+    final response = await FirebaseFirestore.instance
+    .collection('users')
+    .where('userID', isEqualTo: userID)
+    .get();
+    final document = response.docs.first.data();   
+    final userData = UserModel.fromMap(document);
+    return userData;
+  }
   
 }

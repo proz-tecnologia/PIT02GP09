@@ -2,16 +2,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/reset_password/reset_password_bloc.dart';
-
-import '../../../routes/consts_routes.dart';
-import '../../../shared/models/login_model.dart';
 import '../../../shared/utils/consts.dart';
 import '../../../shared/utils/mixins/validations_mixin.dart';
-import '../../../shared/utils/shared_preferences_keys.dart';
-
-import '../reset_password/reset_password_event.dart';
 import 'custom_dialog/custom_dialog.dart';
 import 'custom_input_form/text_rich_info.dart';
 import 'custom_show_alert_dialog.dart';
