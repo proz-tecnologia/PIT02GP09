@@ -24,4 +24,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     await FirebaseAuth.instance.signOut();
   }
 
+  Future<void> getUserData() async{
+    
+  }
+
 }
