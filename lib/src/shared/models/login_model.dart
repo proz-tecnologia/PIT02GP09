@@ -1,23 +1,23 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-class UserModel {
+class LoginModel {
   final String name;
   final String email;
   final String password;
 
-  UserModel({
+  LoginModel({
     required this.name,
     required this.email,
     required this.password,
   });
 
-  UserModel copyWith({
+  LoginModel copyWith({
     String? name,
     String? email,
     String? password,
   }) {
-    return UserModel(
+    return LoginModel(
       name: name ?? this.name,
       email: email ?? this.email,
       password: password ?? this.password,
@@ -32,8 +32,8 @@ class UserModel {
     };
   }
 
-  factory UserModel.fromMap(Map<String, dynamic> map) {
-    return UserModel(
+  factory LoginModel.fromMap(Map<String, dynamic> map) {
+    return LoginModel(
       name: map['name'] as String,
       email: map['email'] as String,
       password: map['password'] as String,
@@ -42,15 +42,15 @@ class UserModel {
 
   String toJson() => json.encode(toMap());
 
-  factory UserModel.fromJson(String source) =>
-      UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory LoginModel.fromJson(String source) =>
+      LoginModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() =>
-      'UserModel(name: $name, email: $email, password: $password)';
+      'LoginModel(name: $name, email: $email, password: $password)';
 
   @override
-  bool operator ==(covariant UserModel other) {
+  bool operator ==(covariant LoginModel other) {
     if (identical(this, other)) return true;
 
     return other.name == name &&

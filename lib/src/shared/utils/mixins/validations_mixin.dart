@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../models/user_model.dart';
+import '../../models/login_model.dart';
 
 mixin ValidationMixin {
   //Verifica se o input não está vazio
@@ -121,12 +121,12 @@ String? validateConfPassword(String? value, String? password) {
 ]) */
 //Fonte:https://youtu.be/HgFstMmYLok
 
-Future<UserModel?> validEmailSharedPref({
+Future<LoginModel?> validEmailSharedPref({
   required String mail,
   required String sharedPreferencesKeys,
 }) async {
-  List<UserModel> usersAll = <UserModel>[];
-  UserModel user;
+  List<LoginModel> usersAll = <LoginModel>[];
+  LoginModel user;
 
   late final SharedPreferences sharedPrefers;
   sharedPrefers = await SharedPreferences.getInstance();
@@ -137,11 +137,11 @@ Future<UserModel?> validEmailSharedPref({
     final usersDecode = jsonDecode(users);
 
     final decodedUsers =
-        (usersDecode as List).map((e) => UserModel.fromJson(e)).toList();
+        (usersDecode as List).map((e) => LoginModel.fromJson(e)).toList();
     usersAll.addAll(decodedUsers);
     for (var i = 0; i < usersAll.length; i++) {
       if (mail.trim().contains(usersAll[i].email.trim())) {
-        user = UserModel(
+        user = LoginModel(
             name: usersAll[i].name,
             email: usersAll[i].email,
             password: usersAll[i].password);

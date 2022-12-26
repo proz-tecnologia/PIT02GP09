@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../routes/consts_routes.dart';
-import '../../../shared/models/user_model.dart';
+import '../../../shared/models/login_model.dart';
 import '../../../shared/utils/consts.dart';
 import '../sign_up/sign_up_bloc.dart';
 import '../sign_up/sign_up_event.dart';
@@ -37,9 +37,9 @@ class TextRichInfoCreateAccount extends StatelessWidget {
           // //   ConstsRoutes.signUpPage,
           // // );
           if (newUser != null) {
-            Modular.get<SignUpBloc>().add(OnSignUpEmpty(newUser as UserModel));
+            Modular.get<SignUpBloc>().add(OnSignUpEmpty(newUser as LoginModel));
             bloc.add(OnCreateNewUserPressed(newUser));
-            // signUpController.addUser(user: newUser as UserModel);
+            // signUpController.addUser(user: newUser as LoginModel);
           }
 
           // formkey.currentState!.reset();

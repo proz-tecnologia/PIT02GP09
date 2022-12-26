@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import '../../../routes/consts_routes.dart';
-import '../../../shared/models/user_model.dart';
+import '../../../shared/models/login_model.dart';
 import '../../../shared/utils/consts.dart';
 import '../../../shared/widgets/show_loader/show_loader.dart';
 import '../widgets/custom_dialog/custom_dialog_stateless.dart';
@@ -36,7 +36,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   final savedFocusNode = FocusNode();
   final confirmPasswordFocusNode = FocusNode();
 
-  late UserModel userResetPassword;
+  late LoginModel userResetPassword;
   final bloc = Modular.get<ResetPasswordBloc>();
 
   @override
@@ -195,9 +195,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                             // Encotra o usário pelo e-mail e devolve para "arg"
                                             final arg = ModalRoute.of(context)!
                                                 .settings
-                                                .arguments as UserModel;
+                                                .arguments as LoginModel;
                                             // Resgata nome e email do usuário existente e cria um usuário com nova senha
-                                            userResetPassword = UserModel(
+                                            userResetPassword = LoginModel(
                                               name: arg.name,
                                               email: arg.email,
                                               password: passwordController.text,

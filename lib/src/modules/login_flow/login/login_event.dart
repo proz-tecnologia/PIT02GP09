@@ -1,11 +1,11 @@
-import '../../../shared/models/user_model.dart';
+import '../../../shared/models/login_model.dart';
 
 abstract class LoginEvent {
-  final UserModel? _user;
+  final LoginModel? _user;
 
   LoginEvent(this._user);
 
-  UserModel? get user => _user;
+  LoginModel? get user => _user;
 }
 
 class OnLogoutPressed extends LoginEvent {

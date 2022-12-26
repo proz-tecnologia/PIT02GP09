@@ -1,14 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/user_model.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/login_model.dart';
 
 abstract class SignUpEvent {
-  final UserModel? _user;
+  final LoginModel? _user;
   SignUpEvent(
     this._user,
   );
 
-  UserModel? get getUser => _user;
-  set setUser(UserModel user) => _user;
+  LoginModel? get getUser => _user;
+  set setUser(LoginModel user) => _user;
 }
 
 class OnCreateNewUserPressed extends SignUpEvent {

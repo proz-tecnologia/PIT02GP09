@@ -5,8 +5,7 @@ import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/logi
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login/login_event.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/sign_up/sign_up_event.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/routes/consts_routes.dart';
-
-import '../../../../shared/models/user_model.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/login_model.dart';
 import '../../../../shared/utils/consts.dart';
 import '../../sign_up/sign_up_bloc.dart';
 
@@ -41,7 +40,7 @@ class CustomDialog extends StatelessWidget {
   }
 
   dialogContent(BuildContext context) {
-    UserModel? user;
+    LoginModel? user;
     final bloc = Modular.get<LoginBloc>();
     return Stack(
       children: <Widget>[

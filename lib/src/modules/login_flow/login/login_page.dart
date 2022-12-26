@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/routes/consts_routes.dart';
-import '../../../shared/models/user_model.dart';
+import '../../../shared/models/login_model.dart';
 import '../../../shared/utils/consts.dart';
 import '../../../shared/utils/mixins/validations_mixin.dart';
 import '../../../shared/widgets/show_loader/show_loader.dart';
@@ -173,7 +173,7 @@ class _LoginPageState extends State<LoginPage> with ValidationMixin {
                                     : () async {
                                         if (formkey.currentState != null &&
                                             formkey.currentState!.validate()) {
-                                          UserModel user = UserModel(
+                                          LoginModel user = LoginModel(
                                             name: '',
                                             email: mailController.text,
                                             password: passwordController.text,

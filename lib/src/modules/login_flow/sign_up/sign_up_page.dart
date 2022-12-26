@@ -8,7 +8,7 @@ import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/sign
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/sign_up/sign_up_state.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/widgets/custom_dialog/custom_dialog_stateless.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/routes/consts_routes.dart';
-import '../../../shared/models/user_model.dart';
+import '../../../shared/models/login_model.dart';
 import '../../../shared/utils/consts.dart';
 import '../../../shared/utils/mixins/validations_mixin.dart';
 import '../../../shared/widgets/show_loader/show_loader.dart';
@@ -209,7 +209,7 @@ class _LoginPageState extends State<SignUpPage> with ValidationMixin {
                                           if (formkey.currentState != null &&
                                               formkey.currentState!
                                                   .validate()) {
-                                            final newUser = UserModel(
+                                            final newUser = LoginModel(
                                                 name: nameController.text,
                                                 email: mailController.text,
                                                 password:
@@ -231,7 +231,7 @@ class _LoginPageState extends State<SignUpPage> with ValidationMixin {
                                     Consts.textInteractionLoginLinkSignUp,
                                     style: theme.textTheme.labelMedium),
                                 link: () {
-                                  UserModel? user;
+                                  LoginModel? user;
                                   
                                   Modular.get<LoginBloc>()
                                       .add(OnLoginStateEmpty(user));

@@ -1,6 +1,6 @@
 
 import 'dart:convert';
-import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/user_model.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/login_model.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/repositories/app_repository.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/utils/shared_preferences_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AppRepositoryImpl implements AppRepository {
 
   @override
-  List<UserModel> usersLogin = <UserModel>[];
+  List<LoginModel> usersLogin = <LoginModel>[];
   @override
   final SharedPreferences sharedPreferences;
 
@@ -24,20 +24,20 @@ class AppRepositoryImpl implements AppRepository {
       final usersDecode = jsonDecode(users);
 
       final decodedUsers =
-          (usersDecode as List).map((e) => UserModel.fromJson(e)).toList();
+          (usersDecode as List).map((e) => LoginModel.fromJson(e)).toList();
       usersLogin.addAll(decodedUsers);
     }
   }
 
   @override
-  Future<List<UserModel>> getUser() async {
+  Future<List<LoginModel>> getUser() async {
     final users = sharedPreferences.getString(SharedPreferencesKeys.users);
 
     if (users != null && users.isNotEmpty) {
       final usersDecode = jsonDecode(users);
 
       final decodedUsers =
-          (usersDecode as List).map((e) => UserModel.fromJson(e)).toList();
+          (usersDecode as List).map((e) => LoginModel.fromJson(e)).toList();
       usersLogin.addAll(decodedUsers);
     }
 

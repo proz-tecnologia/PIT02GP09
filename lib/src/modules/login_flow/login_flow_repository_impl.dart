@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login_flow_repository.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/user_model.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/login_model.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/utils/shared_preferences_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginFlowRepositoryImpl implements LoginFlowRepository {
 
   @override
-  List<UserModel> usersLogin = <UserModel>[];
+  List<LoginModel> usersLogin = <LoginModel>[];
   @override
   late final SharedPreferences sharedPreferences;
 
@@ -23,13 +23,13 @@ class LoginFlowRepositoryImpl implements LoginFlowRepository {
       final usersDecode = jsonDecode(users);
 
       final decodedUsers =
-          (usersDecode as List).map((e) => UserModel.fromJson(e)).toList();
+          (usersDecode as List).map((e) => LoginModel.fromJson(e)).toList();
       usersLogin.addAll(decodedUsers);
     }
   }
 
   @override
-  Future<void> addUser({required UserModel user}) async {
+  Future<void> addUser({required LoginModel user}) async {
     late final SharedPreferences sharedPrefers;
     sharedPrefers = await SharedPreferences.getInstance();
 
@@ -42,15 +42,17 @@ class LoginFlowRepositoryImpl implements LoginFlowRepository {
         SharedPreferencesKeys.users, jsonEncode(newUsersJson));
   }
 
+ 
+
   @override
-  Future<List<UserModel>> getUser() async {
+  Future<List<LoginModel>> getUser() async {
     final users = sharedPreferences.getString(SharedPreferencesKeys.users);
 
     if (users != null && users.isNotEmpty) {
       final usersDecode = jsonDecode(users);
 
       final decodedUsers =
-          (usersDecode as List).map((e) => UserModel.fromJson(e)).toList();
+          (usersDecode as List).map((e) => LoginModel.fromJson(e)).toList();
       usersLogin.addAll(decodedUsers);
     }
 
