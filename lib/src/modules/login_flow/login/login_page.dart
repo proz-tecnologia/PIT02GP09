@@ -44,7 +44,7 @@ class _LoginPageState extends State<LoginPage> with ValidationMixin {
   void dispose() {
     mailController.dispose();
     passwordController.dispose();
-    bloc.close();
+    //bloc.close();
     super.dispose();
   }
 

@@ -54,7 +54,7 @@ class _LoginPageState extends State<SignUpPage> with ValidationMixin {
     mailController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
-    bloc.close();
+    //bloc.close();
     super.dispose();
   }
 
@@ -216,7 +216,7 @@ class _LoginPageState extends State<SignUpPage> with ValidationMixin {
                                                     passwordController.text);
                                             Modular.get<SignUpBloc>().add(
                                                 OnCreateNewUserPressed(
-                                                    newUser));                                            
+                                                    newUser));
                                             formkey.currentState!.reset();
                                           }
                                         },
@@ -250,9 +250,9 @@ class _LoginPageState extends State<SignUpPage> with ValidationMixin {
                   return const ShowLoader();
               } else if (state is SignUpStateSuccess) {
                   log(state.toString());
-                  inputClear;
                   Modular.get<LoginBloc>().add(
-                    OnLoginStateEmpty(null));
+                    OnLoginStateEmpty(null));                  
+                  inputClear;
                   Modular.to.pushReplacementNamed(ConstsRoutes.loginPage);
               } else if (state is SignUpStateError) {
                   log(state.toString());
