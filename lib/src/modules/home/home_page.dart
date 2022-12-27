@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home/home_event.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/routes/consts_routes.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/utils/formatters.dart';
 import 'home_bloc.dart';
 import 'home_state.dart';
 
@@ -69,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               body: Center(
-                child: Text('Seu saldo é de R\$ ${state.user.balance.toStringAsFixed(2)} reais'),
+                child: Text('Seu saldo é de R\$ ${Formatters.formatToReal(state.user.balance)} reais'),
               ),
             );
           } else if (state is HomeStateError) {
