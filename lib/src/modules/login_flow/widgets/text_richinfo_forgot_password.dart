@@ -1,15 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/reset_password/reset_password_bloc.dart';
-
-import '../../../routes/consts_routes.dart';
-import '../../../shared/models/user_model.dart';
 import '../../../shared/utils/consts.dart';
 import '../../../shared/utils/mixins/validations_mixin.dart';
-import '../../../shared/utils/shared_preferences_keys.dart';
-
-import '../reset_password/reset_password_event.dart';
 import 'custom_dialog/custom_dialog.dart';
 import 'custom_input_form/text_rich_info.dart';
 import 'custom_show_alert_dialog.dart';
@@ -47,22 +41,12 @@ class _TextRichInfoForgotPasswordState
           builder: (context) => const CustomShowAlertDialog(),
         ).then((email) async {
           if (email != null) {
-            UserModel? user = await validEmailSharedPref(
-              mail: email,
-              sharedPreferencesKeys: SharedPreferencesKeys.users,
-            );
-
-            if (user != null) {
-              final userResetPassword = await Modular.to
-                  .pushNamed(ConstsRoutes.resetPasswordPage, arguments: user);
-
-              if (userResetPassword != null) {
-                Modular.get<ResetPasswordBloc>().add(OnResetPasswordPressed(
-                    user: userResetPassword as UserModel));
-              }
+            try {
+              await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
               widget.formkey.currentState!.reset();
-              widget.inputClear;
-            } else {
+              widget.inputClear;              
+            } catch (e, s) {
+              FirebaseCrashlytics.instance.recordError(e, s);
               return showDialog(
                 context: context,
                 builder: (BuildContext context) => CustomDialog(
@@ -78,7 +62,8 @@ class _TextRichInfoForgotPasswordState
               );
             }
           }
-        });
+          }
+        );
       },
     );
   }

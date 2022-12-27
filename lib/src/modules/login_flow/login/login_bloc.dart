@@ -1,15 +1,19 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/app_controller.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login_flow_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../../shared/repositories/repository.dart';
-import '../../../shared/utils/consts.dart';
 import '../../../shared/utils/shared_preferences_keys.dart';
 import 'login_event.dart';
 import 'login_state.dart';
 
+
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final Repository repository;
+  final LoginFlowRepository repository;
   final SharedPreferences sharedPreferences;
 
   LoginBloc({
@@ -18,50 +22,40 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }) : super(
           LoginStateEmpty(),
         ) {
-    on<OnLoginPressed>(newLogin);
+    on<OnLoginPressed>(newLoginFirebase); // using Firebase login option
     on<OnLogoutPressed>(logout);
     on<OnLoginStateEmpty>(empty);
   }
 
-  Future<bool> newLogin(LoginEvent event, Emitter<LoginState> emitter) async {
+  FirebaseAuth get _auth => FirebaseAuth.instance;  
+
+  Future<void> newLoginFirebase(LoginEvent event, Emitter<LoginState> emitter) async {
     try {
       emitter(LoginStateLoading());
 
-      await Future.delayed(const Duration(seconds: 3));
-
-      final user = await repository.getUser();
-      if (user.isEmpty) {
-        emitter(LoginStateError(erro: Consts.textLoginStateErrorGetUser ));
+      final userCredential = await _auth.signInWithEmailAndPassword(
+                                email: event.user!.email, 
+                                password: event.user!.password,
+                                );
+      Modular.get<AppController>().setUser(userCredential.user!);
+      if (userCredential.user != null) {
+        emitter(LoginStateSuccess());
+      } else {
+        throw Exception();
       }
-
-      for (var element in user) {
-        if (element.email.trim() == event.user!.email.trim()) {
-         
-          if (element.password.trim() == event.user!.password.trim()) {
-            sharedPreferences.setString(
-                SharedPreferencesKeys.userSession, element.name.trim());
-            final userSession = await repository.getUserSession();
-
-            emitter(LoginStateSuccess(user: userSession));
-            return true;
-          } else {
-            emitter(LoginStateError(erro: Consts.textLoginStateErrorPassEmail));
-            return false;
-          }
-        }
-      }
-    } on Exception catch (e) {
+    } on Exception catch (e, s) {
+      FirebaseCrashlytics.instance.recordError(e, s);
       emitter(LoginStateError(erro: e));
-      return false;
     }
-    return false;
   }
+
 
   Future<bool> logout(LoginEvent event, Emitter<LoginState> emitter) async {
     return await sharedPreferences.remove(SharedPreferencesKeys.userSession);
   }
 
   empty(LoginEvent event, Emitter<LoginState> emitter) {
+    log(state.toString());
     emitter(LoginStateEmpty());
   }
 }

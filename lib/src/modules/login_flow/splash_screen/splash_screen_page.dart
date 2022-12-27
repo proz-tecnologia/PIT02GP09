@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
 import '../../../routes/consts_routes.dart';
 import '../../../shared/utils/consts.dart';
 import 'splash_screen_bloc.dart';
@@ -16,18 +15,20 @@ class SplashScreenPage extends StatefulWidget {
 
 class _SplashScreenPageState extends State<SplashScreenPage> {
   @override
+
   void initState() {
     super.initState();
-    Modular.get<SplashScreenBloc>().add(OnIsAuthenticated());
+    Modular.get<SplashScreenBloc>().add(OnIsAuthenticated()); // Firebase initialiazed in the state emitted
     _navigateToHome();
   }
+  
   _navigateToHome() async {
     Future.delayed(const Duration(seconds: 3)).then((value) async {
       final bloc = Modular.get<SplashScreenBloc>();
       if (bloc.state is SplashScreenStateAuthenticated) {
-        Modular.to.navigate(ConstsRoutes.homePage);
+        Modular.to.pushReplacementNamed(ConstsRoutes.homePageModule);
       } else if (bloc.state is SplashScreenStateUnauthenticated) {
-        Modular.to.navigate(ConstsRoutes.loginFlowModule);
+        Modular.to.pushReplacementNamed(ConstsRoutes.loginFlowModule);
         
       }
     });

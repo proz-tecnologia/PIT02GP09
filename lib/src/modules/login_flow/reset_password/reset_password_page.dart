@@ -1,15 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
 import '../../../routes/consts_routes.dart';
-import '../../../shared/models/user_model.dart';
+import '../../../shared/models/login_model.dart';
 import '../../../shared/utils/consts.dart';
 import '../../../shared/widgets/show_loader/show_loader.dart';
-import '../../home/home_page.dart';
 import '../widgets/custom_dialog/custom_dialog_stateless.dart';
 import '../widgets/custom_input_form/confirm_password_custom_text_form_field.dart';
 import '../widgets/custom_input_form/custom_elevated_button.dart';
@@ -39,7 +36,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   final savedFocusNode = FocusNode();
   final confirmPasswordFocusNode = FocusNode();
 
-  late UserModel userResetPassword;
+  late LoginModel userResetPassword;
   final bloc = Modular.get<ResetPasswordBloc>();
 
   @override
@@ -198,9 +195,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                             // Encotra o usário pelo e-mail e devolve para "arg"
                                             final arg = ModalRoute.of(context)!
                                                 .settings
-                                                .arguments as UserModel;
+                                                .arguments as LoginModel;
                                             // Resgata nome e email do usuário existente e cria um usuário com nova senha
-                                            userResetPassword = UserModel(
+                                            userResetPassword = LoginModel(
                                               name: arg.name,
                                               email: arg.email,
                                               password: passwordController.text,
@@ -231,14 +228,14 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 onSuccess: (userSession) {
                   inputClear;
                   log(state.toString());
-                  Modular.to.canPop();
-                  return const HomePage();
+                  Modular.to.pushReplacementNamed(ConstsRoutes.homePageModule);
                 },
                 onError: (erro) {
                   log(state.toString());
                   log(erro.toString());
-
+                  log(state.runtimeType.toString());
                   return CustomDialogStateless(
+                    stateType: state,
                     theme: theme,
                     formkey: formkey,
                     inputClear: inputClear,

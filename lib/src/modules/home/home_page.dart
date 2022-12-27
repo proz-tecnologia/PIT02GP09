@@ -1,12 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login/login_bloc.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login/login_event.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home/home_event.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/routes/consts_routes.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/user_model.dart';
-
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/utils/formatters.dart';
 import 'home_bloc.dart';
 import 'home_state.dart';
 
@@ -22,7 +21,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final bloc = Modular.get<HomeBloc>();
   String? name;
-  late UserModel user;
 
   @override
   void dispose() {
@@ -31,34 +29,59 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void initState() {
+    Modular.get<HomeBloc>().add(OnHomePageEmpty());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    bloc.repo.getUserSession().then((value) => setState(() {
-          name = value;
-        }));
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Home Page  Olá $name'),
-        actions: [
-          IconButton(
-              onPressed: () {                
-                Modular.get<LoginBloc>().add(OnLogoutPressed(user));
-                Modular.get<LoginBloc>().add(OnLoginStateEmpty(user));
-                Modular.to.navigate(ConstsRoutes.loginPage);
-                // Navigator.popAndPushNamed(context, ConstsRoutes.loginPage);
-              },
-              icon: const Icon(Icons.logout))
-        ],
+    return SafeArea(
+      child: BlocBuilder<HomeBloc, HomeState>(
+        bloc: bloc,
+        builder: (context, state) {
+          if (state is HomeStateEmpty) {
+            log(state.toString());
+            return Scaffold(
+              appBar: AppBar(
+                title: const Text('Homepage Empty'),
+                actions: [
+                  IconButton(
+                    onPressed: () {                
+                      Modular.get<HomeBloc>().add(OnHomePageLogout());
+                      Modular.to.pushReplacementNamed(ConstsRoutes.loginFlowModule);
+                    },
+                    icon: const Icon(Icons.logout))
+                ],
+              ),
+            );
+          } else if (state is HomeStateSuccess){
+            log(state.toString());
+            return Scaffold(
+              appBar: AppBar(
+                title: Text('Home Page  Olá ${state.user.userModelName}'),
+                actions: [
+                  IconButton(
+                    onPressed: () {                
+                      Modular.get<HomeBloc>().add(OnHomePageLogout());
+                      Modular.to.pushReplacementNamed(ConstsRoutes.loginFlowModule);
+                    },
+                    icon: const Icon(Icons.logout))
+                ],
+              ),
+              body: Center(
+                child: Text('Seu saldo é de R\$ ${Formatters.formatToReal(state.user.balance)} reais'),
+              ),
+            );
+          } else if (state is HomeStateError) {
+            log(state.toString());
+            log(state.erro.toString());
+            log(state.runtimeType.toString());
+            return Text(state.erro.toString());
+          }
+          return const SizedBox.shrink();
+        },
       ),
-      body: BlocBuilder<HomeBloc, HomeState>(
-          bloc: bloc,
-          builder: (context, state) {
-            if (state is HomeStateEmpty) {
-              return const Center(child: SizedBox());
-            }
-
-            return const SizedBox.shrink();
-          }),
     );
   }
 }

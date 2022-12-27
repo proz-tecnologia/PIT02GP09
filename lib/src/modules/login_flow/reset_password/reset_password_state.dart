@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/utils/page_state.dart';
 
-abstract class ResetPasswordState {  Widget when({
+abstract class ResetPasswordState extends PageState {  Widget when({
     required Function(ResetPasswordStateEmpty) onEmpty,
     required Function(ResetPasswordStateLoading) onLoading,
     required Function(ResetPasswordStateSuccess) onSuccess,

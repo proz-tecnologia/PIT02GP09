@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -7,13 +6,12 @@ import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/logi
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/login/login_event.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/sign_up/sign_up_bloc.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/sign_up/sign_up_state.dart';
-
-import '../../../routes/consts_routes.dart';
-import '../../../shared/models/user_model.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/login_flow/widgets/custom_dialog/custom_dialog_stateless.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/routes/consts_routes.dart';
+import '../../../shared/models/login_model.dart';
 import '../../../shared/utils/consts.dart';
 import '../../../shared/utils/mixins/validations_mixin.dart';
 import '../../../shared/widgets/show_loader/show_loader.dart';
-import '../login/login_page.dart';
 import '../widgets/custom_input_form/confirm_password_custom_text_form_field.dart';
 import '../widgets/custom_input_form/custom_elevated_button.dart';
 import '../widgets/custom_input_form/custom_text_form_field.dart';
@@ -56,7 +54,7 @@ class _LoginPageState extends State<SignUpPage> with ValidationMixin {
     mailController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
-    bloc.close();
+    //bloc.close();
     super.dispose();
   }
 
@@ -75,8 +73,7 @@ class _LoginPageState extends State<SignUpPage> with ValidationMixin {
         body: BlocBuilder<SignUpBloc, SignUpState>(
             bloc: bloc,
             builder: (context, state) {
-              return bloc.state.when(
-                onEmpty: (_) {
+              if (state is SignUpStateEmpty) {
                   log(state.toString());
                   return SafeArea(
                     child: ListView(
@@ -212,20 +209,15 @@ class _LoginPageState extends State<SignUpPage> with ValidationMixin {
                                           if (formkey.currentState != null &&
                                               formkey.currentState!
                                                   .validate()) {
-                                            final newUser = UserModel(
+                                            final newUser = LoginModel(
                                                 name: nameController.text,
                                                 email: mailController.text,
                                                 password:
                                                     passwordController.text);
-
                                             Modular.get<SignUpBloc>().add(
                                                 OnCreateNewUserPressed(
                                                     newUser));
-                                            Modular.get<LoginBloc>().add(
-                                                OnLoginStateEmpty(newUser));
-                                             Modular.to.pop( newUser);
                                             formkey.currentState!.reset();
-                                            inputClear;
                                           }
                                         },
                                 );
@@ -239,7 +231,7 @@ class _LoginPageState extends State<SignUpPage> with ValidationMixin {
                                     Consts.textInteractionLoginLinkSignUp,
                                     style: theme.textTheme.labelMedium),
                                 link: () {
-                                  UserModel? user;
+                                  LoginModel? user;
                                   
                                   Modular.get<LoginBloc>()
                                       .add(OnLoginStateEmpty(user));
@@ -253,22 +245,32 @@ class _LoginPageState extends State<SignUpPage> with ValidationMixin {
                       ],
                     ),
                   );
-                },
-                onLoading: (_) {
+              } else if (state is SignUpStateLoading) {
                   log(state.toString());
                   return const ShowLoader();
-                },
-                onSuccess: (userSession) {
+              } else if (state is SignUpStateSuccess) {
                   log(state.toString());
-                  return const LoginPage();
-                },
-                onError: (_) {
+                  Modular.get<LoginBloc>().add(
+                    OnLoginStateEmpty(null));                  
+                  inputClear;
+                  Modular.to.pushReplacementNamed(ConstsRoutes.loginPage);
+              } else if (state is SignUpStateError) {
                   log(state.toString());
-                  return Center(
-                    child: Container(color: Colors.red),
-                  );
-                },
-              );
-            }));
+                  log(state.erro.toString());
+                  log(state.runtimeType.toString());
+                  log(state.erro.toString());
+                  inputClear;
+                  return CustomDialogStateless(
+                  stateType: state,
+                  error: state.erro,
+                  theme: theme,
+                  formkey: formkey,
+                  inputClear: inputClear,
+                );
+              }
+              return Container();
+            },
+          ),
+        );
   }
 }
