@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_transaction/create_transaction_repository.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/financial_transactions/financial_transaction.dart';
@@ -18,12 +20,12 @@ class CreateTransactionRepositoryImpl implements CreateTransactionRepository {
   Future<void> createTransaction({required FinancialTransaction transaction}) async {
 
     // cria transacao e automaticamente gera um id
-    final response = await FirebaseFirestore.instance
+    final response = await _firestore
     .collection('transactions')
     .add(transaction.toMap());
 
     // update na transacao criada anteriormente adicionando o id gerado na criacao
-    await FirebaseFirestore.instance
+    await _firestore
     .collection('transactions')
     .doc(response.id)
     .update({'id' : response.id});
@@ -33,11 +35,14 @@ class CreateTransactionRepositoryImpl implements CreateTransactionRepository {
 
   @override
   Future<void> updateBalance({required UserModel userModel}) async {
-    // update apenas do parametro 'balance' do usuario
+    log(userModel.balance.toString());
+    log(userModel.userModelDocID.toString());
+    // update apenas do parametro 'balance' do usuario no Firebase
     await _firestore
     .collection('users')
     .doc(userModel.userModelDocID)
-    .update({'balance':userModel.balance});
+    .update({'balance' : userModel.balance});
+    
   }
 
   
