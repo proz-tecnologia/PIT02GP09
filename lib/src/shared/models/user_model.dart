@@ -5,11 +5,13 @@ class UserModel {
   final double balance;
   final String userModelID;
   final String userModelName;
+  final String? userModelDocID;
   
   UserModel({
     this.balance = 0.0,
     required this.userModelID,
     required this.userModelName,
+    this.userModelDocID,
   });
 
   UserModel copyWith({
@@ -29,6 +31,7 @@ class UserModel {
       'balance': balance,
       'userModelID': userModelID,
       'userModelName': userModelName,
+      'userModelDocID': userModelDocID,
     };
   }
 
@@ -37,6 +40,7 @@ class UserModel {
       balance: map['balance'] as double,    // map['balance']?.toDouble() ?? 0.0,
       userModelID: map['userModelID'] as String,      // map['userModelID'] ?? '',
       userModelName: map['userModelName'] as String,  // map['userModelName'] ?? '',
+      userModelDocID: map['userModelDocID'] ?? '',
     );
   }
 
