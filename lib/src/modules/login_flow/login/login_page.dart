@@ -38,6 +38,7 @@ class _LoginPageState extends State<LoginPage> with ValidationMixin {
   final mailFocusNode = FocusNode();
   final passwordFocusNode = FocusNode();
   final savedFocusNode = FocusNode();
+  
   final bloc = Modular.get<LoginBloc>();
 
   @override
@@ -178,9 +179,7 @@ class _LoginPageState extends State<LoginPage> with ValidationMixin {
                                             email: mailController.text,
                                             password: passwordController.text,
                                           );
-                                          bloc.add(
-                                            OnLoginPressed(user),
-                                          );
+                                          bloc.add(OnLoginPressed(user));
                                           formkey.currentState!.reset();
                                           inputClear;
                                         }
