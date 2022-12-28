@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/app_controller.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_transaction/create_transaction_bloc.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_transaction/create_transaction_page.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_transaction/create_transaction_repository.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_transaction/create_transaction_repository_impl.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/home/home_bloc.dart';
@@ -37,6 +38,8 @@ class HomePageModule extends Module { // equivalent to AutenthicationModule
   List<ModularRoute> get routes => [
         ChildRoute(ConstsRoutes.rootRoute,
             child: (context, args) => const HomePage()),
+        ChildRoute(ConstsRoutes.createTransactionPage,
+            child: (context, args) => const CreateTransactionPage()),
         WildcardRoute(child: (context, args) => const NotFoundPage()),
       ];
 }

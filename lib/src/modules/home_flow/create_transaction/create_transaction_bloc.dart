@@ -20,37 +20,43 @@ class CreateTransactionBloc extends Bloc<CreateTransactionEvent, CreateTransacti
     this.repository,
     this._id,
     this.userModel,
-  ) : super(CreateTransactionStateLoading()) {
+  ) : super(CreateTransactionStateEmpty()) {
     log('Create Transaction bloc created');
+    on<OnNewTransaction>(createTransaction);
   }
 
   Future<void> createTransaction(
+    CreateTransactionEvent event, 
     Emitter<CreateTransactionState> emitter,
-    {required FinancialTransaction transaction}
   ) async {
     try {
       emitter(CreateTransactionStateLoading());
 
-      // recebe usuario do HomeBloc
-      UserModel? myUser = Modular.get<HomeBloc>().userModel;
+      log(event.newTransaction!.value.toString());
+      log(userModel.userModelDocID.toString());
 
-      // alimenta usuario do HomeBloc
-      final updatedTransaction = transaction.copyWith(userID: _id);
+      final transaction = event.newTransaction;
+      final updatedTransaction = transaction!.copyWith(userID: _id);
+
+      UserModel? myUser;
+
       await repository.createTransaction(transaction: updatedTransaction);
 
       if (transaction.type == TransactionTypes.expense) {
-        myUser = userModel.copyWith(balance: userModel.balance - transaction.value);
+        myUser = userModel.copyWith(balance: userModel.balance - updatedTransaction.value);
       } else if (transaction.type == TransactionTypes.receive) { // n usar "else" p facilitar futura adapt p novos tipos
-        myUser = userModel.copyWith(balance: userModel.balance + transaction.value);
+        myUser = userModel.copyWith(balance: userModel.balance + updatedTransaction.value);
       }
 
-      // devolve usuario ao HomeBloc
+      log(myUser!.balance.toString());
+      log(myUser.userModelDocID.toString());
+
       Modular.get<HomeBloc>().userModel = myUser;
 
       // atualiza usuario no Firebase
-      await repository.updateBalance(userModel: myUser!);
-      
-      emitter(CreateTransactionStateSuccess());
+      await repository.updateBalance(userModel: myUser);
+
+      emitter(CreateTransactionStateSuccess(userModel: myUser));
     } catch (e, s) {
       FirebaseCrashlytics.instance.recordError(e, s);
       emitter(CreateTransactionError(erro: e));

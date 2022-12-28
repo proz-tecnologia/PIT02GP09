@@ -70,7 +70,16 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               body: Center(
-                child: Text('Seu saldo é de ${Formatters.formatToReal(state.user.balance)} reais'),
+                child: Column(
+                  children: [
+                    Text('Seu saldo é de ${Formatters.formatToReal(state.user.balance)} reais'),
+                    IconButton(
+                    onPressed: () {
+                      Modular.to.pushNamed(ConstsRoutes.createTransactionPage);
+                    },
+                    icon: const Icon(Icons.add))
+                  ],
+                ),
               ),
             );
           } else if (state is HomeStateError) {

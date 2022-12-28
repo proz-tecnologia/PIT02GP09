@@ -1,17 +1,17 @@
 
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/user_model.dart';
+
 abstract class CreateTransactionState {}
 
 class CreateTransactionStateLoading extends CreateTransactionState {}
 
-class CreateTransactionStateSuccess extends CreateTransactionState {}
+class CreateTransactionStateEmpty extends CreateTransactionState {}
 
-class CreateTransactionStateBankSlip extends CreateTransactionState {}
+class CreateTransactionStateSuccess extends CreateTransactionState {
+  final UserModel userModel;
 
-class CreateTransactionStateCreditCardPayment extends CreateTransactionState {}
-
-class CreateTransactionStateGenericExpense extends CreateTransactionState {}
-
-class CreateTransactionStateGenericReceive extends CreateTransactionState {}
+  CreateTransactionStateSuccess({required this.userModel});
+}
 
 class CreateTransactionError extends CreateTransactionState {
   final Object erro;
