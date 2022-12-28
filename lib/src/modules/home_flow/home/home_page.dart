@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home/home_event.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/home/home_event.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/routes/consts_routes.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/utils/formatters.dart';
 import 'home_bloc.dart';
