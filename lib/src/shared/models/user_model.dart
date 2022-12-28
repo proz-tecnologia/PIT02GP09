@@ -18,11 +18,13 @@ class UserModel {
     double? balance,
     String? userModelID,
     String? userModelName,
+    String? userModelDocID,
   }) {
     return UserModel(
       balance: balance ?? this.balance,
       userModelID: userModelID ?? this.userModelID,
       userModelName: userModelName ?? this.userModelName,
+      userModelDocID: userModelDocID ?? this.userModelDocID,
     );
   }
 
