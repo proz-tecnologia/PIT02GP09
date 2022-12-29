@@ -30,14 +30,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Future<void> getUserData(HomeEvent event, Emitter<HomeState> emitter) async {
     try {
       emitter(HomeStateLoading());
-      userModel = await repository.getUserData(userID: id!);
-      emitter(HomeStateSuccess(user: userModel!));
+      final userModel = await repository.getUserData(userID: id!);
+      emitter(HomeStateSuccess(user: userModel));
     } catch (e, s) {
       FirebaseCrashlytics.instance.recordError(e, s);
       emitter(HomeStateError(erro: e));
     }
-
-
   }
 
 }
