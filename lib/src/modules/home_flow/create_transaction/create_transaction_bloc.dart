@@ -53,7 +53,7 @@ class CreateTransactionBloc extends Bloc<CreateTransactionEvent, CreateTransacti
 
       Modular.get<HomeBloc>().userModel = myUser;
 
-      // atualiza usuario no Firebase
+      // atualizar usuario no Firebase
       await repository.updateBalance(userModel: myUser);
 
       emitter(CreateTransactionStateSuccess(userModel: myUser));

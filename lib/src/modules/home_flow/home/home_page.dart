@@ -6,6 +6,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/home/home_event.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/routes/consts_routes.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/utils/formatters.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/widgets/show_loader/show_loader.dart';
 import 'home_bloc.dart';
 import 'home_state.dart';
 
@@ -55,7 +56,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             );
-          } else if (state is HomeStateSuccess){
+          } else if (state is HomeStateSuccess) {
             log(state.toString());
             return Scaffold(
               appBar: AppBar(
@@ -82,6 +83,11 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             );
+
+          } else if (state is HomeStateLoading) {
+            log(state.toString());
+            return const ShowLoader();
+
           } else if (state is HomeStateError) {
             log(state.toString());
             log(state.erro.toString());
