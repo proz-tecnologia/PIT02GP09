@@ -36,6 +36,7 @@ class TransactionsPageRepositoryImpl implements TransactionsPageRepository {
     await _firestore
     .collection('transactions')
     .where('userID', isEqualTo: userID)
+    .orderBy('date', descending: true)
     .get();
 
     transactions = firebaseTransactions.docs.map((e) => FinancialTransaction.fromMap(e.data())).toList();
