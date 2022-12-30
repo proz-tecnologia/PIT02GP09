@@ -82,7 +82,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                   const Divider(),
                                   Text(Formatters.formatToReal(bloc.repository.transactions![i].value)),
                                   const Divider(),
-                                  Text(DateFormat('dd/MM/yy').format(bloc.repository.transactions![i].date)),
+                                  Text(bloc.repository.transactions![i].formattedDate),
 
                                   /*
                                   IconButton(

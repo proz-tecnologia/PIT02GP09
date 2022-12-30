@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
+
 
 enum TransactionTypes {
   expense,
@@ -11,7 +14,7 @@ class FinancialTransaction {
   final TransactionTypes type;
   final String name;
   final double value;
-  final DateTime date;
+  final Timestamp date;
   final String? userID;
   final String? id;
   
@@ -24,11 +27,13 @@ class FinancialTransaction {
     this.id,
   });
 
+  String get formattedDate => DateFormat('dd/MM/yyyy').format(date.toDate());
+
   FinancialTransaction copyWith({
     TransactionTypes? type,
     String? name,
     double? value,
-    DateTime? date,
+    Timestamp? date,
     String? userID,
     String? id,
   }) {
@@ -58,7 +63,7 @@ class FinancialTransaction {
       'type': type.toString(),
       'name': name,
       'value': value,
-      'date': date.millisecondsSinceEpoch,
+      'date': date,
       'userID': userID,
       'id': id,
     };
@@ -69,7 +74,7 @@ class FinancialTransaction {
       type: transactionTypeFromString(map['type']) as TransactionTypes,
       name: map['name'] as String,
       value: map['value'] as double,
-      date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
+      date: map['date'],
       userID: map['userID'] != null ? map['userID'] as String : null,
       id: map['id'] != null ? map['id'] as String : null,
     );

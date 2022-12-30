@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -32,7 +33,7 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
   final nameController = TextEditingController();
   final valueController = TextEditingController();
   final idController = TextEditingController();
-  DateTime date = DateTime.now();
+  Timestamp date = Timestamp.now();
 
   @override
   void dispose() {
