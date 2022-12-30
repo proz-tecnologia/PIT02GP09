@@ -34,6 +34,12 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
   final idController = TextEditingController();
   DateTime date = DateTime.now();
 
+  @override
+  void dispose() {
+    bloc.close();
+    super.dispose();
+  }
+
   get inputClear {
     typeController.clear;
     nameController.clear;
@@ -147,12 +153,22 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
                         } : null,
                       icon: const Icon(Icons.add),
                     ),
+
                     IconButton(
                         onPressed: (() {
+                          inputClear;
                           Modular.to.pushReplacementNamed(ConstsRoutes.homePageModule);
                         }),
-                      icon: const Icon(Icons.arrow_back),          
+                      icon: const Icon(Icons.home),          
                       ),
+
+                    IconButton(
+                        onPressed: (() {
+                          inputClear;
+                          Modular.to.pushReplacementNamed(ConstsRoutes.transactionsPage);
+                        }),
+                      icon: const Icon(Icons.arrow_back),          
+                      )
 
                   ],
                 ),
@@ -170,6 +186,7 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
             Modular.to.pushReplacementNamed(ConstsRoutes.homePageModule);
 
           } else if (state is CreateTransactionError) {
+            inputClear;
             log(state.toString());
             log(state.erro.toString());
             log(state.runtimeType.toString());

@@ -76,9 +76,9 @@ class _HomePageState extends State<HomePage> {
                     Text('Seu saldo é de ${Formatters.formatToReal(state.user.balance)} reais'),
                     IconButton(
                     onPressed: () {
-                      Modular.to.pushNamed(ConstsRoutes.createTransactionPage);
+                      Modular.to.pushNamed(ConstsRoutes.transactionsPage);
                     },
-                    icon: const Icon(Icons.add))
+                    icon: const Icon(Icons.monetization_on))
                   ],
                 ),
               ),

@@ -8,6 +8,10 @@ import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/home/
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/home/home_page.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/home/home_repository.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/home/home_repository_impl.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/transactions/transactions_bloc.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/transactions/transactions_page.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/transactions/transactions_repository.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/transactions/transactions_repository_impl.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/not_found_page/not_found_page.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/routes/consts_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,7 +35,13 @@ class HomePageModule extends Module { // equivalent to AutenthicationModule
     Bind.factory(
             (i) => CreateTransactionBloc(i.get<CreateTransactionRepository>(),
                                          i.get<AppController>().user!.uid,
-                                         i.get<HomeBloc>().userModel!))
+                                         i.get<HomeBloc>().userModel!)),
+    Bind.factory<TransactionsPageRepository>(
+            (i) => TransactionsPageRepositoryImpl(sharedPreferences: sharedPref)),
+    Bind.factory(
+            (i) => TransactionsBloc(repository: i.get<TransactionsPageRepository>(),
+                                    id: i.get<AppController>().user!.uid,
+                                    userModel: i.get<HomeBloc>().userModel!))
   ];
 
   @override
@@ -40,6 +50,8 @@ class HomePageModule extends Module { // equivalent to AutenthicationModule
             child: (context, args) => const HomePage()),
         ChildRoute(ConstsRoutes.createTransactionPage,
             child: (context, args) => const CreateTransactionPage()),
+        ChildRoute(ConstsRoutes.transactionsPage,
+            child: (context, args) => const TransactionsPage()),
         WildcardRoute(child: (context, args) => const NotFoundPage()),
       ];
 }
