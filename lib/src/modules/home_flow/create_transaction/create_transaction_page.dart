@@ -183,7 +183,7 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
             inputClear;
             log(state.toString());
             Modular.get<HomeBloc>().add(OnHomePageEmpty());
-            Modular.to.pushReplacementNamed(ConstsRoutes.homePageModule);
+            Modular.to.pushReplacementNamed(ConstsRoutes.transactionsPage);
 
           } else if (state is CreateTransactionError) {
             inputClear;
