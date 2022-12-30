@@ -11,7 +11,7 @@ class ConstsRoutes {
   static const String revenuePage = '/revenue_page';
   static const String expensesPage = '/expenses_page';
   static const String creditCardPage = '/credit_card_page';
-  static const String transactionsPage = '/../transactionsPage';
+  static const String transactionsPage = '/../transactions_page';
   static const String createTransactionPage = '/../create_transaction_page';
   
 }
