@@ -48,6 +48,7 @@ class UserModel {
       userModelID: map['userModelID'] as String,      // map['userModelID'] ?? '',
       userModelName: map['userModelName'] as String,  // map['userModelName'] ?? '',
       userModelDocID: map['userModelDocID'] ?? '',
+      categories: map['categories'] ?? [],
     );
   }
 
