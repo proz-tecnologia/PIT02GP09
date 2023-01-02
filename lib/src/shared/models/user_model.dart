@@ -6,14 +6,14 @@ class UserModel {
   final String userModelID;
   final String userModelName;
   final String? userModelDocID;
-  List<String>? categories;
+  List<String> categories;
   
   UserModel({
     this.balance = 0.0,
     required this.userModelID,
     required this.userModelName,
     this.userModelDocID,
-    this.categories,
+    this.categories = const [],
   });
 
   UserModel copyWith({
@@ -48,7 +48,7 @@ class UserModel {
       userModelID: map['userModelID'] as String,      // map['userModelID'] ?? '',
       userModelName: map['userModelName'] as String,  // map['userModelName'] ?? '',
       userModelDocID: map['userModelDocID'] ?? '',
-      categories: map['categories'] ?? [],
+      categories: List.castFrom(map['categories']) ?? [],
     );
   }
 
