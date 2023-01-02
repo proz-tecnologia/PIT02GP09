@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -29,7 +30,6 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
   final _formKey = GlobalKey<FormState>();
 
   // financial transaction common parameters controllers
-  final typeController = TextEditingController();
   final nameController = TextEditingController();
   final valueController = TextEditingController();
   final idController = TextEditingController();
@@ -42,10 +42,15 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
   }
 
   get inputClear {
-    typeController.clear;
     nameController.clear;
     valueController.clear;
     idController.clear;
+  }
+
+  @override
+  void initState() {
+    type = TransactionTypes.values.first;
+    super.initState();
   }
 
   @override
@@ -66,6 +71,20 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
                 child: ListView(
                   children: [
 
+                    DropdownButtonFormField(
+                      value: type,
+                      items: TransactionTypes.values.map(
+                        (e) => DropdownMenuItem<TransactionTypes>(
+                          value: e,
+                          child: e == TransactionTypes.expense ? const Text('Despesa') : const Text('Receita'),
+                          ),
+                        ).toList(), 
+                      onChanged: (value) {
+                        type = value;
+                      }, 
+                    ),
+
+                    /*
                     IconButton(
                       onPressed: () {
                         showDialog(
@@ -96,20 +115,7 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
                       }, 
                       icon: const Text('Escolha um tipo de transação')
                     ),
-
-                    TextFormField(
-                      enabled: false,
-                      controller: typeController,
-                      validator: (value) {
-                        if (value != null &&
-                            value.isNotEmpty) {
-                          return null;
-                        } else {
-                          return 'Valor inválido';
-                        }
-                      },
-                      decoration: const InputDecoration(label: Text('Tipo de transação')),
-                    ),
+                    */                    
 
                     TextFormField(
                       controller: nameController,

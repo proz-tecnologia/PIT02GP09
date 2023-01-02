@@ -6,12 +6,14 @@ class UserModel {
   final String userModelID;
   final String userModelName;
   final String? userModelDocID;
+  List<String>? categories;
   
   UserModel({
     this.balance = 0.0,
     required this.userModelID,
     required this.userModelName,
     this.userModelDocID,
+    this.categories,
   });
 
   UserModel copyWith({
@@ -19,12 +21,14 @@ class UserModel {
     String? userModelID,
     String? userModelName,
     String? userModelDocID,
+    List<String>? categories,
   }) {
     return UserModel(
       balance: balance ?? this.balance,
       userModelID: userModelID ?? this.userModelID,
       userModelName: userModelName ?? this.userModelName,
       userModelDocID: userModelDocID ?? this.userModelDocID,
+      categories: categories ?? this.categories,
     );
   }
 
@@ -34,6 +38,7 @@ class UserModel {
       'userModelID': userModelID,
       'userModelName': userModelName,
       'userModelDocID': userModelDocID,
+      'categories': categories,
     };
   }
 
