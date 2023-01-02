@@ -17,6 +17,7 @@ class FinancialTransaction {
   final Timestamp date;
   final String? userID;
   final String? id;
+  List<String>? categories;
   
   FinancialTransaction({
     required this.type,
@@ -25,6 +26,7 @@ class FinancialTransaction {
     required this.date,
     this.userID,
     this.id,
+    this.categories,
   });
 
   String get formattedDate => DateFormat('dd/MM/yyyy').format(date.toDate());
@@ -36,6 +38,7 @@ class FinancialTransaction {
     Timestamp? date,
     String? userID,
     String? id,
+    List<String>? categories,
   }) {
     return FinancialTransaction(
       type: type ?? this.type,
@@ -44,6 +47,7 @@ class FinancialTransaction {
       date: date ?? this.date,
       userID: userID ?? this.userID,
       id: id ?? this.id,
+      categories: categories ?? this.categories,
     );
   }
 
@@ -66,6 +70,7 @@ class FinancialTransaction {
       'date': date,
       'userID': userID,
       'id': id,
+      'categories': categories,
     };
   }
 
@@ -77,6 +82,7 @@ class FinancialTransaction {
       date: map['date'],
       userID: map['userID'] != null ? map['userID'] as String : null,
       id: map['id'] != null ? map['id'] as String : null,
+      categories: map['categories'] != null ? map['categories'] as List<String> : null,
     );
   }
 
@@ -86,7 +92,7 @@ class FinancialTransaction {
 
   @override
   String toString() {
-    return 'FinancialTransaction(type: $type, name: $name, value: $value, date: $date, userID: $userID, id: $id)';
+    return 'FinancialTransaction(type: $type, name: $name, value: $value, date: $date, userID: $userID, id: $id, categories: $categories)';
   }
 
   @override
@@ -99,7 +105,8 @@ class FinancialTransaction {
       other.value == value &&
       other.date == date &&
       other.userID == userID &&
-      other.id == id;
+      other.id == id &&
+      other.categories == categories ;
   }
 
   @override
@@ -109,6 +116,7 @@ class FinancialTransaction {
       value.hashCode ^
       date.hashCode ^
       userID.hashCode ^
-      id.hashCode;
+      id.hashCode ^
+      categories.hashCode;
   }
 }
