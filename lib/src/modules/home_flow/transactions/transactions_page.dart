@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:intl/intl.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/transactions/transactions_bloc.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/transactions/transactions_event.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/transactions/transactions_state.dart';
@@ -42,13 +41,22 @@ class _TransactionsPageState extends State<TransactionsPage> {
             return Scaffold(
               appBar: AppBar(
                 title: const Text('Transactions page Empty'),
-                actions: [
-                  IconButton(
-                    onPressed: () {
-                      Modular.to.pushReplacementNamed(ConstsRoutes.loginFlowModule);
-                    },
-                    icon: const Icon(Icons.logout))
-                ],
+              ),
+              body: Center(
+                child: Column(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Modular.to.pushReplacementNamed(ConstsRoutes.homePageModule);
+                      },
+                      icon: const Icon(Icons.home)),
+                    IconButton(
+                      onPressed: () {
+                        Modular.to.pushReplacementNamed(ConstsRoutes.createTransactionPage);
+                      },
+                      icon: const Icon(Icons.add)),
+                  ],
+                ),
               ),
             );
           } else if (state is TransactionsPageStateSuccess) {
