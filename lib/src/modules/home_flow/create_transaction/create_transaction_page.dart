@@ -35,6 +35,9 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
   final idController = TextEditingController();
   Timestamp date = Timestamp.now();
 
+  List<String> categories = Modular.get<HomeBloc>().userModel!.categories;
+  String? category;
+
   @override
   void dispose() {
     bloc.close();
@@ -115,7 +118,20 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
                       }, 
                       icon: const Text('Escolha um tipo de transação')
                     ),
-                    */                    
+                    */
+                    
+                    DropDownTextField(
+                      enableSearch: true,
+                      dropDownList: categories.map(
+                          (e) => DropDownValueModel(
+                            name: e, 
+                            value: e,
+                            ),
+                          ).toList(),
+                      onChanged: (value) {
+                        category = value.toString();
+                      },
+                    ),
 
                     TextFormField(
                       controller: nameController,
