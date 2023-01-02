@@ -17,7 +17,7 @@ class FinancialTransaction {
   final Timestamp date;
   final String? userID;
   final String? id;
-  List<String>? categories;
+  String? category;
   
   FinancialTransaction({
     required this.type,
@@ -26,7 +26,7 @@ class FinancialTransaction {
     required this.date,
     this.userID,
     this.id,
-    this.categories,
+    this.category,
   });
 
   String get formattedDate => DateFormat('dd/MM/yyyy').format(date.toDate());
@@ -38,7 +38,7 @@ class FinancialTransaction {
     Timestamp? date,
     String? userID,
     String? id,
-    List<String>? categories,
+    String? category,
   }) {
     return FinancialTransaction(
       type: type ?? this.type,
@@ -47,7 +47,7 @@ class FinancialTransaction {
       date: date ?? this.date,
       userID: userID ?? this.userID,
       id: id ?? this.id,
-      categories: categories ?? this.categories,
+      category: category ?? this.category,
     );
   }
 
@@ -70,7 +70,7 @@ class FinancialTransaction {
       'date': date,
       'userID': userID,
       'id': id,
-      'categories': categories,
+      'category': category,
     };
   }
 
@@ -82,7 +82,7 @@ class FinancialTransaction {
       date: map['date'],
       userID: map['userID'] != null ? map['userID'] as String : null,
       id: map['id'] != null ? map['id'] as String : null,
-      categories: map['categories'] != null ? map['categories'] as List<String> : null,
+      category: map['category'] != null ? map['category'] as String : null,
     );
   }
 
@@ -92,7 +92,7 @@ class FinancialTransaction {
 
   @override
   String toString() {
-    return 'FinancialTransaction(type: $type, name: $name, value: $value, date: $date, userID: $userID, id: $id, categories: $categories)';
+    return 'FinancialTransaction(type: $type, name: $name, value: $value, date: $date, userID: $userID, id: $id, category: $category)';
   }
 
   @override
@@ -106,7 +106,7 @@ class FinancialTransaction {
       other.date == date &&
       other.userID == userID &&
       other.id == id &&
-      other.categories == categories ;
+      other.category == category ;
   }
 
   @override
@@ -117,6 +117,6 @@ class FinancialTransaction {
       date.hashCode ^
       userID.hashCode ^
       id.hashCode ^
-      categories.hashCode;
+      category.hashCode;
   }
 }
