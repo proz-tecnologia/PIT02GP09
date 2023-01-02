@@ -28,7 +28,7 @@ class TransactionsBloc extends Bloc<TransactionsPageEvent, TransactionsPageState
       final userModel = await repository.getUserData(userID: id!);
       final transactions = await repository.getTransactions(userID: id!);
 
-      if (transactions != null) {
+      if (transactions!.isNotEmpty) {
         emitter(TransactionsPageStateSuccess(user: userModel,
                                              transactions: transactions));
       } else {
