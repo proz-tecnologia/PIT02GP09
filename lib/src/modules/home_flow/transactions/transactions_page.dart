@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/home/home_bloc.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/transactions/transactions_bloc.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/transactions/transactions_event.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/transactions/transactions_state.dart';
@@ -23,6 +24,8 @@ class TransactionsPage extends StatefulWidget {
 class _TransactionsPageState extends State<TransactionsPage> {
 
   final bloc = Modular.get<TransactionsBloc>();
+
+  List<String> categories = Modular.get<HomeBloc>().userModel!.categories;
 
   @override
   void initState() {
@@ -83,6 +86,30 @@ class _TransactionsPageState extends State<TransactionsPage> {
                           shrinkWrap: true,
                           itemCount: bloc.repository.transactions!.length,
                           itemBuilder: (context, i) {
+
+                            if (i == 0) {
+                              return Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Wrap(
+                                    children: categories.map(
+                                      (e) => SizedBox(
+                                        height: 36.0,
+                                        width: 120.0,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: InkWell(
+                                            child: Chip(
+                                              label: Text(e)),
+                                            ),
+                                          ),
+                                      ),
+                                    ).toList(),
+                                  ),
+                                ],
+
+                              );
+                            }
                             return Card(
                               child: Column(
                                 children: [
