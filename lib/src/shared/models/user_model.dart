@@ -13,7 +13,7 @@ class UserModel {
     required this.userModelID,
     required this.userModelName,
     this.userModelDocID,
-    this.categories = const [],
+    this.categories = const ['Alimentação','Saúde','Educação','Lazer','Salário','Outros'],
   });
 
   UserModel copyWith({
