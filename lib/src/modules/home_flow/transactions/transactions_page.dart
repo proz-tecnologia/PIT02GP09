@@ -91,6 +91,9 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                   Text(Formatters.formatToReal(bloc.repository.transactions![i].value)),
                                   const Divider(),
                                   Text(bloc.repository.transactions![i].formattedDate),
+                                  const Divider(),
+                                  Text(bloc.repository.transactions![i].category ??
+                                       ''),
 
                                   /*
                                   IconButton(

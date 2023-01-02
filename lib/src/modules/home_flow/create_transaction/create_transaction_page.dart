@@ -129,7 +129,8 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
                             ),
                           ).toList(),
                       onChanged: (value) {
-                        category = value.toString();
+                        category = value.value;
+                        log(category.toString());
                       },
                     ),
 
@@ -170,6 +171,7 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
                             name: nameController.text, 
                             value: value, 
                             date: date,
+                            category: category,
                             );
                           bloc.add(OnNewTransaction(newTransaction: newTransaction));
                           log(newTransaction.value.toString());
