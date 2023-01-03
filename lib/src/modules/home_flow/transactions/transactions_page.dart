@@ -26,6 +26,16 @@ class _TransactionsPageState extends State<TransactionsPage> {
   final bloc = Modular.get<TransactionsBloc>();
 
   List<String> categories = Modular.get<HomeBloc>().userModel!.categories;
+  List<String> selectedCategories = [];
+
+  void selectCategory(String category) {
+    if (selectedCategories.contains(category)) {
+      selectedCategories.remove(category);
+    } else {
+      selectedCategories.add(category);
+    }
+    bloc.add(OnTransactionsPageSuccess(categories: selectedCategories));
+  }
 
   @override
   void initState() {
@@ -52,17 +62,52 @@ class _TransactionsPageState extends State<TransactionsPage> {
                       onPressed: () {
                         Modular.to.pushReplacementNamed(ConstsRoutes.homePageModule);
                       },
-                      icon: const Icon(Icons.home)),
+                      icon: const Icon(Icons.home),
+                    ),
                     IconButton(
                       onPressed: () {
                         Modular.to.pushReplacementNamed(ConstsRoutes.createTransactionPage);
                       },
-                      icon: const Icon(Icons.add)),
+                      icon: const Icon(Icons.add),
+                    ),
+
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Wrap(
+                          children: categories.map(
+                            (e) => SizedBox(
+                                height: 36.0,
+                                width: 120.0,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: InkWell(
+                                    onTap: () => selectCategory(e),
+                                      child: Chip(
+                                        label: Text(e),
+                                          backgroundColor:
+                                          selectedCategories.contains(e) ?
+                                          Colors.blue
+                                          : null,
+                                      ),
+                                  ),
+                                ),
+                            ),
+                          ).toList(),
+                        ),
+                      ],
+                    ),
+
+                    const Center(
+                      child: Text('Não há transações.'),
+                    ),
+                    
                   ],
                 ),
               ),
             );
           } else if (state is TransactionsPageStateSuccess) {
+            log(state.transactions!.length.toString());
             return Scaffold(              
               body: Column(
                 children: [
@@ -84,7 +129,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                         child: ListView.builder(
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
-                          itemCount: bloc.repository.transactions!.length,
+                          itemCount: state.transactions!.length,
                           itemBuilder: (context, i) {
 
                             if (i == 0) {
@@ -99,43 +144,50 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                         child: Padding(
                                           padding: const EdgeInsets.all(4.0),
                                           child: InkWell(
+                                            onTap: () => selectCategory(e),
                                             child: Chip(
-                                              label: Text(e)),
+                                              label: Text(e),
+                                              backgroundColor:
+                                              selectedCategories.contains(e) ?
+                                                Colors.blue
+                                                : null,
+                                              ),
                                             ),
                                           ),
                                       ),
                                     ).toList(),
                                   ),
+                                  Card(
+                                    child: Column(
+                                      children: [
+                                        Text(state.transactions![i].type.toString()),
+                                        const Divider(),
+                                        Text(Formatters.formatToReal(state.transactions![i].value)),
+                                        const Divider(),
+                                        Text(state.transactions![i].formattedDate),
+                                        const Divider(),
+                                        Text(state.transactions![i].category ??
+                                            ''),
+                                      ],
+                                    ),
+                                  )                                  
                                 ],
-
                               );
                             }
                             return Card(
                               child: Column(
                                 children: [
-                                  Text(bloc.repository.transactions![i].type.toString()),
+                                  Text(state.transactions![i].type.toString()),
                                   const Divider(),
-                                  Text(Formatters.formatToReal(bloc.repository.transactions![i].value)),
+                                  Text(Formatters.formatToReal(state.transactions![i].value)),
                                   const Divider(),
-                                  Text(bloc.repository.transactions![i].formattedDate),
+                                  Text(state.transactions![i].formattedDate),
                                   const Divider(),
-                                  Text(bloc.repository.transactions![i].category ??
+                                  Text(state.transactions![i].category ??
                                        ''),
-
-                                  /*
-                                  IconButton(
-                                    onPressed: (() {
-                                      movementsCubit.deleteTransaction(
-                                        transaction: movementsCubit.myTransactions[i],
-                                      );
-                                    }),
-                                  icon: const Icon(Icons.delete),          
-                                  ),
-                                  */
-
                                 ],
-                                ),
-                              );
+                              ),
+                            );
                           }
                         ),
                       ),
@@ -160,3 +212,15 @@ class _TransactionsPageState extends State<TransactionsPage> {
     );
   }
 }
+
+
+/*
+                                  IconButton(
+                                    onPressed: (() {
+                                      movementsCubit.deleteTransaction(
+                                        transaction: movementsCubit.myTransactions[i],
+                                      );
+                                    }),
+                                  icon: const Icon(Icons.delete),          
+                                  ),
+                                  */

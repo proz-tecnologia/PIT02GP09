@@ -11,6 +11,8 @@ abstract class TransactionsPageRepository extends Repository {
                               this.transactions});
 
   Future<UserModel> getUserData({required String userID});
-  Future<List<FinancialTransaction>?> getTransactions({required String userID});
+  Future<List<FinancialTransaction>?> getTransactions({
+    required String userID,
+    List<String>? categories});
 
 }

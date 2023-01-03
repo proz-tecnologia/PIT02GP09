@@ -10,7 +10,7 @@ class TransactionsPageStateEmpty extends TransactionsPageState {}
 
 class TransactionsPageStateSuccess extends TransactionsPageState {
   final UserModel user;
-  final List<FinancialTransaction> transactions;
+  final List<FinancialTransaction>? transactions;
   
   TransactionsPageStateSuccess({
     required this.user,
