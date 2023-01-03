@@ -35,38 +35,28 @@ class TransactionsPageRepositoryImpl implements TransactionsPageRepository {
     required String userID,
     List<String>? categories}) async {
 
-      final firebaseTransactions;
-
-      if (categories != null) {
-        firebaseTransactions = 
-        _firestore
-        .collection('transactions')
-        .where('userID', isEqualTo: userID)   
-        .where('category', whereIn: categories);
-      } else {
-        firebaseTransactions = 
+      var firebaseTransactions = 
         _firestore
         .collection('transactions')
         .where('userID', isEqualTo: userID);
+
+      if (categories != null) {
+        firebaseTransactions = 
+        firebaseTransactions
+        .where('category', whereIn: categories);
       }
-    
-    //..get();
 
     final filteredTransactions = await firebaseTransactions.orderBy('date', descending: true).get();
 
-    // O ERRO ESTÁ ABAIXO
-
     final transactions = 
-    (filteredTransactions.docs as List)
+    filteredTransactions.docs
     .map(
       (e) => FinancialTransaction.fromMap(
         Map<String, dynamic>.from(
-          e.data() as Map<String, dynamic>,
+          e.data(),
         ),
       ),
     ).toList();
-    log(transactions.runtimeType.toString());
-    log(transactions.toString());
     return transactions;
   }
 }
