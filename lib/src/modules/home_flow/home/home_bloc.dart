@@ -27,7 +27,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     await FirebaseAuth.instance.signOut();
   }
 
-  Future<void> getUserData(HomeEvent event, Emitter<HomeState> emitter) async {
+  Future<void> getUserData(
+    HomeEvent event,
+    Emitter<HomeState> emitter) async {
     try {
       emitter(HomeStateLoading());
       userModel = await repository.getUserData(userID: id!);

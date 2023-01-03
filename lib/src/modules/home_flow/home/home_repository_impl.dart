@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/home/home_repository.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/financial_transactions/financial_transaction.dart';
@@ -9,6 +8,7 @@ class HomePageRepositoryImpl implements HomePageRepository {
 
   @override
   final SharedPreferences sharedPreferences;
+  List<FinancialTransaction>? transactions;
 
   HomePageRepositoryImpl({required this.sharedPreferences});
 
@@ -16,27 +16,37 @@ class HomePageRepositoryImpl implements HomePageRepository {
 
   @override
   Future<UserModel> getUserData({required String userID}) async {
-    log(userID);
     final response = await FirebaseFirestore.instance
     .collection('users')
     .where('userModelID', isEqualTo: userID)
     .get();
     final document = response.docs.first.data();   
     final userData = UserModel.fromMap(document);
-    log(userData.userModelID);
     return userData;
   }
 
   @override
-  Future<List<FinancialTransaction>> getTransactions({required String userID}) async {
+  Future<List<FinancialTransaction>?> getTransactions({
+    required String userID,
+    List<String>? categories}) async {
     final firebaseTransactions = 
-    await _firestore
+    _firestore
     .collection('transactions')
-    .where('userID', isEqualTo: userID )
-    .orderBy('date')
-    .get();
+    ..where('userID', isEqualTo: userID)
+    ..orderBy('date', descending: true);
+    //..get();
 
-    final transactions = firebaseTransactions.docs.map((e) => FinancialTransaction.fromMap(e.data())).toList();
+    if (categories?.isNotEmpty ?? false) {
+      firebaseTransactions.where('category', whereIn: categories);
+    }
+
+    final filteredTransactions = await firebaseTransactions.get();
+
+    transactions = filteredTransactions.docs
+    .map(
+      (e) => FinancialTransaction.fromMap(
+      e.data()))
+      .toList();
     return transactions;
   }
   
