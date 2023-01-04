@@ -174,7 +174,6 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
                             category: category,
                             );
                           bloc.add(OnNewTransaction(newTransaction: newTransaction));
-                          log(newTransaction.value.toString());
                         } : null,
                       icon: const Icon(Icons.add),
                     ),
