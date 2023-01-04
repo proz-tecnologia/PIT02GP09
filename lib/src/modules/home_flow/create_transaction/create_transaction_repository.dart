@@ -9,5 +9,6 @@ abstract class CreateTransactionRepository extends Repository {
 
   Future<void> createTransaction({required FinancialTransaction transaction});
   Future<void> updateBalance({required UserModel userModel});
+  Future<void> createCategory({required String newCategory, required UserModel userModel});
 
 }

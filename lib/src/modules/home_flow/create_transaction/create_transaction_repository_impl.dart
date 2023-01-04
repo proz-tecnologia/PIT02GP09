@@ -1,6 +1,4 @@
 
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_transaction/create_transaction_repository.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/financial_transactions/financial_transaction.dart';
@@ -35,15 +33,25 @@ class CreateTransactionRepositoryImpl implements CreateTransactionRepository {
 
   @override
   Future<void> updateBalance({required UserModel userModel}) async {
-    log(userModel.balance.toString());
-    log(userModel.userModelDocID.toString());
     // update apenas do parametro 'balance' do usuario no Firebase
     await _firestore
     .collection('users')
     .doc(userModel.userModelDocID)
-    .update({'balance' : userModel.balance});
-    
+    .update({'balance' : userModel.balance});    
   }
+  
+  @override
+  Future<void> createCategory({
+    required String newCategory,
+    required UserModel userModel,
+    }) async {
+    await _firestore
+    .collection('users')
+    .doc(userModel.userModelDocID)
+    .update({'categories' : FieldValue.arrayUnion([newCategory])});
+  }
+
+
 
   
 
