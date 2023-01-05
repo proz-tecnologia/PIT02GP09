@@ -74,11 +74,19 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   children: [
                     Text('Seu saldo é de ${Formatters.formatToReal(state.user.balance)} reais'),
+                    
                     IconButton(
                     onPressed: () {
                       Modular.to.pushNamed(ConstsRoutes.transactionsPage);
                     },
-                    icon: const Icon(Icons.monetization_on))
+                    icon: const Icon(Icons.monetization_on)),
+
+                    IconButton(
+                    onPressed: () {
+                      Modular.to.pushNamed(ConstsRoutes.walletsPage);
+                    },
+                    icon: const Icon(Icons.wallet))
+
                   ],
                 ),
               ),
