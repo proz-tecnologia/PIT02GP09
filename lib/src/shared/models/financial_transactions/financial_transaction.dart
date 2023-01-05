@@ -18,6 +18,7 @@ class FinancialTransaction {
   final String? userID;
   final String? id;
   String? category;
+  final String walletID;
   
   FinancialTransaction({
     required this.type,
@@ -27,6 +28,7 @@ class FinancialTransaction {
     this.userID,
     this.id,
     this.category,
+    required this.walletID,
   });
 
   String get formattedDate => DateFormat('dd/MM/yyyy').format(date.toDate());
@@ -39,6 +41,7 @@ class FinancialTransaction {
     String? userID,
     String? id,
     String? category,
+    String? walletID,
   }) {
     return FinancialTransaction(
       type: type ?? this.type,
@@ -48,6 +51,7 @@ class FinancialTransaction {
       userID: userID ?? this.userID,
       id: id ?? this.id,
       category: category ?? this.category,
+      walletID: walletID ?? this.walletID,
     );
   }
 
@@ -71,6 +75,7 @@ class FinancialTransaction {
       'userID': userID,
       'id': id,
       'category': category,
+      'walletID': walletID,
     };
   }
 
@@ -83,6 +88,7 @@ class FinancialTransaction {
       userID: map['userID'] != null ? map['userID'] as String : null,
       id: map['id'] != null ? map['id'] as String : null,
       category: map['category'] != null ? map['category'] as String : null,
+      walletID: map['walletID'] as String,
     );
   }
 
@@ -92,7 +98,7 @@ class FinancialTransaction {
 
   @override
   String toString() {
-    return 'FinancialTransaction(type: $type, name: $name, value: $value, date: $date, userID: $userID, id: $id, category: $category)';
+    return 'FinancialTransaction(type: $type, name: $name, value: $value, date: $date, userID: $userID, id: $id, category: $category, walletID: $walletID)';
   }
 
   @override
@@ -106,7 +112,8 @@ class FinancialTransaction {
       other.date == date &&
       other.userID == userID &&
       other.id == id &&
-      other.category == category ;
+      other.category == category &&
+      other.walletID == walletID ;
   }
 
   @override
@@ -117,6 +124,7 @@ class FinancialTransaction {
       date.hashCode ^
       userID.hashCode ^
       id.hashCode ^
-      category.hashCode;
+      category.hashCode ^
+      walletID.hashCode;
   }
 }
