@@ -9,8 +9,4 @@ abstract class TransactionsPageEvent {
 
 class OnTransactionsPageEmpty extends TransactionsPageEvent {}
 
-class OnTransactionsPageSuccess extends TransactionsPageEvent {
-  OnTransactionsPageSuccess({
-    super.categories,
-  }); 
-}
+class OnTransactionsInitState extends TransactionsPageEvent {}

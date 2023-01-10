@@ -15,8 +15,7 @@ class TransactionsPage extends StatefulWidget {
   
   const TransactionsPage({super.key});
 
-  @override
-  
+  @override  
   State<TransactionsPage> createState() => _TransactionsPageState();
 }
 
@@ -34,12 +33,12 @@ class _TransactionsPageState extends State<TransactionsPage> {
     } else {
       selectedCategories.add(category);
     }
-    bloc.add(OnTransactionsPageSuccess(categories: selectedCategories));
+    bloc.add(OnTransactionsInitState());
   }
 
   @override
   void initState() {
-    bloc.add(OnTransactionsPageEmpty());
+    bloc.add(OnTransactionsInitState());
     super.initState();
   }
 
@@ -116,7 +115,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                         onPressed: (() {
                           Modular.to.pushReplacementNamed(ConstsRoutes.homePageModule);
                         }),
-                      icon: const Icon(Icons.home),          
+                      icon: const Icon(Icons.home),
                       ),
 
                   IconButton(
