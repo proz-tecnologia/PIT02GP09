@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
                   IconButton(
                     onPressed: () {                
                       Modular.get<HomeBloc>().add(OnHomePageLogout());
-                      Modular.to.pushReplacementNamed(ConstsRoutes.loginFlowModule);
+                      Modular.to.popAndPushNamed(ConstsRoutes.loginFlowModule);
                     },
                     icon: const Icon(Icons.logout))
                 ],
@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                   IconButton(
                     onPressed: () {                
                       Modular.get<HomeBloc>().add(OnHomePageLogout());
-                      Modular.to.pushReplacementNamed(ConstsRoutes.loginFlowModule);
+                      Modular.to.popAndPushNamed(ConstsRoutes.loginFlowModule);
                     },
                     icon: const Icon(Icons.logout))
                 ],
