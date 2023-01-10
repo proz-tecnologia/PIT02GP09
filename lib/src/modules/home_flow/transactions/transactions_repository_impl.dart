@@ -19,7 +19,6 @@ class TransactionsPageRepositoryImpl implements TransactionsPageRepository {
 
   @override
   Future<UserModel> getUserData({required String userID}) async {
-    log(userID);
     final response = await FirebaseFirestore.instance
     .collection('users')
     .where('userModelID', isEqualTo: userID)
