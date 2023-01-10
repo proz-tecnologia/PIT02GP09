@@ -1,5 +1,8 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/app_controller.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_investment/create_investment_bloc.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_investment/create_investment_repository.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_investment/create_investment_repository_impl.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_transaction/create_transaction_bloc.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_transaction/create_transaction_page.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_transaction/create_transaction_repository.dart';
@@ -12,6 +15,10 @@ import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/home/
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/home/home_page.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/home/home_repository.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/home/home_repository_impl.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/investments/investments_bloc.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/investments/investments_page.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/investments/investments_repository.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/investments/investments_repository_impl.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/transactions/transactions_bloc.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/transactions/transactions_page.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/transactions/transactions_repository.dart';
@@ -34,34 +41,54 @@ class HomePageModule extends Module { // equivalent to AutenthicationModule
   
   @override
   List<Bind<Object>> get binds => [
-    Bind.factory<HomePageRepository>((i) => HomePageRepositoryImpl(sharedPreferences: sharedPref)),
+    // ---------------------------------------------------------------------------------------- HOME
+    Bind.factory<HomePageRepository>(
+            (i) => HomePageRepositoryImpl(sharedPreferences: sharedPref)),
     Bind.singleton<HomeBloc>(
             (i) => HomeBloc(repository: i.get<HomePageRepository>(),
                             id: i.get<AppController>().user!.uid)),
+    // --------------------------------------------------------------------------------- TRANSACTIONS 
     Bind.factory<TransactionsPageRepository>(
             (i) => TransactionsPageRepositoryImpl(sharedPreferences: sharedPref)),
     Bind.lazySingleton(
             (i) => TransactionsBloc(repository: i.get<TransactionsPageRepository>(),
                                     id: i.get<AppController>().user!.uid,
                                     userModel: i.get<HomeBloc>().userModel!)),
+    // -------------------------------------------------------------------------- CREATE TRANSACTIONS
     Bind.factory<CreateTransactionRepository>(
             (i) => CreateTransactionRepositoryImpl(sharedPreferences: sharedPref)),
-    Bind.lazySingleton(
+    Bind.factory(
             (i) => CreateTransactionBloc(i.get<CreateTransactionRepository>(),
                                          i.get<AppController>().user!.uid,
-                                         i.get<HomeBloc>().userModel!)),    
+                                         i.get<HomeBloc>().userModel!)),
+    // ------------------------------------------------------------------------------------- WALLETS    
     Bind.factory<WalletsRepository>(
             (i) => WalletsRepositoryImpl(sharedPreferences: sharedPref)),
     Bind.lazySingleton(
             (i) => WalletsBloc(repository: i.get<WalletsRepository>(),
                                id: i.get<AppController>().user!.uid,
                                userModel: i.get<HomeBloc>().userModel!)),
+    // ------------------------------------------------------------------------------- CREATE WALLET
     Bind.factory<CreateWalletRepository>(
             (i) => CreateWalletRepositoryImpl(sharedPreferences: sharedPref)),
-    Bind.lazySingleton(
+    Bind.factory(
             (i) => CreateWalletBloc(repository: i.get<CreateWalletRepository>(),
                                     id: i.get<AppController>().user!.uid,
                                     userModel: i.get<HomeBloc>().userModel!)),
+    // --------------------------------------------------------------------------------- INVESTMENTS
+    Bind.factory<InvestmentsRepository>(
+            (i) => InvestmentsRepositoryImpl(sharedPreferences: sharedPref)),
+    Bind.lazySingleton(
+            (i) => InvestmentsBloc(repository: i.get<InvestmentsRepository>(),
+                                    id: i.get<AppController>().user!.uid,
+                                    userModel: i.get<HomeBloc>().userModel!)),
+    // --------------------------------------------------------------------------- CREATE INVESTMENT
+    Bind.factory<CreateInvestmentRepository>(
+            (i) => CreateInvestmentRepositoryImpl(sharedPreferences: sharedPref)),
+    Bind.factory(
+            (i) => CreateInvestmentBloc(repository: i.get<CreateInvestmentRepository>(),
+                                        id: i.get<AppController>().user!.uid,
+                                        userModel: i.get<HomeBloc>().userModel!)),
   ];
 
   @override
@@ -71,11 +98,13 @@ class HomePageModule extends Module { // equivalent to AutenthicationModule
         ChildRoute(ConstsRoutes.transactionsPage,
             child: (context, args) => const TransactionsPage()),
         ChildRoute(ConstsRoutes.createTransactionPage,
-            child: (context, args) => const CreateTransactionPage()),        
+            child: (context, args) => const CreateTransactionPage()),
         ChildRoute(ConstsRoutes.walletsPage,
             child: (context, args) => const WalletsPage()),
         ChildRoute(ConstsRoutes.createWalletPage,
             child: (context, args) => const CreateWalletPage()),
+        ChildRoute(ConstsRoutes.investmentsPage,
+            child: (context, args) => const InvestmentsPage()),
         WildcardRoute(child: (context, args) => const NotFoundPage()),
       ];
 }
