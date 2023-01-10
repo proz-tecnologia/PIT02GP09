@@ -1,16 +1,21 @@
 
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/user_model.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/wallet_model.dart';
 
 abstract class CreateTransactionState {}
 
 class CreateTransactionStateLoading extends CreateTransactionState {}
 
-class CreateTransactionStateEmpty extends CreateTransactionState {}
+class CreateTransactionStateNoWallets extends CreateTransactionState {}
 
-class CreateTransactionStateSuccess extends CreateTransactionState {
-  final UserModel userModel;
+class CreateTransactionStateEmpty extends CreateTransactionState {
+  final UserModel userModel;  
+  final List<WalletModel> wallets;
 
-  CreateTransactionStateSuccess({required this.userModel});
+  CreateTransactionStateEmpty({
+    required this.userModel,
+    required this.wallets,
+  });
 }
 
 class CreateTransactionError extends CreateTransactionState {
