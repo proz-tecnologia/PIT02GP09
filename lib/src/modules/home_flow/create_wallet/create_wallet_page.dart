@@ -27,12 +27,6 @@ class _CreateWalletPageState extends State<CreateWalletPage> {
   final nameController = TextEditingController();
   final valueController = TextEditingController();
 
-  @override
-  void dispose() {
-    bloc.close();
-    super.dispose();
-  }
-
   get inputClear {
     nameController.clear();
     valueController.clear();
