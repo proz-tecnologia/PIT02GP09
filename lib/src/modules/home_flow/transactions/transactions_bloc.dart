@@ -1,7 +1,8 @@
-
 import 'dart:developer';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/home/home_bloc.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/transactions/transactions_event.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/transactions/transactions_repository.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/transactions/transactions_state.dart';
@@ -19,8 +20,7 @@ class TransactionsBloc extends Bloc<TransactionsPageEvent, TransactionsPageState
      this.userModel,}
   ) : super(TransactionsPageStateEmpty()) {
     log('transactions page bloc created');
-    on<OnTransactionsPageEmpty>(getUserData);
-    on<OnTransactionsPageSuccess>(getUserData);
+    on<OnTransactionsInitState>(getUserData);
   }
 
   Future<void> getUserData(
@@ -28,16 +28,15 @@ class TransactionsBloc extends Bloc<TransactionsPageEvent, TransactionsPageState
     Emitter<TransactionsPageState> emitter) async {
     try {
       emitter(TransactionsPageStateLoading());      
-      final categories = event.categories;
+      final categories = Modular.get<HomeBloc>().userModel!.categories;
       final userModel = await repository.getUserData(userID: id!);
       List<FinancialTransaction>? transactions = [];
-      if (categories != null && categories.isNotEmpty) {
+      if (categories.isNotEmpty) {
         transactions = await repository.getTransactions(userID: id!, categories: categories);
       } else {
         log(transactions.runtimeType.toString());
         transactions = await repository.getTransactions(userID: id!);
         log(transactions.runtimeType.toString());
-        log(transactions.toString());
       }
 
       if (transactions!.isNotEmpty) {
