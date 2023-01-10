@@ -13,6 +13,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.textInputAction,
     required this.prefixIcon,
     this.suffixIcon,
+    this.enabled = true,
     this.maxLines = 1,
     this.autofocus = false,
     this.textCapitalization = TextCapitalization.none,
@@ -35,6 +36,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool obscureText;
   final Widget? suffix;
   final Widget? suffixIcon;
+  final bool enabled;
   final Widget? prefixIcon;
   final Function(String?)? onFieldSubmitted;
   final FocusNode? focusNode;
@@ -42,6 +44,7 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: enabled,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       maxLines: maxLines,
       autofocus: autofocus,
