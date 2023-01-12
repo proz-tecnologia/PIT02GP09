@@ -1,5 +1,5 @@
 
-
+import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/investments/investments_repository.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/investments/investment_model.dart';
@@ -37,7 +37,7 @@ class InvestmentsRepositoryImpl implements InvestmentsRepository {
         .collection('investments')
         .where('userID', isEqualTo: userID);
 
-    final filteredInvestments = await firebaseInvestments.orderBy('date', descending: true).get();
+    final filteredInvestments = await firebaseInvestments.orderBy('initialDate', descending: true).get();
 
     final investments = 
     filteredInvestments.docs
