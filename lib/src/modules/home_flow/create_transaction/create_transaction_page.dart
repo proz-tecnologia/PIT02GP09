@@ -239,9 +239,7 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
                                     category: categoryController.text,
                                     walletID: walletID!,
                                   );
-                                  () async {
-                                    bloc.add(OnNewTransaction(newTransaction: newTransaction));
-                                  };                                 
+                                  bloc.add(OnNewTransaction(newTransaction: newTransaction));                            
                                   Modular.to.popAndPushNamed(ConstsRoutes.transactionsPage);                         
                                 } : null,
                               icon: const Icon(Icons.add),
