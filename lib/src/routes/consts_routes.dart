@@ -17,5 +17,7 @@ class ConstsRoutes {
   static const String createWalletPage = '/../create_wallet_page';
   static const String investmentsPage = '/../investments_page';
   static const String createInvestmentPage = '/../create_investment_page';
+  static const String planningsPage = '/../plannings_page';
+  static const String createPlanningPage = '/../create_planning_page';
   
 }
