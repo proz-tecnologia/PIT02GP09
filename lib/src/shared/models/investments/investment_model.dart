@@ -63,7 +63,7 @@ class InvestmentModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'name': name,
-      'initialDate': initialDate.millisecondsSinceEpoch,
+      'initialDate': initialDate,
       'initialValue': initialValue,
       'incomeRateByDay': incomeRateByDay,
       'currentValue': currentValue,
@@ -104,7 +104,7 @@ class InvestmentModel {
       other.incomeRateByDay == incomeRateByDay &&
       other.currentValue == currentValue &&
       other.userID == userID &&
-      other.id == id;
+      other.id == id ;
   }
 
   @override
@@ -115,7 +115,7 @@ class InvestmentModel {
       incomeRateByDay.hashCode ^
       currentValue.hashCode ^
       userID.hashCode ^
-      id.hashCode ;
+      id.hashCode;
   }
   
 }
