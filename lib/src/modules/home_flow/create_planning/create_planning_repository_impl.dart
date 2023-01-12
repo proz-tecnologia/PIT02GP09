@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_planning/create_planning_repository.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/plannings/planning_model.dart';

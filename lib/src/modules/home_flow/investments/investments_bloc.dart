@@ -34,7 +34,7 @@ class InvestmentsBloc extends Bloc<InvestmentsPageEvent, InvestmentsPageState> {
       investments = await repository.getInvestments(userID: id!);
       log(investments!.length.toString());
 
-      if (investments!.isNotEmpty) {
+      if (investments.isNotEmpty) {
         emitter(InvestmentsPageStateSuccess(user: userModel,
                                              investments: investments));
       } else {
