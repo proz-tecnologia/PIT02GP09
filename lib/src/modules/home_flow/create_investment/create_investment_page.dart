@@ -35,6 +35,12 @@ class _CreateInvestmentPageState extends State<CreateInvestmentPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    bloc.add(OnInitState());    
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: BlocBuilder<CreateInvestmentBloc, CreateInvestmentState> (
@@ -106,7 +112,7 @@ class _CreateInvestmentPageState extends State<CreateInvestmentPage> {
                             CustomTextFormField(
                                             prefixIcon: null,
                                             label: 'Taxa diária de rendimento',
-                                            controller: initialValueController,
+                                            controller: incomeRateByDayController,
                                             hintText: 'Nome',
                                             validator: (value) {
                                                           if (value != null &&
@@ -135,9 +141,7 @@ class _CreateInvestmentPageState extends State<CreateInvestmentPage> {
                                     initialValue: double.parse(initialValueController.text),
                                     incomeRateByDay: double.parse(incomeRateByDayController.text),
                                   );
-                                  () async {
-                                    bloc.add(OnNewInvestment(newInvestment: newInvestment));
-                                  };                                 
+                                  bloc.add(OnNewInvestment(newInvestment: newInvestment));                          
                                   Modular.to.popAndPushNamed(ConstsRoutes.investmentsPage);                         
                                 } : null,
                               icon: const Icon(Icons.add),
