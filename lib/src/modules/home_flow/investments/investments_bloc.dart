@@ -19,8 +19,7 @@ class InvestmentsBloc extends Bloc<InvestmentsPageEvent, InvestmentsPageState> {
      this.userModel,}
   ) : super(InvestmentsPageStateEmpty()) {
     log('transactions page bloc created');
-    on<OnInvestmentsPageEmpty>(getUserData);
-    on<OnInvestmentsPageSuccess>(getUserData);
+    on<OnInvestmentsInitState>(getUserData);
   }
 
   Future<void> getUserData(
@@ -31,7 +30,9 @@ class InvestmentsBloc extends Bloc<InvestmentsPageEvent, InvestmentsPageState> {
       final userModel = await repository.getUserData(userID: id!);
       List<InvestmentModel>? investments = [];
       log(investments.runtimeType.toString());
-      investments = await repository.getInvestments(userID: id!);     
+      log(id.toString());
+      investments = await repository.getInvestments(userID: id!);
+      log(investments!.length.toString());
 
       if (investments!.isNotEmpty) {
         emitter(InvestmentsPageStateSuccess(user: userModel,
