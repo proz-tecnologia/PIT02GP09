@@ -46,6 +46,7 @@ class TransactionsPageRepositoryImpl implements TransactionsPageRepository {
       }
 
     final filteredTransactions = await firebaseTransactions.orderBy('date', descending: true).get();
+    log(filteredTransactions.toString());
 
     final transactions = 
     filteredTransactions.docs

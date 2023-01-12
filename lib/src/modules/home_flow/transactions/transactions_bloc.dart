@@ -34,9 +34,8 @@ class TransactionsBloc extends Bloc<TransactionsPageEvent, TransactionsPageState
       if (categories.isNotEmpty) {
         transactions = await repository.getTransactions(userID: id!, categories: categories);
       } else {
-        log(transactions.runtimeType.toString());
         transactions = await repository.getTransactions(userID: id!);
-        log(transactions.runtimeType.toString());
+        //log(transactions!.length.toString());
       }
 
       if (transactions!.isNotEmpty) {

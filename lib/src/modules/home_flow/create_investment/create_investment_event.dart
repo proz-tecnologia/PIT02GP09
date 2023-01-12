@@ -1,16 +1,15 @@
-import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/financial_transactions/financial_transaction.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/investments/investment_model.dart';
 
-abstract class CreateInvestmentPageEvent {
+abstract class CreateInvestmentEvent {
   final InvestmentModel? newInvestment;
 
-  CreateInvestmentPageEvent({
+  CreateInvestmentEvent({
     this.newInvestment,
   });
 }
 
-class OnInitState extends CreateInvestmentPageEvent {}
+class OnInitState extends CreateInvestmentEvent {}
 
-class OnNewInvestment extends CreateInvestmentPageEvent {
+class OnNewInvestment extends CreateInvestmentEvent {
   OnNewInvestment({required super.newInvestment});
 }
