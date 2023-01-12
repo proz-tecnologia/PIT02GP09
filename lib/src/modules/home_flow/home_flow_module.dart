@@ -94,6 +94,13 @@ class HomePageModule extends Module { // equivalent to AutenthicationModule
             (i) => CreateInvestmentBloc(repository: i.get<CreateInvestmentRepository>(),
                                         id: i.get<AppController>().user!.uid,
                                         userModel: i.get<HomeBloc>().userModel!)),
+    // ----------------------------------------------------------------------------------- PLANNINGS
+    Bind.factory<PlanningsRepository>(
+            (i) => PlanningsRepositoryImpl(sharedPreferences: sharedPref)),
+    Bind.factory(
+            (i) => PlanningsBloc(repository: i.get<PlanningsRepository>(),
+                                        id: i.get<AppController>().user!.uid,
+                                        userModel: i.get<HomeBloc>().userModel!)),
   ];
 
   @override
@@ -112,5 +119,8 @@ class HomePageModule extends Module { // equivalent to AutenthicationModule
             child: (context, args) => const InvestmentsPage()),
         ChildRoute(ConstsRoutes.createInvestmentPage,
             child: (context, args) => const CreateInvestmentPage()),
+        ChildRoute(ConstsRoutes.planningsPage,
+            child: (context, args) => const PlanningsPage()),
+        WildcardRoute(child: (context, args) => const NotFoundPage()),
       ];
 }
