@@ -1,6 +1,4 @@
-
 import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
@@ -14,7 +12,7 @@ class PlanningModel {
     required this.name,
     required this.value,
     required this.finalDate,
-    required this.userID,
+    this.userID,
   });
 
    String get formattedDate => DateFormat('dd/MM/yyyy').format(finalDate.toDate());  
