@@ -4,6 +4,10 @@ import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/creat
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_investment/create_investment_page.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_investment/create_investment_repository.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_investment/create_investment_repository_impl.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_planning/create_planning_bloc.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_planning/create_planning_page.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_planning/create_planning_repository.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_planning/create_planning_repository_impl.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_transaction/create_transaction_bloc.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_transaction/create_transaction_page.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_transaction/create_transaction_repository.dart';
@@ -101,6 +105,13 @@ class HomePageModule extends Module { // equivalent to AutenthicationModule
             (i) => PlanningsBloc(repository: i.get<PlanningsRepository>(),
                                         id: i.get<AppController>().user!.uid,
                                         userModel: i.get<HomeBloc>().userModel!)),
+    // ---------------------------------------------------------------------------- CREATE PLANNINGS
+    Bind.factory<CreatePlanningRepository>(
+            (i) => CreatePlanningRepositoryImpl(sharedPreferences: sharedPref)),
+    Bind.factory(
+            (i) => CreatePlanningBloc(repository: i.get<CreatePlanningRepository>(),
+                                        id: i.get<AppController>().user!.uid,
+                                        userModel: i.get<HomeBloc>().userModel!)),
   ];
 
   @override
@@ -121,6 +132,8 @@ class HomePageModule extends Module { // equivalent to AutenthicationModule
             child: (context, args) => const CreateInvestmentPage()),
         ChildRoute(ConstsRoutes.planningsPage,
             child: (context, args) => const PlanningsPage()),
+        ChildRoute(ConstsRoutes.createPlanningPage,
+            child: (context, args) => const CreatePlanningPage()),
         WildcardRoute(child: (context, args) => const NotFoundPage()),
       ];
 }
