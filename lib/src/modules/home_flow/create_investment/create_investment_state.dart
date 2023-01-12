@@ -1,4 +1,3 @@
-import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/investments/investment_model.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/user_model.dart';
 
 abstract class CreateInvestmentState {}
@@ -6,13 +5,9 @@ abstract class CreateInvestmentState {}
 class CreateInvestmentStateLoading extends CreateInvestmentState {}
 
 class CreateInvestmentStateEmpty extends CreateInvestmentState {
-  final UserModel userModel;  
-  final List<InvestmentModel> wallets;
+  final UserModel userModel;
 
-  CreateInvestmentStateEmpty({
-    required this.userModel,
-    required this.wallets,
-  });
+  CreateInvestmentStateEmpty({required this.userModel});
 }
 
 class CreateInvestmentStateError extends CreateInvestmentState {

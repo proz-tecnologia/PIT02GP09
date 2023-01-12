@@ -8,5 +8,6 @@ abstract class CreateInvestmentRepository extends Repository {
 
   Future<UserModel> getUserData({required String userID});
   Future<void> createInvestment({required InvestmentModel investment});
+  Future<void> getInvestments({required String userID});
 
 }
