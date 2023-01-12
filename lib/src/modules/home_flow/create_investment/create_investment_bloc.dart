@@ -21,7 +21,7 @@ class CreateInvestmentBloc extends Bloc<CreateInvestmentEvent, CreateInvestmentS
     required this.userModel,
   }) : super(CreateInvestmentStateLoading()) {
     log('Create investment bloc created');
-    on<OnInitState>(getUserData);
+    on<OnCreateInvestmentInitState>(getUserData);
     on<OnNewInvestment>(createInvestment);
   }
 

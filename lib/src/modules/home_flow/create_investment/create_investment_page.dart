@@ -37,7 +37,7 @@ class _CreateInvestmentPageState extends State<CreateInvestmentPage> {
   @override
   void initState() {
     super.initState();
-    bloc.add(OnInitState());    
+    bloc.add(OnCreateInvestmentInitState());    
   }
 
   @override

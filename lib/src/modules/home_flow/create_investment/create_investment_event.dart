@@ -8,7 +8,7 @@ abstract class CreateInvestmentEvent {
   });
 }
 
-class OnInitState extends CreateInvestmentEvent {}
+class OnCreateInvestmentInitState extends CreateInvestmentEvent {}
 
 class OnNewInvestment extends CreateInvestmentEvent {
   OnNewInvestment({required super.newInvestment});
