@@ -21,7 +21,7 @@ class _InvestmentsPageState extends State<InvestmentsPage> {
 
   @override
   void initState() {
-    bloc.add(OnInvestmentsPageEmpty());
+    bloc.add(OnInvestmentsInitState());
     super.initState();
   }
 
@@ -97,7 +97,7 @@ class _InvestmentsPageState extends State<InvestmentsPage> {
                                 children: [
                                   Text(state.investments![i].name),
                                   const Divider(),
-                                  Text('Data inicial: ${state.investments![i].initialDate}'),
+                                  Text('Data inicial: ${state.investments![i].formattedDate}'),
                                   const Divider(),
                                   Text('Valor inicial: R\$ ${state.investments![i].initialValue.toStringAsFixed(2)}'),
                                   const Divider(),

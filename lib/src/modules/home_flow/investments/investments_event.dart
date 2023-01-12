@@ -6,10 +6,4 @@ abstract class InvestmentsPageEvent {
   }); 
 }
 
-class OnInvestmentsPageEmpty extends InvestmentsPageEvent {}
-
-class OnInvestmentsPageSuccess extends InvestmentsPageEvent {
-  OnInvestmentsPageSuccess({
-    super.investments,
-  }); 
-}
+class OnInvestmentsInitState extends InvestmentsPageEvent {}
