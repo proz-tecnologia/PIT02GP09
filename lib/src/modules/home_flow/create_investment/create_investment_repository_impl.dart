@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_investment/create_investment_repository.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/investments/investment_model.dart';
@@ -41,4 +43,28 @@ class CreateInvestmentRepositoryImpl implements CreateInvestmentRepository {
 
     return Future.delayed(const Duration(seconds: 2));
   }
+
+  @override
+  Future<List<InvestmentModel>> getInvestments({required String userID}) async {
+
+      var firebaseInvestments = 
+        _firestore
+        .collection('investments')
+        .where('userID', isEqualTo: userID);
+
+    final firebaseInvestmentsGet = await firebaseInvestments.get();
+
+    final investments = 
+    firebaseInvestmentsGet.docs
+    .map(
+      (e) => InvestmentModel.fromMap(
+        Map<String, dynamic>.from(
+          e.data(),
+        ),
+      ),
+    ).toList();
+    log(investments.length.toString());
+    return investments;
+  }
+
 }
