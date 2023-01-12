@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/app_controller.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_investment/create_investment_bloc.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_investment/create_investment_page.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_investment/create_investment_repository.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_investment/create_investment_repository_impl.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_transaction/create_transaction_bloc.dart';
@@ -19,6 +20,10 @@ import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/inves
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/investments/investments_page.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/investments/investments_repository.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/investments/investments_repository_impl.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/plannings/plannings_bloc.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/plannings/plannings_page.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/plannings/plannings_repository.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/plannings/plannings_repository_impl.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/transactions/transactions_bloc.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/transactions/transactions_page.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/transactions/transactions_repository.dart';
@@ -105,6 +110,7 @@ class HomePageModule extends Module { // equivalent to AutenthicationModule
             child: (context, args) => const CreateWalletPage()),
         ChildRoute(ConstsRoutes.investmentsPage,
             child: (context, args) => const InvestmentsPage()),
-        WildcardRoute(child: (context, args) => const NotFoundPage()),
+        ChildRoute(ConstsRoutes.createInvestmentPage,
+            child: (context, args) => const CreateInvestmentPage()),
       ];
 }
