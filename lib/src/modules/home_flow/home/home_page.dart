@@ -85,7 +85,19 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () {
                       Modular.to.pushNamed(ConstsRoutes.walletsPage);
                     },
-                    icon: const Icon(Icons.wallet))
+                    icon: const Icon(Icons.wallet)),
+
+                    IconButton(
+                    onPressed: () {
+                      Modular.to.pushNamed(ConstsRoutes.investmentsPage);
+                    },
+                    icon: const Icon(Icons.trending_up)),
+
+                    IconButton(
+                    onPressed: () {
+                      Modular.to.pushNamed(ConstsRoutes.planningsPage);
+                    },
+                    icon: const Icon(Icons.calendar_month)),
 
                   ],
                 ),
