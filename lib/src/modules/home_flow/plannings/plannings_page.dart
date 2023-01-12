@@ -100,7 +100,7 @@ class _PlanningsPageState extends State<PlanningsPage> {
                                   const Divider(),
                                   Text('Valor: R\$ ${state.plannings![i].value.toStringAsFixed(2)}'),
                                   const Divider(),
-                                  Text('Data limite: ${state.plannings![i].formattedDate}%'),                                 
+                                  Text('Data limite: ${state.plannings![i].formattedDate}'),                                 
                                 ],
                               ),
                             );
