@@ -7,6 +7,7 @@ import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/walle
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/wallets/wallets_event.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/wallets/wallets_state.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/routes/consts_routes.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/utils/consts.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/utils/formatters.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/widgets/show_loader/show_loader.dart';
 
@@ -56,9 +57,18 @@ class _WalletsPageState extends State<WalletsPage> {
                     ),
                     
 
-                    const Center(
-                      child: Text('Você não tem carteiras.'),
-                    ),
+                    Center(
+                        child: Text('Não há investimentos.',
+                                      style: Theme.of(context).textTheme.titleLarge,),
+                      ),
+
+                      const SizedBox(
+                        height: 191,
+                        width: 205,
+                        child: Image(
+                          image: AssetImage(Consts.pathImageEmptyBox),
+                        ),
+                      ),
                     
                   ],
                 ),
@@ -67,42 +77,46 @@ class _WalletsPageState extends State<WalletsPage> {
 
           } else if (state is WalletsPageStateSuccess) {
             return Scaffold(              
-              body: Column(
-                children: [
+              body: Padding(
+                padding: const EdgeInsets.symmetric(
+                                      horizontal: 25, vertical: 10),
+                child: Column(
+                  children: [
 
-                  IconButton(
-                        onPressed: (() {
-                          Modular.to.pushReplacementNamed(ConstsRoutes.homePageModule);
-                        }),
-                      icon: const Icon(Icons.home),          
-                      ),
-
-                  IconButton(
-                    onPressed: () {
-                      Modular.to.pushReplacementNamed(ConstsRoutes.createWalletPage);
-                    },
-                    icon: const Icon(Icons.add)),
-
-                  Expanded(
-                        child: ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: state.wallets!.length,
-                          itemBuilder: (context, i) {                            
-                            return Card(
-                              child: Column(
-                                children: [
-                                  Text(state.wallets![i].name.toString()),
-                                  const Divider(),
-                                  Text(Formatters.formatToReal(state.wallets![i].value)),
-                                  const Divider(),
-                                ],
-                              ),
-                            );
-                          }
+                    IconButton(
+                          onPressed: (() {
+                            Modular.to.pushReplacementNamed(ConstsRoutes.homePageModule);
+                          }),
+                        icon: const Icon(Icons.home),          
                         ),
-                      ),
-                ],
+
+                    IconButton(
+                      onPressed: () {
+                        Modular.to.pushReplacementNamed(ConstsRoutes.createWalletPage);
+                      },
+                      icon: const Icon(Icons.add)),
+
+                    Expanded(
+                          child: ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemCount: state.wallets!.length,
+                            itemBuilder: (context, i) {                            
+                              return Card(
+                                child: Column(
+                                  children: [
+                                    Text(state.wallets![i].name.toString()),
+                                    const Divider(),
+                                    Text(Formatters.formatToReal(state.wallets![i].value)),
+                                    const Divider(),
+                                  ],
+                                ),
+                              );
+                            }
+                          ),
+                        ),
+                  ],
+                ),
               ),
             );
 

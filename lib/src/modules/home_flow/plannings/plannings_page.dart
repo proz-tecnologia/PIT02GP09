@@ -6,6 +6,7 @@ import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/plann
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/plannings/plannings_event.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/plannings/plannings_state.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/routes/consts_routes.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/utils/consts.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/widgets/show_loader/show_loader.dart';
 
 class PlanningsPage extends StatefulWidget {
@@ -53,9 +54,18 @@ class _PlanningsPageState extends State<PlanningsPage> {
                       icon: const Icon(Icons.add),
                     ),
                     
-                    const Center(
-                      child: Text('Não há planejamentos.'),
-                    ),
+                    Center(
+                        child: Text('Não há investimentos.',
+                                      style: Theme.of(context).textTheme.titleLarge,),
+                      ),
+
+                    const SizedBox(
+                        height: 191,
+                        width: 205,
+                        child: Image(
+                          image: AssetImage(Consts.pathImageEmptyBox),
+                        ),
+                      ),
                     
                   ],
                 ),
@@ -68,47 +78,51 @@ class _PlanningsPageState extends State<PlanningsPage> {
 
           } else if (state is PlanningsStateSuccess) {
             return Scaffold(              
-              body: Column(
-                children: [
+              body: Padding(
+                padding: const EdgeInsets.symmetric(
+                                      horizontal: 25, vertical: 10),
+                child: Column(
+                  children: [
 
-                  IconButton(
-                        onPressed: (() {
-                          Modular.to.popAndPushNamed(ConstsRoutes.homePageModule);
-                        }),
-                      icon: const Icon(Icons.home),
-                      ),
-
-                  IconButton(
-                    onPressed: () {
-                      Modular.to.popAndPushNamed(ConstsRoutes.createPlanningPage);
-                    },
-                    icon: const Icon(Icons.add)),
-
-                  Expanded(
-                        child: ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: state.plannings!.length,
-                          itemBuilder: (context, i) {
-                            
-                            return Card(
-                              child: Column(
-                                children: [
-                                  Text(state.plannings![i].name),
-                                  const Divider(),
-                                  Text('Nome: ${state.plannings![i].name}'),
-                                  const Divider(),
-                                  Text('Valor: R\$ ${state.plannings![i].value.toStringAsFixed(2)}'),
-                                  const Divider(),
-                                  Text('Data limite: ${state.plannings![i].formattedDate}'),                                 
-                                ],
-                              ),
-                            );
-
-                          }
+                    IconButton(
+                          onPressed: (() {
+                            Modular.to.popAndPushNamed(ConstsRoutes.homePageModule);
+                          }),
+                        icon: const Icon(Icons.home),
                         ),
-                      ),
-                ],
+
+                    IconButton(
+                      onPressed: () {
+                        Modular.to.popAndPushNamed(ConstsRoutes.createPlanningPage);
+                      },
+                      icon: const Icon(Icons.add)),
+
+                    Expanded(
+                          child: ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemCount: state.plannings!.length,
+                            itemBuilder: (context, i) {
+                              
+                              return Card(
+                                child: Column(
+                                  children: [
+                                    Text(state.plannings![i].name),
+                                    const Divider(),
+                                    Text('Nome: ${state.plannings![i].name}'),
+                                    const Divider(),
+                                    Text('Valor: R\$ ${state.plannings![i].value.toStringAsFixed(2)}'),
+                                    const Divider(),
+                                    Text('Data limite: ${state.plannings![i].formattedDate}'),                                 
+                                  ],
+                                ),
+                              );
+
+                            }
+                          ),
+                        ),
+                  ],
+                ),
               ),
             );
 

@@ -32,6 +32,15 @@ class FinancialTransaction {
 
   String get formattedDate => DateFormat('dd/MM/yyyy').format(date.toDate());
 
+  String financialTypeToString() {
+    if (type == TransactionTypes.receive) {
+      return 'Receita';
+    } else if (type == TransactionTypes.expense) {
+      return 'Despesa';
+    }
+    return 'erro';
+  }
+
   FinancialTransaction copyWith({
     TransactionTypes? type,
     String? name,

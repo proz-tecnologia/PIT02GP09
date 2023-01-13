@@ -2,10 +2,12 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/home/view_widgets/homepage_body_widgets/homepage_body_inkwell.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/investments/investments_bloc.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/investments/investments_event.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/investments/investments_state.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/routes/consts_routes.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/utils/consts.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/widgets/show_loader/show_loader.dart';
 
 class InvestmentsPage extends StatefulWidget {
@@ -38,26 +40,39 @@ class _InvestmentsPageState extends State<InvestmentsPage> {
                 title: const Text('Investments page Empty'),
               ),
               body: Center(
-                child: Column(
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        Modular.to.popAndPushNamed(ConstsRoutes.homePageModule);
-                      },
-                      icon: const Icon(Icons.home),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        Modular.to.popAndPushNamed(ConstsRoutes.createInvestmentPage);
-                      },
-                      icon: const Icon(Icons.add),
-                    ),
-                    
-                    const Center(
-                      child: Text('Não há investimentos.'),
-                    ),
-                    
-                  ],
+                child: Padding(
+                padding: const EdgeInsets.symmetric(
+                                      horizontal: 25, vertical: 10),
+                  child: Column(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          Modular.to.popAndPushNamed(ConstsRoutes.homePageModule);
+                        },
+                        icon: const Icon(Icons.home),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          Modular.to.popAndPushNamed(ConstsRoutes.createInvestmentPage);
+                        },
+                        icon: const Icon(Icons.add),
+                      ),
+                      
+                      Center(
+                        child: Text('Não há investimentos.',
+                                      style: Theme.of(context).textTheme.titleLarge,),
+                      ),
+
+                      const SizedBox(
+                        height: 191,
+                        width: 205,
+                        child: Image(
+                          image: AssetImage(Consts.pathImageEmptyBox),
+                        ),
+                      ),
+                      
+                    ],
+                  ),
                 ),
               ),
             );

@@ -140,6 +140,7 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
                             const Text('Escolha uma categoria da lista ou digite uma nova categoria:'),
                             const SizedBox(height: 20),                            
                             IconButton(
+                              color: Colors.blueGrey,
                               onPressed: () {
                                 showDialog(
                                   context: context, 
@@ -150,15 +151,15 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(16.0),
                                       ),
-                                      children: 
+                                      children:
                                             List.generate(
                                               categories.length,
-                                              (i) => 
+                                              (i) =>
                                               IconButton(
                                               onPressed: () {
                                                 categoryController.text = categories[i].toString();
                                                 Navigator.pop(context);
-                                              }, 
+                                              },
                                               icon: Text(categories[i].toString()),
                                               ),
                                             ),           
@@ -212,19 +213,26 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
                                           ),                            
                             const SizedBox(height: 20),
 
-                            TextFormField(
-                              controller: valueController,
-                              validator: (value) {
-                                if (value != null &&
-                                    value.isNotEmpty &&
-                                    double.tryParse(value) != null) {
-                                  return null;
-                                } else {
-                                  return 'Valor inválido';
-                                }
-                              },
-                              decoration: const InputDecoration(label: Text('valor: ')),
-                            ),
+                            CustomTextFormField(
+                                            prefixIcon: null,
+                                            label: 'Valor',
+                                            controller: valueController,
+                                            hintText: 'Valor',
+                                            validator: (value) {
+                                                          if (value != null &&
+                                                              value.isNotEmpty) {
+                                                            return null;
+                                                          } else {
+                                                            return 'Valor inválido';
+                                                          }
+                                                        },
+                                            //suffix: InputClear(
+                                            //    controller: mailController),
+                                            textInputAction: TextInputAction.next,
+                                            //onFieldSubmitted: (_) =>
+                                            //    passwordFocusNode.requestFocus(),
+                                          ),                            
+                            const SizedBox(height: 20),
               
                             IconButton(
                               onPressed:                

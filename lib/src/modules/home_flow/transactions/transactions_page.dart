@@ -7,6 +7,8 @@ import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/trans
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/transactions/transactions_event.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/transactions/transactions_state.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/routes/consts_routes.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/financial_transactions/financial_transaction.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/utils/consts.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/utils/formatters.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/widgets/show_loader/show_loader.dart';
 
@@ -98,9 +100,18 @@ class _TransactionsPageState extends State<TransactionsPage> {
                       ],
                     ),
 
-                    const Center(
-                      child: Text('Não há transações.'),
-                    ),
+                    Center(
+                        child: Text('Não há investimentos.',
+                                      style: Theme.of(context).textTheme.titleLarge,),
+                      ),
+
+                      const SizedBox(
+                        height: 191,
+                        width: 205,
+                        child: Image(
+                          image: AssetImage(Consts.pathImageEmptyBox),
+                        ),
+                      ),
                     
                   ],
                 ),
@@ -109,89 +120,102 @@ class _TransactionsPageState extends State<TransactionsPage> {
           } else if (state is TransactionsPageStateSuccess) {
             log(state.transactions!.length.toString());
             return Scaffold(              
-              body: Column(
-                children: [
-
-                  IconButton(
-                        onPressed: (() {
-                          Modular.to.pushReplacementNamed(ConstsRoutes.homePageModule);
-                        }),
-                      icon: const Icon(Icons.home),
-                      ),
-
-                  IconButton(
-                    onPressed: () {
-                      Modular.to.pushReplacementNamed(ConstsRoutes.createTransactionPage);
-                    },
-                    icon: const Icon(Icons.add)),
-
-                  Expanded(
-                        child: ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: state.transactions!.length,
-                          itemBuilder: (context, i) {
-
-                            if (i == 0) {
-                              return Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Wrap(
-                                    children: categories.map(
-                                      (e) => SizedBox(
-                                        height: 36.0,
-                                        width: 120.0,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(4.0),
-                                          child: InkWell(
-                                            onTap: () => selectCategory(e),
-                                            child: Chip(
-                                              label: Text(e),
-                                              backgroundColor:
-                                              selectedCategories.contains(e) ?
-                                                Colors.blue
-                                                : null,
+              body: Padding(
+                padding: const EdgeInsets.symmetric(
+                                      horizontal: 25, vertical: 10),
+                child: Column(
+                  children: [
+              
+                    IconButton(
+                          onPressed: (() {
+                            Modular.to.pushReplacementNamed(ConstsRoutes.homePageModule);
+                          }),
+                        icon: const Icon(Icons.home),
+                        ),
+              
+                    IconButton(
+                      onPressed: () {
+                        Modular.to.pushReplacementNamed(ConstsRoutes.createTransactionPage);
+                      },
+                      icon: const Icon(Icons.add)),
+              
+                    Expanded(
+                          child: ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemCount: state.transactions!.length,
+                            itemBuilder: (context, i) {
+              
+                              if (i == 0) {
+                                return Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Wrap(
+                                      children: categories.map(
+                                        (e) => SizedBox(
+                                          height: 36.0,
+                                          width: 120.0,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(4.0),
+                                            child: InkWell(
+                                              onTap: () => selectCategory(e),
+                                              child: Chip(
+                                                label: Text(e),
+                                                backgroundColor:
+                                                selectedCategories.contains(e) ?
+                                                  Colors.blue
+                                                  : null,
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                      ),
-                                    ).toList(),
-                                  ),
-                                  Card(
-                                    child: Column(
-                                      children: [
-                                        Text(state.transactions![i].type.toString()),
-                                        const Divider(),
-                                        Text(Formatters.formatToReal(state.transactions![i].value)),
-                                        const Divider(),
-                                        Text(state.transactions![i].formattedDate),
-                                        const Divider(),
-                                        Text(state.transactions![i].category ??
-                                            ''),
-                                      ],
+                                        ),
+                                      ).toList(),
+                                      
                                     ),
-                                  )                                  
-                                ],
+                                    Card(
+                                      child: Column(
+                                        children: [
+                                          Text(state.transactions![i].type == TransactionTypes.expense ?
+                                                'Despesa' : 'Receita'),
+                                          const Divider(),
+                                          Text(style: state.transactions![i].type == TransactionTypes.expense ?
+                                                const TextStyle(color: Colors.red) : 
+                                                const TextStyle(color: Colors.green),
+                                            Formatters.formatToReal(state.transactions![i].value)),
+                                          const Divider(),
+                                          Text(state.transactions![i].formattedDate),
+                                          const Divider(),
+                                          Text(state.transactions![i].category ??
+                                              ''),
+                                        ],
+                                      ),
+                                    )                                  
+                                  ],
+                                );
+                              }
+                              return Card(
+                                child: Column(
+                                  children: [
+                                    Text(state.transactions![i].type == TransactionTypes.expense ?
+                                          'Despesa' : 'Receita'),
+                                    const Divider(),
+                                    Text(style: state.transactions![i].type == TransactionTypes.expense ?
+                                          const TextStyle(color: Colors.red) : 
+                                          const TextStyle(color: Colors.green),
+                                      Formatters.formatToReal(state.transactions![i].value)),
+                                    const Divider(),
+                                    Text(state.transactions![i].formattedDate),
+                                    const Divider(),
+                                    Text(state.transactions![i].category ??
+                                         ''),
+                                  ],
+                                ),
                               );
                             }
-                            return Card(
-                              child: Column(
-                                children: [
-                                  Text(state.transactions![i].type.toString()),
-                                  const Divider(),
-                                  Text(Formatters.formatToReal(state.transactions![i].value)),
-                                  const Divider(),
-                                  Text(state.transactions![i].formattedDate),
-                                  const Divider(),
-                                  Text(state.transactions![i].category ??
-                                       ''),
-                                ],
-                              ),
-                            );
-                          }
+                          ),
                         ),
-                      ),
-                ],
+                  ],
+                ),
               ),
             );
 
