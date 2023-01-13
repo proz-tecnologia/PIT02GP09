@@ -26,17 +26,17 @@ class CreateWalletRepositoryImpl implements CreateWalletRepository {
     .collection('wallets')
     .doc(response.id)
     .update({'id' : response.id});
-
-    return Future.delayed(const Duration(seconds: 2));
+    
   }
 
   @override
-  Future<void> updateBalance({required UserModel userModel}) async {
+  Future<void> updateBalanceNewWallet({required UserModel userModel, required double walletValue}) async {
     // update apenas do parametro 'balance' do usuario no Firebase
+    final newUserModel = userModel.copyWith(balance: userModel.balance + walletValue);
     await _firestore
     .collection('users')
     .doc(userModel.userModelDocID)
-    .update({'balance' : userModel.balance});    
+    .update({'balance' : newUserModel.balance});    
   }
   
   @override

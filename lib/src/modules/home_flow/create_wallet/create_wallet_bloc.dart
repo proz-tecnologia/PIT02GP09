@@ -39,7 +39,7 @@ class CreateWalletBloc extends Bloc<CreateWalletEvent, CreateWalletState> {
       // atualizar usuario ------------------------------------------------------------------
       UserModel myUser = userModel.copyWith(balance: userModel.balance + wallet.value);
 
-      await repository.updateBalance(userModel: myUser);
+      await repository.updateBalanceNewWallet(userModel: myUser, walletValue: event.newWallet!.value);
       
       Modular.get<HomeBloc>().userModel = myUser;
 

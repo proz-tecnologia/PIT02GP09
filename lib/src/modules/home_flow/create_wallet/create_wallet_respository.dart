@@ -7,7 +7,7 @@ abstract class CreateWalletRepository extends Repository {
   CreateWalletRepository({required super.sharedPreferences});
 
   Future<void> createWallet({required WalletModel wallet});
-  Future<void> updateBalance({required UserModel userModel});
+  Future<void> updateBalanceNewWallet({required UserModel userModel, required double walletValue});
   Future<void> updateWalletValue({required WalletModel wallet});
 
 }
