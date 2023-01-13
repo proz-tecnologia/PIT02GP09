@@ -10,5 +10,8 @@ abstract class HomePageRepository extends Repository {
   Future<List<FinancialTransaction>?> getTransactions({
     required String userID,
     List<String>? categories});
+  Future<double> getMonthPlanning({
+    required String userID,
+    required int currentMonth});
 
 }
