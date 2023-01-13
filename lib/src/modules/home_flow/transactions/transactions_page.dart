@@ -33,13 +33,14 @@ class _TransactionsPageState extends State<TransactionsPage> {
     } else {
       selectedCategories.add(category);
     }
-    bloc.add(OnTransactionsInitState());
+    log('selected categories: $selectedCategories');
+    bloc.add(OnTransactionsInitState(categories: selectedCategories));
   }
 
   @override
   void initState() {
-    bloc.add(OnTransactionsInitState());
     super.initState();
+    bloc.add(OnTransactionsInitState());
   }
 
   @override
