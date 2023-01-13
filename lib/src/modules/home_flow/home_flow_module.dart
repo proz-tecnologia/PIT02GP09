@@ -55,6 +55,7 @@ class HomePageModule extends Module { // equivalent to AutenthicationModule
             (i) => HomePageRepositoryImpl(sharedPreferences: sharedPref)),
     Bind.singleton<HomeBloc>(
             (i) => HomeBloc(repository: i.get<HomePageRepository>(),
+                            currentMonth: 1,
                             id: i.get<AppController>().user!.uid)),
     // --------------------------------------------------------------------------------- TRANSACTIONS 
     Bind.factory<TransactionsPageRepository>(
