@@ -17,6 +17,9 @@ class LoginFlowRepositoryImpl implements LoginFlowRepository {
     init();
   }
 
+  // FirebaseAuth get _auth => FirebaseAuth.instance;
+  FirebaseFirestore get _firestore => FirebaseFirestore.instance; 
+
   @override
   Future<void> init() async {
     final users = sharedPreferences.getString(SharedPreferencesKeys.users);
@@ -46,11 +49,14 @@ class LoginFlowRepositoryImpl implements LoginFlowRepository {
 
   @override
   Future<void> createUserData({required UserModel user}) async {
-    await FirebaseFirestore.instance.collection('users').add(user.toMap());
-    
-  }
+    final response = await _firestore
+    .collection('users')
+    .add(user.toMap());
 
- 
+    await _firestore
+    .collection('users')
+    .doc(response.id).update({'userModelDocID':response.id});    
+  } 
 
   @override
   Future<List<LoginModel>> getUser() async {

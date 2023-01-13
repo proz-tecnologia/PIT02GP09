@@ -11,5 +11,13 @@ class ConstsRoutes {
   static const String revenuePage = '/revenue_page';
   static const String expensesPage = '/expenses_page';
   static const String creditCardPage = '/credit_card_page';
+  static const String transactionsPage = '/../transactions_page';
+  static const String createTransactionPage = '/../create_transaction_page';
+  static const String walletsPage = '/../wallets_page';
+  static const String createWalletPage = '/../create_wallet_page';
+  static const String investmentsPage = '/../investments_page';
+  static const String createInvestmentPage = '/../create_investment_page';
+  static const String planningsPage = '/../plannings_page';
+  static const String createPlanningPage = '/../create_planning_page';
   
 }

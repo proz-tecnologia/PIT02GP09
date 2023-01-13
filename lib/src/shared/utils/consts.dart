@@ -101,6 +101,9 @@ class Consts {
 
   /*================================================================= */
 
+  //Textos para state empty
+  static const String pathImageEmptyBox = 'images/empty-box.jpg';
+
 
 
   //Constantes de de configurações gerais
