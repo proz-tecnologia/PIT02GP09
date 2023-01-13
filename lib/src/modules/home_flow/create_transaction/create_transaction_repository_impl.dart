@@ -51,6 +51,15 @@ class CreateTransactionRepositoryImpl implements CreateTransactionRepository {
     .doc(userModel.userModelDocID)
     .update({'balance' : userModel.balance});    
   }
+
+  @override
+  Future<void> updateWallet({required String walletID, required double value}) async {
+    await _firestore
+    .collection('wallets')
+    .doc(walletID)
+    .update({'value' : value});
+
+  }
   
   @override
   Future<void> createCategory({

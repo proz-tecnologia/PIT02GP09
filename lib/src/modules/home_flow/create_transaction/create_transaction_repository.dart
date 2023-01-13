@@ -10,6 +10,7 @@ abstract class CreateTransactionRepository extends Repository {
   Future<UserModel> getUserData({required String userID});
   Future<void> createTransaction({required FinancialTransaction transaction});
   Future<void> updateBalance({required UserModel userModel});
+  Future<void> updateWallet({required String walletID, required double value});
   Future<void> createCategory({required String newCategory, required UserModel userModel});
   Future<List<WalletModel>> getWallets({required String userID});
 

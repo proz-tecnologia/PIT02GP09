@@ -69,7 +69,7 @@ class CreateTransactionBloc extends Bloc<CreateTransactionEvent, CreateTransacti
         await repository.createTransaction(transaction: updatedTransaction);
 
         // atualizar usuario ------------------------------------------------------------------
-        UserModel? myUser;
+        UserModel? myUser;        
 
         if (transaction.type == TransactionTypes.expense) {
           myUser = userModel.copyWith(balance: userModel.balance - updatedTransaction.value);
@@ -79,6 +79,22 @@ class CreateTransactionBloc extends Bloc<CreateTransactionEvent, CreateTransacti
 
         await repository.updateBalance(userModel: myUser!);
 
+        // atualizar carteira -----------------------------------------------------------------
+        double value = 0;
+
+        for (int i=0; i < wallets.length; i++) {
+          if (wallets[i].id == transaction.walletID) {
+            if (transaction.type == TransactionTypes.receive) {
+              value = wallets[i].value += transaction.value;
+            } else {
+              value = wallets[i].value -= transaction.value;
+            }
+          }
+
+        }
+        await repository.updateWallet(walletID: event.newTransaction!.walletID, value: value);
+
+        // atualizar categorias ---------------------------------------------------------------
         if (transaction.category != null &&
             !userModel.categories.contains(transaction.category)) {
           myUser.categories.add(transaction.category!);
@@ -96,6 +112,20 @@ class CreateTransactionBloc extends Bloc<CreateTransactionEvent, CreateTransacti
       FirebaseCrashlytics.instance.recordError(e, s);
       emitter(CreateTransactionError(erro: e));
     }
+  }
+
+  double updateBalance({required List<FinancialTransaction>? transactions}) {
+    double balance = 0;
+    if (transactions != null) {
+      for (int i=0; i < transactions.length; i++) {
+        if (transactions[i].type == TransactionTypes.receive) {
+          balance += transactions[i].value;
+        } else {
+          balance -= transactions[i].value;
+        }
+      }
+    }    
+    return balance;
   }
 
   Future<void> updatePages(UserModel myUser) async {
