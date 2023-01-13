@@ -34,6 +34,8 @@ class TransactionsPageRepositoryImpl implements TransactionsPageRepository {
     required String userID,
     List<String>? categories}) async {
 
+      log(categories.toString());
+
       var firebaseTransactions = 
         _firestore
         .collection('transactions')
