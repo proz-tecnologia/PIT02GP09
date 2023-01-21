@@ -59,8 +59,13 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: BlocBuilder<CreateTransactionBloc, CreateTransactionState> (
+      child: BlocConsumer<CreateTransactionBloc, CreateTransactionState> (
         bloc: bloc,
+        listener: (context, state) {
+          if (state is CreateTransactionSuccess) {
+            Modular.to.popAndPushNamed(ConstsRoutes.transactionsPage);
+          }
+        },
         builder: (context, state) {
           if (state is CreateTransactionStateNoWallets) {
             return Scaffold(
@@ -247,8 +252,7 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
                                     category: categoryController.text,
                                     walletID: walletID!,
                                   );
-                                  bloc.add(OnNewTransaction(newTransaction: newTransaction));                            
-                                  Modular.to.popAndPushNamed(ConstsRoutes.transactionsPage);                         
+                                  bloc.add(OnNewTransaction(newTransaction: newTransaction)); 
                                 } : null,
                               icon: const Icon(Icons.add),
                             ),
