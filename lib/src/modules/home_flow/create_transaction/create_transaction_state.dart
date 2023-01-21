@@ -8,6 +8,8 @@ class CreateTransactionStateLoading extends CreateTransactionState {}
 
 class CreateTransactionStateNoWallets extends CreateTransactionState {}
 
+class CreateTransactionSuccess extends CreateTransactionState {}
+
 class CreateTransactionStateEmpty extends CreateTransactionState {
   final UserModel userModel;  
   final List<WalletModel> wallets;

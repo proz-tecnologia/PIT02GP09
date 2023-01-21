@@ -103,7 +103,7 @@ class CreateTransactionBloc extends Bloc<CreateTransactionEvent, CreateTransacti
         
        await updatePages(myUser);
 
-       // emitter(CreateTransactionStateSuccess());
+       emitter(CreateTransactionSuccess());
       } else {
         log('sem carteiras');
         emitter(CreateTransactionStateNoWallets());

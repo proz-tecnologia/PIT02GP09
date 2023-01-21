@@ -48,7 +48,7 @@ class UserModel {
       userModelID: map['userModelID'] as String,      // map['userModelID'] ?? '',
       userModelName: map['userModelName'] as String,  // map['userModelName'] ?? '',
       userModelDocID: map['userModelDocID'] ?? '',
-      categories: List.castFrom(map['categories']) ?? [],
+      categories: map.containsKey('categories') && map['categories'] != null ? List.castFrom(map['categories']) : [],
     );
   }
 
