@@ -48,5 +48,15 @@ class InvestmentsRepositoryImpl implements InvestmentsRepository {
     ).toList();
     return investments;
   }
+
+  @override
+  Future<void> deleteInvestment({required String docID}) async {
+
+    await _firestore
+    .collection('investments')
+    .doc(docID)
+    .delete();
+
+  }
   
 }

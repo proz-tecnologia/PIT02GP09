@@ -11,4 +11,5 @@ abstract class InvestmentsRepository extends Repository {
 
   Future<UserModel> getUserData({required String userID});
   Future<List<InvestmentModel>?> getInvestments({required String userID,});
+  Future<void> deleteInvestment({required String docID});
 }
