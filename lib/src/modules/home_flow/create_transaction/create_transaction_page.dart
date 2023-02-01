@@ -96,7 +96,7 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
 
           } else if (state is CreateTransactionStateEmpty) {
             log(state.toString());
-            walletID = state.wallets.first.id;
+            walletID ??= state.wallets.first.id;
             return Scaffold(
               appBar: AppBar(
                 title: const Text('Registrar transação'),
@@ -139,6 +139,7 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
                                 ).toList(), 
                               onChanged: (value) {
                                 walletID = value!.id;
+                                log(walletID!);
                               }, 
                             ),
                             const SizedBox(height: 20),
@@ -241,8 +242,10 @@ class _CreateTransactionPageState extends State<CreateTransactionPage> {
               
                             IconButton(
                               onPressed:                
-                                _formKey.currentState?.validate() == true ?
+                                _formKey.currentState?.validate() == true 
+                                && walletID != null ?
                                 () async {
+                                  log(walletID!);
                                   double value = double.parse(valueController.text);
                                   final newTransaction = FinancialTransaction(
                                     type: type!, 
