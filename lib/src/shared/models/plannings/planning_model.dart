@@ -8,11 +8,13 @@ class PlanningModel {
   final double value;
   final Timestamp finalDate;
   final String? userID;
+  final String? id;
   PlanningModel({
     required this.name,
     required this.value,
     required this.finalDate,
     this.userID,
+    this.id,
   });
 
    String get formattedDate => DateFormat('dd/MM/yyyy').format(finalDate.toDate());  
@@ -22,12 +24,14 @@ class PlanningModel {
     double? value,
     Timestamp? finalDate,
     String? userID,
+    String? id,
   }) {
     return PlanningModel(
       name: name ?? this.name,
       value: value ?? this.value,
       finalDate: finalDate ?? this.finalDate,
       userID: userID ?? this.userID,
+      id: id ?? this.id,
     );
   }
 
@@ -37,6 +41,7 @@ class PlanningModel {
       'value': value,
       'finalDate': finalDate,
       'userID' : userID,
+      'id': id,
     };
   }
 
@@ -46,6 +51,7 @@ class PlanningModel {
       value: map['value'] as double,
       finalDate: map['finalDate'],
       userID: map['userID'] != null ? map['userID'] as String : null,
+      id: map['id'] != null ? map['id'] as String : null,
     );
   }
 
@@ -54,7 +60,7 @@ class PlanningModel {
   factory PlanningModel.fromJson(String source) => PlanningModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'PlanningModel(name: $name, value: $value, finalDate: $finalDate, userID: $userID)';
+  String toString() => 'PlanningModel(name: $name, value: $value, finalDate: $finalDate, userID: $userID, id: $id)';
 
   @override
   bool operator ==(covariant PlanningModel other) {
@@ -64,9 +70,10 @@ class PlanningModel {
       other.name == name &&
       other.value == value &&
       other.finalDate == finalDate &&
-      other.userID == userID;
+      other.userID == userID &&
+      other.id == id ;
   }
 
   @override
-  int get hashCode => name.hashCode ^ value.hashCode ^ finalDate.hashCode ^ userID.hashCode;
+  int get hashCode => name.hashCode ^ value.hashCode ^ finalDate.hashCode ^ userID.hashCode ^ id.hashCode;
 }
