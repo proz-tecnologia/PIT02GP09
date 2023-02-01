@@ -72,7 +72,6 @@ class _HomePageState extends State<HomePage> {
                 automaticallyImplyLeading: false,
                 actions: const [
                   HomepageAppBarSettingsButton(),
-                  HomepageAppBarAvatar(),
                 ],
               ),
               body: SafeArea(
@@ -127,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                                         Padding(
                                           padding: const EdgeInsets.all(5),
                                           child: HomePageProgBar(
-                                            currentValue: bloc.currentValue!.toInt(),
+                                            currentValue: bloc.currentValue! >= 0 ? bloc.currentValue!.toInt() : 0,
                                             planning: bloc.planning!.toInt(),
                                           ),
                                         ),
@@ -156,7 +155,7 @@ class _HomePageState extends State<HomePage> {
                                         Padding(
                                           padding: const EdgeInsets.all(5),
                                           child: Text(
-                                            "Planejamento de ${bloc.months[bloc.currentMonth].monthName}",
+                                            "Planejamento de ${bloc.months[bloc.currentMonth-1].monthName}",
                                             style: const TextStyle(
                                               fontSize: 14,
                                             ),
@@ -177,11 +176,11 @@ class _HomePageState extends State<HomePage> {
                         ),
               
                         //menu
-                        Wrap(
+                        const Wrap(
                             alignment: WrapAlignment.start,
                             spacing: 30,
                             runSpacing: 30,
-                            children: const [
+                            children: [
                               //botão primeiro
                               HomePageBodyInkWell(
                                 imageSrc: 'images/wallet.png',
