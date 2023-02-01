@@ -18,6 +18,8 @@ class TransactionsPageStateSuccess extends TransactionsPageState {
   });
 }
 
+class TransactionsPageStateUpdate extends TransactionsPageState {}
+
 class TransactionsPageStateError extends TransactionsPageState {
   final Object erro;
 

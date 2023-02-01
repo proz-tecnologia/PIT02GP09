@@ -1,5 +1,6 @@
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/financial_transactions/financial_transaction.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/user_model.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/wallet_model.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/repositories/repository.dart';
 
 abstract class TransactionsPageRepository extends Repository {
@@ -15,5 +16,8 @@ abstract class TransactionsPageRepository extends Repository {
     List<String>? categories});
   Future<void> deleteTransaction({required String docID});
   Future<void> updateWallet({required String walletID, required double value});
+  Future<void> updateBalance({required UserModel userModel});
+  Future<List<WalletModel>> getWallets({required String userID});
+  Future<void> deleteCategory({required String category, required UserModel userModel});
 
 }

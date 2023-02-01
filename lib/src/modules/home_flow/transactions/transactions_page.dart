@@ -41,15 +41,21 @@ class _TransactionsPageState extends State<TransactionsPage> {
 
   @override
   void initState() {
-    super.initState();
+    super.initState();    
     bloc.add(OnTransactionsInitState());
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: BlocBuilder<TransactionsBloc, TransactionsPageState>(
+      child: BlocConsumer<TransactionsBloc, TransactionsPageState>(
         bloc: bloc,
+        listener: (context, state) {
+          if (state is TransactionsPageStateUpdate) {
+            categories = Modular.get<HomeBloc>().userModel!.categories;
+            bloc.add(OnTransactionsInitState());
+          }
+        },
         builder: (context, state) {
           if (state is TransactionsPageStateEmpty) {
             log(state.toString());
@@ -101,7 +107,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
                     ),
 
                     Center(
-                        child: Text('Não há investimentos.',
+                        child: Text('Não há transações.',
                                       style: Theme.of(context).textTheme.titleLarge,),
                       ),
 
@@ -172,38 +178,51 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                       ).toList(),
                                       
                                     ),
-                                    Card(
-                                      child: Column(
-                                        children: [
-                                          Text(state.transactions![i].type == TransactionTypes.expense ?
-                                                'Despesa' : 'Receita'),
-                                          const Divider(),
-                                          Text(style: state.transactions![i].type == TransactionTypes.expense ?
-                                                const TextStyle(color: Colors.red) : 
-                                                const TextStyle(color: Colors.green),
-                                            Formatters.formatToReal(state.transactions![i].value)),
-                                          const Divider(),
-                                          Text(state.transactions![i].formattedDate),
-                                          const Divider(),
-                                          Text(state.transactions![i].category ??
-                                              ''),
-                                    
-                                    IconButton(
-                                      onPressed: (() {
-                                        bloc.add(OnTransactionsDelete(transaction: state.transactions![i]));
-                                      }),
-                                      icon: const Icon(Icons.delete),
-                                    ),
-
-                                        ],
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Card(
+                                          child: Column(
+                                            children: [
+                                              Text(state.transactions![i].name,
+                                                  style: Theme.of(context).textTheme.titleLarge,
+                                              ),
+                                              const Divider(),
+                                              Text(state.transactions![i].type == TransactionTypes.expense ?
+                                                    'Despesa' : 'Receita'),
+                                              const Divider(),
+                                              Text(style: state.transactions![i].type == TransactionTypes.expense ?
+                                                    const TextStyle(color: Colors.red) : 
+                                                    const TextStyle(color: Colors.green),
+                                                Formatters.formatToReal(state.transactions![i].value)),
+                                              const Divider(),
+                                              Text(state.transactions![i].formattedDate),
+                                              const Divider(),
+                                              Text(state.transactions![i].category ??
+                                                  ''),
+                                        
+                                        IconButton(
+                                          onPressed: (() async {
+                                            bloc.add(OnTransactionsDelete(transaction: state.transactions![i]));
+                                          }),
+                                          icon: const Icon(Icons.delete),
+                                        ),
+                                                                          
+                                            ],
+                                          ),
+                                        ),
                                       ),
-                                    )                                  
+                                    )
                                   ],
                                 );
                               }
                               return Card(
                                 child: Column(
                                   children: [
+                                    Text(state.transactions![i].name,
+                                         style: Theme.of(context).textTheme.titleLarge,),
+                                    const Divider(),
                                     Text(state.transactions![i].type == TransactionTypes.expense ?
                                           'Despesa' : 'Receita'),
                                     const Divider(),
