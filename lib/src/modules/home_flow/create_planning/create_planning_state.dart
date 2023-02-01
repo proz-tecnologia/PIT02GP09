@@ -4,6 +4,8 @@ abstract class CreatePlanningState {}
 
 class CreatePlanningStateLoading extends CreatePlanningState {}
 
+class CreatePlanningStateSuccess extends CreatePlanningState {}
+
 class CreatePlanningStateEmpty extends CreatePlanningState {
   final UserModel userModel;
 

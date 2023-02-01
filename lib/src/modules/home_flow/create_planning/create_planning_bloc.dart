@@ -53,6 +53,8 @@ class CreatePlanningBloc extends Bloc<CreatePlanningEvent, CreatePlanningState> 
       await repository.createPlanning(planning: updatedPlanning);
         
       await updatePages();
+
+      emitter(CreatePlanningStateSuccess());
           
     } catch (e, s) {
       FirebaseCrashlytics.instance.recordError(e, s);

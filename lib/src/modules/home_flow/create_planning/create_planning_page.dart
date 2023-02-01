@@ -45,8 +45,13 @@ class _CreatePlanningPageState extends State<CreatePlanningPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: BlocBuilder<CreatePlanningBloc, CreatePlanningState> (
+      child: BlocConsumer<CreatePlanningBloc, CreatePlanningState> (
         bloc: bloc,
+        listener: (context, state) {
+          if (state is CreatePlanningStateSuccess) {
+            Modular.to.popAndPushNamed(ConstsRoutes.planningsPage);
+          }
+        },
         builder: (context, state) {
           if (state is CreatePlanningStateEmpty) {
             return Scaffold(
@@ -159,8 +164,7 @@ class _CreatePlanningPageState extends State<CreatePlanningPage> {
                                     value: double.parse(valueController.text), 
                                     finalDate: Timestamp.fromDate(finalDate),
                                   );
-                                  bloc.add(OnNewPlanning(newPlanning: newPlanning));                          
-                                  Modular.to.popAndPushNamed(ConstsRoutes.planningsPage);                         
+                                  bloc.add(OnNewPlanning(newPlanning: newPlanning));                         
                                 } : null,
                               icon: const Icon(Icons.add),
                             ),

@@ -8,5 +8,6 @@ abstract class CreatePlanningRepository extends Repository {
 
   Future<UserModel> getUserData({required String userID});
   Future<void> createPlanning({required PlanningModel planning});
+  Future<void> getPlannings({required String userID});
 
 }

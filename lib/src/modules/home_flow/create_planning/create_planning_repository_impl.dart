@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/create_planning/create_planning_repository.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/plannings/planning_model.dart';
@@ -41,5 +43,27 @@ class CreatePlanningRepositoryImpl implements CreatePlanningRepository {
     return Future.delayed(const Duration(seconds: 2));
   }
 
+  @override
+  Future<List<PlanningModel>> getPlannings({required String userID}) async {
+
+      var firebasePlannings = 
+        _firestore
+        .collection('plannings')
+        .where('userID', isEqualTo: userID);
+
+    final firebasePlanningsGet = await firebasePlannings.get();
+
+    final plannings = 
+    firebasePlanningsGet.docs
+    .map(
+      (e) => PlanningModel.fromMap(
+        Map<String, dynamic>.from(
+          e.data(),
+        ),
+      ),
+    ).toList();
+    log(plannings.length.toString());
+    return plannings;
+  }
 
 }
