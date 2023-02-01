@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:projeto_gestao_financeira_grupo_nove/src/app_controller.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/home/home_repository.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/months/month_model.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/user_model.dart';
@@ -32,6 +34,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   Future<void> logout(HomeEvent event, Emitter<HomeState> emitter) async {
     await FirebaseAuth.instance.signOut();
+    Modular.get<AppController>().logout;
   }
 
   Future<void> getUserData(
@@ -51,7 +54,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       
       currentValue = 0;
       if (//userModel.balance != null &&
-          userModel!.balance != 0) {
+          userModel!.balance > 0) {
         currentValue = userModel!.balance;
       } else if (monthPlanningValue == 0) {
         currentValue = 100;
