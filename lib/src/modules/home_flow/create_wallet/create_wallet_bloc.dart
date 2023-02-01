@@ -37,13 +37,14 @@ class CreateWalletBloc extends Bloc<CreateWalletEvent, CreateWalletState> {
       await repository.createWallet(wallet: updatedWallet);
 
       // atualizar usuario ------------------------------------------------------------------
-      UserModel myUser = userModel.copyWith(balance: userModel.balance + wallet.value);
+      UserModel myUser = userModel;
 
       await repository.updateBalanceNewWallet(userModel: myUser, walletValue: event.newWallet!.value);
       
       Modular.get<HomeBloc>().userModel = myUser;
 
       emitter(CreateWalletStateSuccess(userModel: myUser));
+      
     } catch (e, s) {
       FirebaseCrashlytics.instance.recordError(e, s);
       emitter(CreateWalletStateError(erro: e));
