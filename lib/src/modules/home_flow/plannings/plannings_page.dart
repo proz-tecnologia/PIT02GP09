@@ -39,35 +39,38 @@ class _PlanningsPageState extends State<PlanningsPage> {
                 title: const Text('Plannings page Empty'),
               ),
               body: Center(
-                child: Column(
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        Modular.to.popAndPushNamed(ConstsRoutes.homePageModule);
-                      },
-                      icon: const Icon(Icons.home),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        Modular.to.popAndPushNamed(ConstsRoutes.createPlanningPage);
-                      },
-                      icon: const Icon(Icons.add),
-                    ),
-                    
-                    Center(
-                        child: Text('Não há investimentos.',
-                                      style: Theme.of(context).textTheme.titleLarge,),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                  child: Column(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          Modular.to.popAndPushNamed(ConstsRoutes.homePageModule);
+                        },
+                        icon: const Icon(Icons.home),
                       ),
+                      IconButton(
+                        onPressed: () {
+                          Modular.to.popAndPushNamed(ConstsRoutes.createPlanningPage);
+                        },
+                        icon: const Icon(Icons.add),
+                      ),
+                      
+                      Center(
+                        child: Text('Não há planejamentos.',
+                                      style: Theme.of(context).textTheme.titleLarge,),
+                        ),
 
-                    const SizedBox(
+                      const SizedBox(
                         height: 191,
                         width: 205,
                         child: Image(
                           image: AssetImage(Consts.pathImageEmptyBox),
                         ),
                       ),
-                    
-                  ],
+                      
+                    ],
+                  ),
                 ),
               ),
             );
@@ -79,8 +82,7 @@ class _PlanningsPageState extends State<PlanningsPage> {
           } else if (state is PlanningsStateSuccess) {
             return Scaffold(              
               body: Padding(
-                padding: const EdgeInsets.symmetric(
-                                      horizontal: 25, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                 child: Column(
                   children: [
 
@@ -97,30 +99,40 @@ class _PlanningsPageState extends State<PlanningsPage> {
                       },
                       icon: const Icon(Icons.add)),
 
-                    Expanded(
-                          child: ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            itemCount: state.plannings!.length,
-                            itemBuilder: (context, i) {
-                              
-                              return Card(
-                                child: Column(
-                                  children: [
-                                    Text(state.plannings![i].name),
-                                    const Divider(),
-                                    Text('Nome: ${state.plannings![i].name}'),
-                                    const Divider(),
-                                    Text('Valor: R\$ ${state.plannings![i].value.toStringAsFixed(2)}'),
-                                    const Divider(),
-                                    Text('Data limite: ${state.plannings![i].formattedDate}'),                                 
-                                  ],
-                                ),
-                              );
-
-                            }
+                    ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: state.plannings!.length,
+                      itemBuilder: (context, i) {
+                        
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                children: [
+                                  Text(state.plannings![i].name,
+                                       style: Theme.of(context).textTheme.titleLarge,
+                                  ),
+                                  const Divider(),
+                                  Text('Valor: R\$ ${state.plannings![i].value.toStringAsFixed(2)}'),
+                                  const Divider(),
+                                  Text('Data limite: ${state.plannings![i].formattedDate}'),
+                                  IconButton(
+                                          onPressed: (() {
+                                            bloc.add(OnPlanningsDelete(planning: state.plannings![i]));
+                                          }),
+                                        icon: const Icon(Icons.delete),
+                                        ),                                
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
+                        );
+
+                      }
+                    ),
                   ],
                 ),
               ),

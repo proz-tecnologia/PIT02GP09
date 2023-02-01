@@ -1,9 +1,16 @@
-abstract class PlanningsPageEvent {  
-  final List<String>? plannings;
+import 'package:projeto_gestao_financeira_grupo_nove/src/shared/models/plannings/planning_model.dart';
+
+abstract class PlanningsPageEvent {
+
+  final PlanningModel? planning;
   
   PlanningsPageEvent({
-    this.plannings,
+    this.planning,
   }); 
 }
 
 class OnPlanningsInitState extends PlanningsPageEvent {}
+class OnPlanningsDelete extends PlanningsPageEvent {
+
+  OnPlanningsDelete({super.planning});
+}

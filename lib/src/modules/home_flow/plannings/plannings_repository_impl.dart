@@ -30,6 +30,7 @@ class PlanningsRepositoryImpl implements PlanningsRepository {
 
   @override
   Future<List<PlanningModel>?> getPlannings({required String userID}) async {
+    
     var firebasePlannings = 
         _firestore
         .collection('plannings')
@@ -47,6 +48,16 @@ class PlanningsRepositoryImpl implements PlanningsRepository {
       ),
     ).toList();
     return plannings;
+  }
+
+  @override
+  Future<void> deletePlanning({required String docID}) async {
+
+    await _firestore
+    .collection('plannings')
+    .doc(docID)
+    .delete();
+
   }
   
 }

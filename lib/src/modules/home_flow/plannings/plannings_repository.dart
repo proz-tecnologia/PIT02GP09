@@ -11,5 +11,6 @@ abstract class PlanningsRepository extends Repository {
 
   Future<UserModel> getUserData({required String userID});
   Future<List<PlanningModel>?> getPlannings({required String userID});
+  Future<void> deletePlanning({required String docID});
 
 }
