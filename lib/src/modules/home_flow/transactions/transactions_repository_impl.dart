@@ -61,4 +61,24 @@ class TransactionsPageRepositoryImpl implements TransactionsPageRepository {
     ).toList();
     return transactions;
   }
+
+  @override
+  Future<void> deleteTransaction({required String docID}) async {
+
+    await _firestore
+    .collection('transactions')
+    .doc(docID)
+    .delete();
+
+  }
+
+  @override
+  Future<void> updateWallet({required String walletID, required double value}) async {
+    await _firestore
+    .collection('wallets')
+    .doc(walletID)
+    .update({'value' : value});
+
+  }
+
 }

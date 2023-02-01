@@ -187,6 +187,14 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                           const Divider(),
                                           Text(state.transactions![i].category ??
                                               ''),
+                                    
+                                    IconButton(
+                                      onPressed: (() {
+                                        bloc.add(OnTransactionsDelete(transaction: state.transactions![i]));
+                                      }),
+                                      icon: const Icon(Icons.delete),
+                                    ),
+
                                         ],
                                       ),
                                     )                                  
@@ -208,6 +216,14 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                     const Divider(),
                                     Text(state.transactions![i].category ??
                                          ''),
+                                    
+                                    IconButton(
+                                      onPressed: (() {
+                                        bloc.add(OnTransactionsDelete(transaction: state.transactions![i]));
+                                      }),
+                                      icon: const Icon(Icons.delete),
+                                    ),
+                                    
                                   ],
                                 ),
                               );

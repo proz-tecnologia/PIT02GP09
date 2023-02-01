@@ -13,5 +13,7 @@ abstract class TransactionsPageRepository extends Repository {
   Future<List<FinancialTransaction>?> getTransactions({
     required String userID,
     List<String>? categories});
+  Future<void> deleteTransaction({required String docID});
+  Future<void> updateWallet({required String walletID, required double value});
 
 }
