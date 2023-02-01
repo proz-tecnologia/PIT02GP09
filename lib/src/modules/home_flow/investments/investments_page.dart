@@ -40,8 +40,7 @@ class _InvestmentsPageState extends State<InvestmentsPage> {
               ),
               body: Center(
                 child: Padding(
-                padding: const EdgeInsets.symmetric(
-                                      horizontal: 25, vertical: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                   child: Column(
                     children: [
                       IconButton(
@@ -83,89 +82,92 @@ class _InvestmentsPageState extends State<InvestmentsPage> {
           } else if (state is InvestmentsPageStateSuccess) {
             log(state.investments!.length.toString());
             return Scaffold(              
-              body: Column(
-                children: [
+              body: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                child: Column(
+                  children: [
 
-                  IconButton(
-                        onPressed: (() {
-                          Modular.to.popAndPushNamed(ConstsRoutes.homePageModule);
-                        }),
-                      icon: const Icon(Icons.home),
-                      ),
+                    IconButton(
+                          onPressed: (() {
+                            Modular.to.popAndPushNamed(ConstsRoutes.homePageModule);
+                          }),
+                        icon: const Icon(Icons.home),
+                        ),
 
-                  IconButton(
-                    onPressed: () {
-                      Modular.to.popAndPushNamed(ConstsRoutes.createInvestmentPage);
-                    },
-                    icon: const Icon(Icons.add)),
+                    IconButton(
+                      onPressed: () {
+                        Modular.to.popAndPushNamed(ConstsRoutes.createInvestmentPage);
+                      },
+                      icon: const Icon(Icons.add)),
 
-                  ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: state.investments!.length,
-                          itemBuilder: (context, i) {
-                            
-                            return Padding(
+                    ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: state.investments!.length,
+                      itemBuilder: (context, i) {
+                              
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(                              
+                            child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Card(                              
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(state.investments![i].name,
-                                              style: Theme.of(context).textTheme.titleLarge,
-                                      ),
-                                      const Divider(),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                              Column(
-                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                children: [
-                                                  const Text('Data inicial:'),
-                                                  Text(state.investments![i].formattedDate), 
-                                                  const Divider(),
-                                                  const Text('Valor inicial:'),
-                                                  Text('R\$ ${state.investments![i].initialValue.toStringAsFixed(2)}'),
-                                                ],
-                                              ),
-                                              // const Divider(),
-                                              Column(
-                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                children: [
-                                                  const Text('Taxa diária de rendimento:'),
-                                                  Text('${state.investments![i].incomeRateByDay.toStringAsFixed(2)}%'),
-                                                  const Divider(),
-                                                  const Text('Rendimento hoje:'),
-                                                  Text('+R\$ ${(state.investments![i].currentValue -
-                                                                                state.investments![i].getValueAtTime(
-                                                                                    DateTime.now().subtract(const Duration(days:1)))).toStringAsFixed(2)}',
-                                                        style: const TextStyle(color: Colors.green)),
-                                                  const Divider(),
-                                                  const Text('Valor atual:'),
-                                                  Text('R\$ ${state.investments![i].currentValue.toStringAsFixed(2)}'),
-                                                ],
-                                              ),                                  
-                                            
-                                          IconButton(
-                                            onPressed: (() {
-                                              bloc.add(OnInvestmentsDelete(investment: state.investments![i]));
-                                            }),
-                                          icon: const Icon(Icons.delete),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(state.investments![i].name,
+                                    style: Theme.of(context).textTheme.titleLarge,
+                                  ),
+                                  const Divider(),
+                                  Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                                Column(
+                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                  children: [
+                                                    const Text('Data inicial:'),
+                                                    Text(state.investments![i].formattedDate), 
+                                                    const Divider(),
+                                                    const Text('Valor inicial:'),
+                                                    Text('R\$ ${state.investments![i].initialValue.toStringAsFixed(2)}'),
+                                                  ],
+                                                ),
+                                                // const Divider(),
+                                                Column(
+                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                  children: [
+                                                    const Text('Taxa diária de rendimento:'),
+                                                    Text('${state.investments![i].incomeRateByDay.toStringAsFixed(2)}%'),
+                                                    const Divider(),
+                                                    const Text('Rendimento hoje:'),
+                                                    Text('+R\$ ${(state.investments![i].currentValue -
+                                                                                  state.investments![i].getValueAtTime(
+                                                                                      DateTime.now().subtract(const Duration(days:1)))).toStringAsFixed(2)}',
+                                                          style: const TextStyle(color: Colors.green)),
+                                                    const Divider(),
+                                                    const Text('Valor atual:'),
+                                                    Text('R\$ ${state.investments![i].currentValue.toStringAsFixed(2)}'),
+                                                  ],
+                                                ),                                  
+                                              
+                                            IconButton(
+                                              onPressed: (() {
+                                                bloc.add(OnInvestmentsDelete(investment: state.investments![i]));
+                                              }),
+                                            icon: const Icon(Icons.delete),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
+                              );
 
-                          }
-                        ),
-                      
-                ],
+                            }
+                          ),
+                        
+                  ],
+                ),
               ),
             );
 

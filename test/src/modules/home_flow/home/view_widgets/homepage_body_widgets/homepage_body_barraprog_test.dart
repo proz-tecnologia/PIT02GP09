@@ -12,7 +12,7 @@ void main () {
         ),
       );
       
-      final progbar = await tester.widget<HomePageProgBar>(find.byType(HomePageProgBar));
+      final progbar = tester.widget<HomePageProgBar>(find.byType(HomePageProgBar));
 
       expect(progbar.currentValue, 50);
       expect(find.byType(Expanded), findsOneWidget);

@@ -42,10 +42,10 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(
-              height: 191,
-              width: 205,
+              height: 250,
+              width: 250,
               child: Image(
-                image: AssetImage(Consts.pathImageSplashScreen),
+                image: AssetImage(Consts.agilisSplash),
               ),
             ),
             Text(

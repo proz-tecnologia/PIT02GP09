@@ -5,7 +5,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/home/home_bloc.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/home/home_event.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/home/home_state.dart';
-import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/home/view_widgets/homepage_appbar_widgets/homepage_appbar_avatar.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/home/view_widgets/homepage_appbar_widgets/homepage_appbar_settings_button.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/home/view_widgets/homepage_appbar_widgets/homepage_appbar_title.dart';
 import 'package:projeto_gestao_financeira_grupo_nove/src/modules/home_flow/home/view_widgets/homepage_body_widgets/homepage_body_barraprog.dart';

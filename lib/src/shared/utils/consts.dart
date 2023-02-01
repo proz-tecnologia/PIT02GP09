@@ -6,7 +6,8 @@ class Consts {
   //Constantes para serem usadas no projeto
 
   //Textos Splash_screen
-  static const String textTitleSplashScreen = 'Eu Me Controlo';
+  //static const String textTitleSplashScreen = 'Eu Me Controlo';
+  static const String textTitleSplashScreen = 'Agilis';
   static const String pathImageSplashScreen =
       'images/images_login_flow/splash_screen.jpg';
   /*================================================================= */
@@ -18,6 +19,8 @@ class Consts {
   // //Textos login_page
   static const String pathImageLoginPage =
       'images/images_login_flow/login_page.jpg';
+  static const String agilisSplash =
+      'images/agilis.png';
   static const String textSalutation = 'Bem vindo de volta!';
   static const String textInteraction = 'Vamos fazer login para continuar';
   static const String textPassword = 'Senha';
@@ -102,7 +105,7 @@ class Consts {
   /*================================================================= */
 
   //Textos para state empty
-  static const String pathImageEmptyBox = 'images/empty-box.jpg';
+  static const String pathImageEmptyBox = 'images/empty-box.png';
 
 
 

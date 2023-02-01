@@ -31,7 +31,7 @@ class _LoginPageState extends State<SignUpPage> with ValidationMixin {
   final formkey = GlobalKey<FormState>();
 
   //Controle com entrada de parametro "text" com valores para teste
-  final nameController = TextEditingController(text: 'Rodrigo Oliveira');
+  final nameController = TextEditingController(text: 'Fábio Wood');
   final mailController = TextEditingController(text: 'teste@teste.com');
   final passwordController = TextEditingController(text: 'Rinex1#');
   final confirmPasswordController = TextEditingController(text: 'Rinex1#');

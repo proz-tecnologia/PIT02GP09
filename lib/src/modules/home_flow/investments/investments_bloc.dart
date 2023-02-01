@@ -27,6 +27,7 @@ class InvestmentsBloc extends Bloc<InvestmentsPageEvent, InvestmentsPageState> {
   Future<void> getUserData(
     InvestmentsPageEvent event,
     Emitter<InvestmentsPageState> emitter) async {
+      
     try {
       emitter(InvestmentsPageStateLoading());
       final userModel = await repository.getUserData(userID: id!);

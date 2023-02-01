@@ -4,8 +4,6 @@ const MaterialColor primarySwath = Colors.blueGrey;
 
 class CustomThemeData {
   static ThemeData themeData = ThemeData(
-    primarySwatch: primarySwath,
-    backgroundColor:const Color(0x00FFFFFF),
     textTheme: TextTheme(
       titleMedium: const TextStyle(
         color: Colors.black87,
@@ -40,6 +38,6 @@ class CustomThemeData {
         color: Colors.grey[700],
       ),
       
-    ),
+    ), colorScheme: ColorScheme.fromSwatch(primarySwatch: primarySwath).copyWith(background: const Color(0x00FFFFFF)),
   );
 }
