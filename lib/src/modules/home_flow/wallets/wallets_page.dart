@@ -58,7 +58,7 @@ class _WalletsPageState extends State<WalletsPage> {
                     
 
                     Center(
-                        child: Text('Não há investimentos.',
+                        child: Text('Não há carteiras.',
                                       style: Theme.of(context).textTheme.titleLarge,),
                       ),
 
@@ -102,14 +102,28 @@ class _WalletsPageState extends State<WalletsPage> {
                             shrinkWrap: true,
                             itemCount: state.wallets!.length,
                             itemBuilder: (context, i) {                            
-                              return Card(
-                                child: Column(
-                                  children: [
-                                    Text(state.wallets![i].name.toString()),
-                                    const Divider(),
-                                    Text(Formatters.formatToReal(state.wallets![i].value)),
-                                    const Divider(),
-                                  ],
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Card(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        Text(state.wallets![i].name.toString(),
+                                             style: Theme.of(context).textTheme.titleLarge,
+                                        ),
+                                        const Divider(),
+                                        Text(Formatters.formatToReal(state.wallets![i].value)),
+                                        const Divider(),
+                                        IconButton(
+                                          onPressed: (() async {
+                                            bloc.add(OnWalletsDelete(wallet: state.wallets![i]));
+                                          }),
+                                          icon: const Icon(Icons.delete),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               );
                             }
