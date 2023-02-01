@@ -43,8 +43,13 @@ class _CreateInvestmentPageState extends State<CreateInvestmentPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: BlocBuilder<CreateInvestmentBloc, CreateInvestmentState> (
+      child: BlocConsumer<CreateInvestmentBloc, CreateInvestmentState> (
         bloc: bloc,
+        listener: (context, state) {
+          if (state is CreateInvestmentStateSuccess) {
+            Modular.to.popAndPushNamed(ConstsRoutes.investmentsPage);
+          }
+        },
         builder: (context, state) {
           if (state is CreateInvestmentStateEmpty) {
             return Scaffold(
@@ -91,7 +96,7 @@ class _CreateInvestmentPageState extends State<CreateInvestmentPage> {
                                             prefixIcon: null,
                                             label: 'Valor inicial',
                                             controller: initialValueController,
-                                            hintText: 'Nome',
+                                            hintText: 'Valor inicial',
                                             validator: (value) {
                                                           if (value != null &&
                                                               value.isNotEmpty &&
@@ -113,7 +118,7 @@ class _CreateInvestmentPageState extends State<CreateInvestmentPage> {
                                             prefixIcon: null,
                                             label: 'Taxa diária de rendimento',
                                             controller: incomeRateByDayController,
-                                            hintText: 'Nome',
+                                            hintText: 'Taxa diária de rendimento',
                                             validator: (value) {
                                                           if (value != null &&
                                                               value.isNotEmpty &&
@@ -141,8 +146,7 @@ class _CreateInvestmentPageState extends State<CreateInvestmentPage> {
                                     initialValue: double.parse(initialValueController.text),
                                     incomeRateByDay: double.parse(incomeRateByDayController.text),
                                   );
-                                  bloc.add(OnNewInvestment(newInvestment: newInvestment));                          
-                                  Modular.to.popAndPushNamed(ConstsRoutes.investmentsPage);                         
+                                  bloc.add(OnNewInvestment(newInvestment: newInvestment));                        
                                 } : null,
                               icon: const Icon(Icons.add),
                             ),

@@ -53,7 +53,9 @@ class CreateInvestmentBloc extends Bloc<CreateInvestmentEvent, CreateInvestmentS
       await repository.createInvestment(investment: updatedInvestment);
         
       await updatePages();
-          
+
+      emitter(CreateInvestmentStateSuccess());
+                
     } catch (e, s) {
       FirebaseCrashlytics.instance.recordError(e, s);
       emitter(CreateInvestmentStateError(erro: e));

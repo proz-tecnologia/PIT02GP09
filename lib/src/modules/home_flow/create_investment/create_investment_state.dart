@@ -4,6 +4,8 @@ abstract class CreateInvestmentState {}
 
 class CreateInvestmentStateLoading extends CreateInvestmentState {}
 
+class CreateInvestmentStateSuccess extends CreateInvestmentState {}
+
 class CreateInvestmentStateEmpty extends CreateInvestmentState {
   final UserModel userModel;
 
