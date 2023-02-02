@@ -1,6 +1,6 @@
 <h1 align="center" style="font-size: 16px;"> :man_technologist:   Projeto Gestão Financeira:moneybag: - Grupo 9 <h1>
 
-<p align="center"><img src="http://img.shields.io/static/v1?label=STATUS&message=CONCLUIDO&color=GREEN&style=for-the-badge"/></p>
+<p align="center"><img src="http://img.shields.io/static/v1?label=STATUS&message=CONCLUÍDO&color=GREEN&style=for-the-badge"/></p>
 
 ### :new: Um novo projeto Dart/Flutter.
 ### 📁 Acesso ao projeto<br>
@@ -52,5 +52,5 @@ _Versão do SDK Flutter/Dart:_<br>
 	
 ## :octocat:Desenvolvedores
 
-| [<img src="https://avatars.githubusercontent.com/u/70405742?v=4" width=115><br><sub>Hugo Daudt</sub>](https://github.com/HugoDaudt) |  [<img src="https://avatars.githubusercontent.com/u/112892707?v=4" width=115><br><sub>Amanda Mendanha</sub>](https://github.com/Amanda-Mendanha) |  [<img src="https://avatars.githubusercontent.com/u/113555317?v=4" width=115><br><sub>Tamires de Carvalho</sub>](https://github.com/TamiresDCarvalho) |  [<img src="https://avatars.githubusercontent.com/u/67833327?v=4" width=115><br><sub>Rodrigo Oliveira</sub>](https://github.com/rexoliveira) |  [<img src="https://avatars.githubusercontent.com/u/67833327?v=4" width=115><br><sub>Rodrigo Oliveira</sub>](https://github.com/rexoliveira) |
+| [<img src="https://avatars.githubusercontent.com/u/70405742?v=4" width=115><br><sub>Hugo Daudt</sub>](https://github.com/HugoDaudt) |  [<img src="https://avatars.githubusercontent.com/u/112892707?v=4" width=115><br><sub>Amanda Mendanha</sub>](https://github.com/Amanda-Mendanha) |  [<img src="https://avatars.githubusercontent.com/u/113555317?v=4" width=115><br><sub>Tamires de Carvalho</sub>](https://github.com/TamiresDCarvalho) |  [<img src="https://avatars.githubusercontent.com/u/67833327?v=4" width=115><br><sub>Rodrigo Oliveira</sub>](https://github.com/rexoliveira) |
 | :---: | :---: | :---: | :---: 
