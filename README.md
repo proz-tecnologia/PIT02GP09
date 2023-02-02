@@ -52,6 +52,6 @@ _Versão do SDK Flutter/Dart:_<br>
 	
 ## :octocat:Desenvolvedores
 
-| [<img src="https://avatars.githubusercontent.com/u/70405742?v=4" width=115><br><sub>Hugo Daudt</sub>](https://github.com/HugoDaudt) |  [<img src="https://avatars.githubusercontent.com/u/112892707?v=4" width=115><br><sub>Amanda Mendanha</sub>](https://github.com/Amanda-Mendanha) |  [<img src="https://avatars.githubusercontent.com/u/113555317?v=4" width=115><br><sub>Tamires de Carvalho</sub>](https://github.com/TamiresDCarvalho) |  [<img src="https://avatars.githubusercontent.com/u/67833327?v=4" width=115><br><sub>Rodrigo Oliveira</sub>](https://github.com/rexoliveira) |  [<img
+| [<img src="https://avatars.githubusercontent.com/u/70405742?v=4" width=115><br><sub>Hugo Daudt</sub>](https://github.com/HugoDaudt) |  [<img src="https://avatars.githubusercontent.com/u/112892707?v=4" width=115><br><sub>Amanda Mendanha</sub>](https://github.com/Amanda-Mendanha) |  [<img src="https://avatars.githubusercontent.com/u/113555317?v=4" width=115><br><sub>Tamires de Carvalho</sub>](https://github.com/TamiresDCarvalho) |  [<img
 src="https://avatars.githubusercontent.com/u/90792281?v=4" width=115><br><sub>Fábio Wood</sub>](https://github.com/woodfabio) |
 | :---: | :---: | :---: | :---: 
